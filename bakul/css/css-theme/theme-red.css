@@ -1,0 +1,112 @@
+/**
+
+* Template Name: Rames - Restaurant Cafe Responsive HTML Template
+* Version: 1.0
+* Author: HidraTheme 
+* Developed By: HidraTheme  
+* Author URL: https://themeforest.net/user/hidratheme
+
+NOTE: This is stylesheet of theme color.
+
+**/
+
+/*============================
+body class name: .theme-red 
+primary-color  : #f90000;
+secondary-color: #090909;
+==============================*/ 
+
+
+body.theme-red .text-theme {
+  color: #f90000; }
+
+body.theme-red .outline-btn:hover { 
+  background: #f90000;
+  border: 1px solid #f90000; }
+
+body.theme-red .rounded-button {
+  background: #f90000;  
+  color: #ffffff !important; }
+
+body.theme-red .form-control:focus,
+body.theme-red .form-control:active {
+  border: 1px solid #f90000; }
+
+body.theme-red .back-to-top { 
+  background: #f90000;  }
+
+body.theme-red .back-to-top.btn-primary:hover,
+body.theme-red .back-to-top.btn-primary:focus,
+body.theme-red .back-to-top.btn-primary:active,
+body.theme-red .back-to-top.btn-primary.active,
+body.theme-red .open .back-to-top.dropdown-toggle.btn-primary { 
+ background: #f90000;  }
+
+@media screen and (min-width: 768px) {
+
+body.theme-red .sticky .nav-header nav .navbar-nav > li > a:hover {
+border-bottom: 5px solid #f90000; }
+
+body.theme-red .header.sticky .nav-header .nav > li.active > a {
+border-bottom: 5px solid #f90000; }
+
+}
+
+body.theme-red section.promo .box-menu-package .bmp-text h3 {
+  color: #f90000; } 
+
+body.theme-red section.foodmenu .owl-nav .owl-prev,
+body.theme-red section.foodmenu .owl-nav .owl-next {
+  background: #f90000; }
+
+body.theme-red section.testimonial .heading-text {
+  color: #f90000; }
+
+body.theme-red section.testimonial .item-testimonial .client-info .rating {
+  color: #f90000; }
+
+body.theme-red section.testimonial .item-testimonial .client-content h4 {
+  color: #f90000; } 
+
+body.theme-red section.footer .footer-wrap-b .footer-content-right .open-hours-wrap { 
+ border: 1px solid #f90000; }
+
+body.theme-red section.footer .footer-wrap-b .footer-content-right .open-hours-wrap .oh-day .ohd-day {
+  color: #f90000; }
+
+body.theme-red section.footer .footer-wrap-b .footer-content-left .footer-row-c .footer-info .footer-info-left { 
+  color: #f90000; }
+
+body.theme-red footer .footer-sosmed-icon .wrap-circle-sosmed .circle-sosmed { 
+  border: 1px solid #f90000; }
+
+body.theme-red footer .footer-sosmed-icon .wrap-circle-sosmed .circle-sosmed:hover {
+  border: 1px solid #f90000;
+  background: #f90000; }
+
+body.theme-red .contact-page .form-group .btn { 
+  background-color: #f90000; }
+
+body.theme-red .hovereffect p a {
+  background: #f90000; }
+
+body.theme-red .style-option-wrap .style-btn-class { 
+  background: #f90000; }
+
+body.theme-red a:hover, a:focus, a:active { 
+  color: #090909; }
+
+body.theme-red .rounded-button:hover,
+body.theme-red .rounded-button:active {
+  background: #090909; }
+
+body.theme-red .contact-page .form-group .btn:hover {
+  background-color: #090909; }
+
+body.theme-red .style-option-wrap .style-btn-class,
+body.theme-red .back-to-top {
+  color: #ffffff !important; }
+
+body.theme-red .hovereffect p a { 
+  color: #ffffff; }
+ 

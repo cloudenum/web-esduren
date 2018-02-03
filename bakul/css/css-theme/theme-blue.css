@@ -1,0 +1,111 @@
+/**
+
+* Template Name: Rames - Restaurant Cafe Responsive HTML Template
+* Version: 1.0
+* Author: HidraTheme 
+* Developed By: HidraTheme  
+* Author URL: https://themeforest.net/user/hidratheme
+
+NOTE: This is stylesheet of theme color.
+
+**/
+
+/*============================
+Body class name : .theme-blue  
+primary-color  : #4b70f0;
+secondary-color: #090909;
+==============================*/
+
+
+body.theme-blue .text-theme {
+  color: #4b70f0; }
+
+body.theme-blue .outline-btn:hover { 
+  background: #4b70f0;
+  border: 1px solid #4b70f0; }
+
+body.theme-blue .rounded-button {
+  background: #4b70f0;  
+  color: #ffffff !important;}
+
+body.theme-blue .form-control:focus,
+body.theme-blue .form-control:active {
+  border: 1px solid #4b70f0; }
+
+body.theme-blue .back-to-top { 
+  background: #4b70f0;  }
+
+body.theme-blue .back-to-top.btn-primary:hover,
+body.theme-blue .back-to-top.btn-primary:focus,
+body.theme-blue .back-to-top.btn-primary:active,
+body.theme-blue .back-to-top.btn-primary.active,
+body.theme-blue .open .back-to-top.dropdown-toggle.btn-primary { 
+ background: #4b70f0;  }
+
+@media screen and (min-width: 768px) {
+
+body.theme-blue .sticky .nav-header nav .navbar-nav > li > a:hover {
+border-bottom: 5px solid #4b70f0; }
+
+body.theme-blue .header.sticky .nav-header .nav > li.active > a {
+border-bottom: 5px solid #4b70f0; }
+
+}
+
+body.theme-blue section.promo .box-menu-package .bmp-text h3 {
+  color: #4b70f0; }
+
+body.theme-blue section.foodmenu .owl-nav .owl-prev,
+body.theme-blue section.foodmenu .owl-nav .owl-next {
+  background: #4b70f0; }
+
+body.theme-blue section.testimonial .heading-text {
+  color: #4b70f0; }
+
+body.theme-blue section.testimonial .item-testimonial .client-info .rating {
+  color: #4b70f0; }
+
+body.theme-blue section.testimonial .item-testimonial .client-content h4 {
+  color: #4b70f0; } 
+
+body.theme-blue section.footer .footer-wrap-b .footer-content-right .open-hours-wrap { 
+ border: 1px solid #4b70f0; }
+
+body.theme-blue section.footer .footer-wrap-b .footer-content-right .open-hours-wrap .oh-day .ohd-day {
+  color: #4b70f0; }
+
+body.theme-blue section.footer .footer-wrap-b .footer-content-left .footer-row-c .footer-info .footer-info-left { 
+  color: #4b70f0; }
+
+body.theme-blue footer .footer-sosmed-icon .wrap-circle-sosmed .circle-sosmed { 
+  border: 1px solid #4b70f0; }
+
+body.theme-blue footer .footer-sosmed-icon .wrap-circle-sosmed .circle-sosmed:hover {
+  border: 1px solid #4b70f0;
+  background: #4b70f0; }
+
+body.theme-blue .contact-page .form-group .btn { 
+  background-color: #4b70f0; }
+
+body.theme-blue .hovereffect p a {
+  background: #4b70f0; }
+
+body.theme-blue .style-option-wrap .style-btn-class { 
+  background: #4b70f0; }
+
+body.theme-blue a:hover, a:focus, a:active { 
+  color: #090909; }
+
+body.theme-blue .rounded-button:hover,
+body.theme-blue .rounded-button:active {
+  background: #090909; }
+
+body.theme-blue .contact-page .form-group .btn:hover {
+  background-color: #090909; }
+
+body.theme-blue .style-option-wrap .style-btn-class,
+body.theme-blue .back-to-top {
+  color: #ffffff !important;}
+
+body.theme-blue .hovereffect p a { 
+  color: #ffffff; }

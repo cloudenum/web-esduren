@@ -1,0 +1,26 @@
+.preloading .cssload-loader {
+	width: 25vh;
+	height: 25vh;
+	margin: 1em;
+	display: inline-block;
+	position: relative;
+	vertical-align: middle; 
+}
+
+.preloading .cssload-loader {
+	animation: cssload-flower-fan 1s infinite linear;
+	-o-animation: cssload-flower-fan 1s infinite linear;
+	-ms-animation: cssload-flower-fan 1s infinite linear;
+	-webkit-animation: cssload-flower-fan 1s infinite linear;
+	-moz-animation: cssload-flower-fan 1s infinite linear; 
+}  
+
+#home-slider {
+	top: -1px;
+}
+
+section.home-slider .owl-nav .owl-prev, 
+section.home-slider .owl-nav .owl-next {
+	background-color: transparent;
+	font-size: 5em;
+}
