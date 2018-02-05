@@ -11,19 +11,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>assets/vendor/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/bootstrap/css/bootstrap.min.css">
   <!-- Pace -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>assets/vendor/pace/pace.css">
+  <link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/pace/pace.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>assets/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>assets/vendor/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/iCheck/all.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>assets/admin/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="<?php echo base_url() ?>bakul/admin/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="<?php echo base_url() ?>bakul/admin/css/custom.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>assets/admin/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="<?php echo base_url() ?>bakul/admin/css/skins/skin-blue.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -45,9 +47,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Logo -->
     <a href="#" data-toggle="push-menu" role="button" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>ESK</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>ES DUREN KOMBINASI</b></span>
     </a>
 
     <!-- Header Navbar -->
@@ -75,7 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a href="#">
                       <div class="pull-left">
                         <!-- User Image -->
-                        <img src="<?php echo base_url() ?>assets/admin/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="<?php echo base_url() ?>bakul/admin/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
@@ -160,17 +162,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="<?php echo base_url() ?>assets/admin/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="<?php echo base_url() ?>bakul/admin/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs"><?php echo $_SESSION['nama'] ?></span>
+              <span class="hidden-xs"><?php // echo $_SESSION['nama'] ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="<?php echo base_url() ?>assets/admin/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="<?php echo base_url() ?>bakul/admin/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  <?php echo $_SESSION['nama'];?>
+                  <?php // echo $_SESSION['nama'];?>
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -217,12 +219,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url() ?>assets/admin/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="<?php echo base_url() ?>bakul/admin/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><?php echo $_SESSION['nama'];?></p>
+          <p><?php // echo $_SESSION['nama'];?></p>
           <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> <?php echo $_SESSION['status'] ?></a>
+          <a href="#"><i class="fa fa-circle text-success"></i> <?php // echo $_SESSION['status'] ?></a>
         </div>
       </div>
 
@@ -249,7 +251,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a id="routes"href="#"><i class="fa fa-link"></i> <span>Routes</span></a>
         </li>
         <li>
-            <a id="user" href="<?php echo base_url() ?>admin/user"><i class="fa fa-link"></i> <span>User</span></a>
+            <a id="user" href="<?php echo base_url() ?>admin/varian"><i class="fa fa-link"></i> <span>Varian</span></a>
         </li>
       </ul>
       <!-- /.sidebar-menu -->

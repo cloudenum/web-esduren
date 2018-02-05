@@ -1,4 +1,10 @@
-<body id="homepage">
+<body id="<?php 
+			if (is_array($body_id)){
+				foreach ($body_id as $id){
+					echo $id;
+				}
+			}
+		?>">
 <!-- BEGIN PRELOADING -->
 <div class="preloading">
 	<div class="wrap-preload">
@@ -16,7 +22,7 @@
 				<div class="header-bottom">
 					<div class="row">
 						<div class="col-md-3 col-logo">
-							<a href="index-2.html">
+							<a href="<?php echo base_url(); ?>">
 							<div class="logo">
 								<img class="with-invert" alt="logo-header" src="<?php echo base_url(); ?>bakul/img/logo-white.png">
 							</div>
@@ -41,7 +47,7 @@
 										<li>
 											<a href="<?php echo base_url(); ?>" class="page-scroll">HOME</a>
 										</li>
-										<li class="dropdown">
+										<!-- <li class="dropdown">
 											<a href="#" class="dropdown-toggle" data-toggle="dropdown">SINGLE PAGE<b class="caret"></b></a>
 											<ul class="dropdown-menu">
 												<li>
@@ -85,15 +91,18 @@
 													<a href="singlepage-menu.html">FULL MENU - SINGLE PAGE</a>
 												</li>
 											</ul>
+										</li> -->
+										<li>
+											<a href="<?php echo base_url(); ?>varian" class="page-scroll">VARIAN</a>
 										</li>
 										<li>
-											<a href="#goto-reservation" class="page-scroll">VARIAN</a>
+											<a href="<?php echo base_url(); ?>galeri" class="page-scroll">GALERI</a>
 										</li>
 										<li>
-											<a href="singlepage-gallery.html" class="page-scroll">GALERI</a>
+											<a href="<?php echo base_url(); ?>tentang" class="page-scroll">TENTANG</a>
 										</li>
 										<li>
-											<a href="singlepage-contact.html" class="page-scroll">KONTAK</a>
+											<a href="<?php echo base_url(); ?>kontak" class="page-scroll">KONTAK</a>
 										</li>
 									</ul>
 								</div>

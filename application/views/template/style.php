@@ -11,7 +11,7 @@
 <!-- custom css -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>bakul/css/main.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>bakul/css/mediaquery.css">
-<link rel="stylesheet" href="<?php echo base_url(); ?>bakul/css/css-theme/theme-greensea.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>bakul/css/themecolor.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>bakul/css/custom.css">
 <!-- Font icon -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>bakul/vendor/font-awesome/css/font-awesome.min.css">

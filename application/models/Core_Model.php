@@ -36,7 +36,7 @@ class Core_Model extends CI_Model{
         return $res;
     }
 
-    public function register($table, $data){
+    public function insert($table, $data){
         $res = $this->db->insert($table, $data); // Kode ini digunakan untuk memasukan record baru kedalam sebuah tabel
         return $res; // Kode ini digunakan untuk mengembalikan hasil $res
     }

@@ -1,85 +1,85 @@
 
   <!-- Main Footer -->
   <footer class="main-footer">
-    <!-- To the right -->
-    <div class="pull-right hidden-xs">
-      Anything you want
-    </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a href="#">Hambuilt</a>.</strong> All rights reserved.
+	<!-- To the right -->
+	<div class="pull-right hidden-xs">
+	  Anything you want
+	</div>
+	<!-- Default to the left -->
+	<strong>Copyright &copy; 2016 <a href="#">Hambuilt</a>.</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane active" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:;">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+	<!-- Create the tabs -->
+	<ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+	  <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+	  <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+	</ul>
+	<!-- Tab panes -->
+	<div class="tab-content">
+	  <!-- Home tab content -->
+	  <div class="tab-pane active" id="control-sidebar-home-tab">
+		<h3 class="control-sidebar-heading">Recent Activity</h3>
+		<ul class="control-sidebar-menu">
+		  <li>
+			<a href="javascript:;">
+			  <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+			  <div class="menu-info">
+				<h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
 
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
+				<p>Will be 23 on April 24th</p>
+			  </div>
+			</a>
+		  </li>
+		</ul>
+		<!-- /.control-sidebar-menu -->
 
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:;">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="pull-right-container">
-                    <span class="label label-danger pull-right">70%</span>
-                  </span>
-              </h4>
+		<h3 class="control-sidebar-heading">Tasks Progress</h3>
+		<ul class="control-sidebar-menu">
+		  <li>
+			<a href="javascript:;">
+			  <h4 class="control-sidebar-subheading">
+				Custom Template Design
+				<span class="pull-right-container">
+					<span class="label label-danger pull-right">70%</span>
+				  </span>
+			  </h4>
 
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
+			  <div class="progress progress-xxs">
+				<div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+			  </div>
+			</a>
+		  </li>
+		</ul>
+		<!-- /.control-sidebar-menu -->
 
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
+	  </div>
+	  <!-- /.tab-pane -->
+	  <!-- Stats tab content -->
+	  <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+	  <!-- /.tab-pane -->
+	  <!-- Settings tab content -->
+	  <div class="tab-pane" id="control-sidebar-settings-tab">
+		<form method="post">
+		  <h3 class="control-sidebar-heading">General Settings</h3>
 
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
+		  <div class="form-group">
+			<label class="control-sidebar-subheading">
+			  Report panel usage
+			  <input type="checkbox" class="pull-right" checked>
+			</label>
 
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
+			<p>
+			  Some information about this general settings option
+			</p>
+		  </div>
+		  <!-- /.form-group -->
+		</form>
+	  </div>
+	  <!-- /.tab-pane -->
+	</div>
   </aside>
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
@@ -91,23 +91,25 @@
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="<?php echo base_url() ?>assets/vendor/jquery/dist/jquery.min.js"></script>
+<script src="<?php echo base_url() ?>bakul/vendor/jquery/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="<?php echo base_url() ?>assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url() ?>assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url() ?>assets/vendor/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="<?php echo base_url() ?>assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="<?php echo base_url() ?>assets/vendor/fastclick/lib/fastclick.js"></script>
+<script src="<?php echo base_url() ?>bakul/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url() ?>bakul/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url() ?>bakul/vendor/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo base_url() ?>bakul/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<?php echo base_url() ?>bakul/vendor/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="<?php echo base_url() ?>assets/admin/js/adminlte.min.js"></script>
+<script src="<?php echo base_url() ?>bakul/admin/js/adminlte.min.js"></script>
 <!-- Pace.js -->
-<script src="<?php echo base_url() ?>assets/vendor/pace/pace.min.js"></script>
-<script src="<?php echo base_url() ?>assets/admin/js/demo.js"></script>
+<script src="<?php echo base_url() ?>bakul/vendor/pace/pace.min.js"></script>
+<script src="<?php echo base_url() ?>bakul/admin/js/demo.js"></script>
+<script src="<?php echo base_url() ?>bakul/vendor/iCheck/icheck.min.js"></script>
 
-<script>
-  $(function () {
-    $('#user-table').DataTable();
-  })
-</script>
+<?php 
+  if (is_array($js_to_load)) {
+	foreach ($js_to_load as $js_file) {?>
+<script type="text/javascript" src="<?php echo base_url() ?>bakul/admin/js/<?php echo $js_file;?>"></script>
+<?php  }
+  } ?>
 </body>
 </html>

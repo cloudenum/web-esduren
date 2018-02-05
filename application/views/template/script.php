@@ -7,13 +7,13 @@
 <!-- scrollorama js-->
 <script src="<?php echo base_url(); ?>bakul/js/jquery.scrollorama.js"></script>
 <!-- Contact form-->
-<script type="text/javascript" src="<?php echo base_url(); ?>bakul/js/validator.min.js"></script> 
+<script src="<?php echo base_url(); ?>bakul/js/validator.min.js"></script> 
 <!--owl carousel -->
 <script src="<?php echo base_url(); ?>bakul/vendor/owlcarousel/owl.carousel.min.js"></script>
 <!-- Inview js -->
 <script src="<?php echo base_url(); ?>bakul/vendor/jquery.inview-master/jquery.inview.min.js"> </script>
 <!-- Datepicker js -->
-<script src="<?php echo base_url(); ?>bakul/vendor/gijgo-combined/gijgo.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>bakul/vendor/gijgo-combined/gijgo.min.js"></script>
 <!-- Timepicker js -->
 <script src="<?php echo base_url(); ?>bakul/vendor/bootstrap-timepicker/bootstrap-timepicker.js"> </script>
 <!-- Custom js -->

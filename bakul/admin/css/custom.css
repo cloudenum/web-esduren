@@ -1,0 +1,33 @@
+/* .login-page{
+    padding: 5px;
+} */
+.bg-cover{
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(rgba(0, 174, 255, 0.7) 0%, rgba(0, 38, 255, 1) 100%);
+    margin: 0;
+}
+
+.login-box {
+    margin: 0 auto;
+    height: 50vh;
+    padding: 15px;
+}
+
+.login-box-body {
+    border-radius: 10px;
+    box-shadow: 4px rgba(0,0,0,0.2), 5px rgba(0,0,0, 0.19)
+}
+
+.login-logo a{
+    color: white;
+}
+
+.col-pusher{
+    height: 20vh;
+    margin: auto;
+}
+
+.img-responsive {
+	height: 100px;
+}
