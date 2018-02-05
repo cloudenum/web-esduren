@@ -1,5 +1,3 @@
-
-
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
@@ -17,11 +15,7 @@
 		<!-- Main content -->
 		<section class="content container-fluid">
 			<?php 
-				if (isset($data)){
-					foreach ($data as $upload_data){
-						echo $upload_data;
-					}
-				} 
+				echo $this->session->flashdata('success');
 			?>
 			<div class="box box-info">
 				<div class="box-header with-border">
@@ -111,7 +105,7 @@
 											<td><?php echo 'Rp '.$row->price;?></td>
 											<td><img class="img-responsive img-rounded" src="<?php echo $row->image_path;?>" alt="<?php echo $row->name;?>"></td>
 											<td>
-												<a class="btn btn-warning btn-s" data-toggle="modal" data-target="#editModal" >
+												<a class="btn btn-warning btn-s" data-toggle="modal" data-target="#editModal">
 													<span class="fa fa-pencil"/>
 													edit
 												</a>
@@ -123,6 +117,8 @@
 										</tr>
 										<?php 
 												}
+											}else{
+												echo 'No data';
 											} ?>
 									</tbody>
 									<tfoot>

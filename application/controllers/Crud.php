@@ -45,11 +45,18 @@ class Crud extends CI_Controller {
 				);
 			$data = $this->Core_Model->insert('menu', $data);
 
-			$data = array('upload_data' => $this->upload->data());
+			$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismisable" role="alert">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Success!</strong> Berhasil tambah data
+		  </div>');			
+
+			//$data = array('upload_data' => $this->upload->data());
+			redirect(base_url('admin/varian'));
+
 			
-			foreach ($data['upload_data'] as $upload) {
-				echo $upload;
-			}
+			// foreach ($data['upload_data'] as $upload) {
+			// 	echo $upload;
+			// }
 			// $this->load->view('admin/varian', $data);
 		}
 	}

@@ -15,11 +15,13 @@ user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
 /vendor/
 
-travelo/*
+uploads/*
+
 # IDE Files
 #-------------------------
 /nbproject/
 .idea/*
+/.vscode/*
 
 ## Sublime Text cache files
 *.tmlanguage.cache
