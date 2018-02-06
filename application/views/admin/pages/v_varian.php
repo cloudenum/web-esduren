@@ -105,7 +105,13 @@
 											<td><?php echo 'Rp '.$row->price;?></td>
 											<td><img class="img-responsive img-rounded" src="<?php echo $row->image_path;?>" alt="<?php echo $row->name;?>"></td>
 											<td>
-												<a class="btn btn-warning btn-s" data-toggle="modal" data-target="#editModal">
+												<a class="btn btn-warning btn-s" data-toggle="modal" data-target="#editModal" 
+													data-id="<?php echo $row->id;?>" 
+													data-code="<?php echo $row->code;?>" 
+													data-name="<?php echo $row->name;?>"
+													data-desc="<?php echo $row->description;?>"
+													data-price="<?php echo $row->price;?>"
+													data-imgPath="<?php echo $row->image_path;?>">
 													<span class="fa fa-pencil"/>
 													edit
 												</a>
@@ -156,52 +162,30 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id="editForm" action="<?php echo base_url('crud/edit/')?>" method="post">
-					<!-- <div class="input-group form-group has-feedback">
-							<span class="input-group-addon"><i class="fa fa-user"></i></span>
-							<input id="id-text" class="form-control" disabled name="username" type="text">
-						</div> -->
-						<div class="input-group form-group has-feedback">
-							<span class="input-group-addon"><i class="fa fa-user"></i></span>
-							<input id="username"class="form-control" name="username" placeholder="Username" type="text">
-						</div>
-						<div class="input-group form-group has-feedback">
-							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-							<input id="password"class="form-control" name="password" placeholder="Password" type="password">
-						</div>
-						<div class="input-group form-group has-feedback">
-							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-							<input id="fullname"class="form-control" name="fullname" placeholder="Fullname" type="text">
+					<?php echo form_open_multipart('crud/insertVarian');?>
+						<div class="form-group has-feedback">
+							<label>Kode Varian</label>    
+							<input id="code" class="form-control" name="code" placeholder="Kode Varian" type="text">
 						</div>
 						<div class="form-group has-feedback">
-							<label>Textarea</label>
-							<textarea id="address"name="address" class="form-control" rows="3" placeholder="Address"></textarea>
+							<label>Nama Varian</label>    
+							<input id="name" class="form-control" name="name" placeholder="Nama Varian" type="text">
 						</div>
-						<div class="input-group form-group has-feedback">
-							<span class="input-group-addon"><i class="fa fa-phone"></i></span>
-							<input id="phone"class="form-control" name="phone" placeholder="phone" type="text">
+						<div class="form-group has-feedback">
+							<label>Deskripsi</label>
+							<textarea id="desc" name="description" class="form-control" placeholder="Deskripsi" rows="3"></textarea>
 						</div>
-						<div class="form-group">
-							<div class="radio">
-								<label>
-									<input type="radio" name="gender" id="gender-laki" value="l">
-									Laki Laki
-								</label>
-							</div>
-							<div class="radio">
-								<label>
-									<input type="radio" name="gender" id="gender-perempuan" value="p">
-									Perempuan
-								</label>
-							</div>
+						<div class="form-group has-feedback">
+							<label>Harga</label>    
+							<input id="price" class="form-control" name="price" placeholder="Harga" type="text">
 						</div>
-						<div class="form-group">
-							<label>Level</label>
-							<select name="level" class="form-control">
-								<option value="1">1 : Admin</option>
-								<option value="2">2 : User</option>
-							</select>
+						<img class="img-responsive img-rounded" src="">
+						<div class="form-group has-feedback">
+							<label for="upload-gambar">Edit Foto</label>
+							<input id="upload-gambar" name="image" type="file">
+							<p class="help-block">Upload gambar/foto varian es durian yang akan ditambahkan.</p>
 						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
 					</form>
 				</div>
 				<div class="modal-footer">

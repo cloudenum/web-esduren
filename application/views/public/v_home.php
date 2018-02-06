@@ -11,7 +11,7 @@
 						<h2 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown">Es Duren Kombinasi</h2>
 						<div data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown" class="line"></div>
 						<p data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown">
-							Jl. Prof. Dr. Suharso, Purwokerto Lor, Purwokerto, Kabupaten Banyumas, Jawa Tengah 53115
+							Jl. Prof. Dr. Suharso, Purwokerto Utara, Banyumas, Jawa Tengah 53115
 						</p>
 					</div>
 					<div class="slide-layer-img">
@@ -35,7 +35,7 @@
 						<h2 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown">Es Duren Kombinasi</h2>
 						<div data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown" class="line"></div>
 						<p data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown" style="max-width: 500px">
-							Jl. Prof. Dr. Suharso, Purwokerto Lor, Purwokerto, Kabupaten Banyumas, Jawa Tengah 53115
+							Jl. Prof. Dr. Suharso, Purwokerto Utara, Banyumas, Jawa Tengah 53115
 						</p>
 					</div>
 				</div>
@@ -57,7 +57,7 @@
 			<div class="col-md-12 pr-row">
 				<div id="goto-about" class="wrap-promo">
 					<div class="wp-right to-right">
-						<h2>About Us</h2>
+						<h2>Tentang Kami</h2>
 						<br>
 						<div class="wp-right-about">
 							 Lorem ipsum dolor sit amet, di dunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Excepteur sint qui officia deserunt Excepteur sint occaecat cupidatat <br>
@@ -70,11 +70,11 @@
 							<img src="<?php echo base_url(); ?>bakul/img/p4.jpg" alt="img-promo">
 						</div>
 						<div class="pr-left-content">
-							<h1>Menu of <br>the Day</h1>
+							<h1>Menu<br>hari ini</h1>
 							<p>
-								 Chikcen Satay <br>
-								 Mushroom Soup<br>
-								 Carrot and Ginger Soup<br>Broccoli Soup</p>
+								 Sate Ayam <br>
+								 Soup Jamur<br>
+								 Carrot and Ginger Soup<br>Soup Brokoli</p>
 							<div class="explore-menu-btn">
 								<a href="#goto-reservation" class="rounded-button fadetransition page-scroll">RESERVE NOW</a>
 							</div>
@@ -93,7 +93,7 @@
 						<img src="<?php echo base_url(); ?>bakul/img/breakfast.png" alt="menu">
 					</div>
 					<div class="bmp-text">
-						<h3>Breakfast Menu</h3>
+						<h3>Menu Sarapan</h3>
 						<p>
 							 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
 						</p>
@@ -109,7 +109,7 @@
 						<img src="<?php echo base_url(); ?>bakul/img/lunch.png" alt="menu">
 					</div>
 					<div class="bmp-text">
-						<h3>Lunch Menu</h3>
+						<h3>Makan Siang</h3>
 						<p>
 							 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
 						</p>
@@ -125,7 +125,7 @@
 						<img src="<?php echo base_url(); ?>bakul/img/special.png" alt="menu">
 					</div>
 					<div class="bmp-text">
-						<h3>Special Menu</h3>
+						<h3>Menu Spesial</h3>
 						<p>
 							 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
 						</p>
@@ -141,7 +141,7 @@
 						<img src="<?php echo base_url(); ?>bakul/img/dinner.png" alt="menu">
 					</div>
 					<div class="bmp-text">
-						<h3>Dinner Menu</h3>
+						<h3>Makan Malam</h3>
 						<p>
 							 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
 						</p>
@@ -161,7 +161,7 @@
 <section id="goto-featured-menu" class="foodmenu">
 <div class="wrap-fm">
 	<div class="full-heading-featured">
-		<div class="heading-featured">FEATURED MENU</div>
+		<div class="heading-featured">MENU UNGGULAN</div>
 	</div>
 	<div id="foodmenu" class="owl-carousel">
 		<!-- item -->
@@ -173,7 +173,7 @@
 				<div class="bfm-price">
 					<div class="info-menu-box">
 						<div class="bfm-text">
-							<div class="bfm-food-name">Fried Egg</div>
+							<div class="bfm-food-name">Telor Goreng</div>
 							<div class="line-fm"></div>
 							<div class="bfm-food-info">
 								 Lorem ipsum dolor sit amet, consectetuer adipiscing elit

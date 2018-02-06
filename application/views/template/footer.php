@@ -30,8 +30,8 @@
 										<div class="icon-location-pin"></div>
 									</div>
 									<div class="footer-info-right">
-										 Karangwaru St <br>
-										 Yogyakarta City <br>Java, Indonesia</div>
+										 Jl. Prof. Dr. Suharso <br>
+										 Purwokerto Utara <br>Banyumas</div>
 								</div>
 							</div>
 							<div class="col-md-4 col-sm-12 footer-address">
@@ -56,44 +56,44 @@
 					</div>
 					<div class="footer-content-right">
 						<div class="open-hours-wrap">
-							<div class="oh-title">OPEN HOURS</div>
+							<div class="oh-title">JAM BUKA</div>
 							<div class="oh-day">
-								<div class="ohd-day">Monday</div>
+								<div class="ohd-day">Senin</div>
 								<div class="ohd-time">8AM - 9PM</div>
 								<div class="clear"></div>
 							</div>
 							<div class="oh-day">
-								<div class="ohd-day">Tuesday</div>
+								<div class="ohd-day">Selasa</div>
 								<div class="ohd-time">8AM - 9PM</div>
 								<div class="clear"></div>
 							</div>
 							<div class="oh-day">
-								<div class="ohd-day">Wednesday</div>
+								<div class="ohd-day">Rabu</div>
 								<div class="ohd-time">8AM - 9PM</div>
 								<div class="clear"></div>
 							</div>
 							<div class="oh-day">
-								<div class="ohd-day">Thursday</div>
+								<div class="ohd-day">Kamis</div>
 								<div class="ohd-time">8AM - 9PM</div>
 								<div class="clear"></div>
 							</div>
 							<div class="oh-day">
-								<div class="ohd-day">Friday</div>
+								<div class="ohd-day">Jum'at</div>
 								<div class="ohd-time">8AM - 9PM</div>
 								<div class="clear"></div>
 							</div>
 							<div class="oh-day">
-								<div class="ohd-day">Saturday</div>
+								<div class="ohd-day">Sabtu</div>
 								<div class="ohd-time">8AM - 9PM</div>
 								<div class="clear"></div>
 							</div>
 							<div class="oh-day">
-								<div class="ohd-day">Sunday</div>
+								<div class="ohd-day">Minggu</div>
 								<div class="ohd-time">Close</div>
 								<div class="clear"></div>
 							</div>
 							<div class="reserphone">
-								 Reservations by phone<br>
+								 Telephone Pemesanan<br>
 								 Call <span class="text-theme">&nbsp;&nbsp;(+62)-274-654321</span>
 							</div>
 						</div>
