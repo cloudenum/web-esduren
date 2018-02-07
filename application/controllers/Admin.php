@@ -72,7 +72,7 @@ class Admin extends CI_Controller {
 	{
 		$this->load->helper('form');
 
-		$data['js_to_load']= array('user-page.js');
+		$data['js_to_load']= array('varian-page.js');
 		$this->load->view('admin/template/v_admin_header');
 		$this->load->view('admin/pages/v_varian');
 		$this->load->view('admin/template/v_admin_footer', $data);

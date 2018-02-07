@@ -11,19 +11,8 @@ class Crud extends CI_Controller {
 	
 	public function insertVarian()
 	{
-
-		$this->load->helper('string');
-
-		$config['upload_path']          = './uploads/';
-		$config['file_name']			= random_string('alnum', 8);
-		$config['allowed_types']        = '|gif|jpeg|jpg|png';
-		$config['max_size']             = 2048;
-		$config['max_width']            = 1024;
-		$config['max_height']           = 768;
-
-		$this->load->library('upload', $config);
-
-		if ( ! $this->upload->do_upload('image'))
+	
+		if ( ! $this->Core_Model->upload_gambar('image') )
 		{
 			$data['error'] = array($this->upload->display_errors());
 
@@ -34,8 +23,7 @@ class Crud extends CI_Controller {
 			// $this->load->view('admin/varian', $data);
 		}
 		else
-		{
-			
+		{	
 			$data = array(
 				'code' => $this->input->post('code'),
 				'name' => $this->input->post('name'),
@@ -48,7 +36,7 @@ class Crud extends CI_Controller {
 			$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismisable" role="alert">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 			<strong>Success!</strong> Berhasil tambah data
-		  </div>');			
+		</div>');			
 
 			//$data = array('upload_data' => $this->upload->data());
 			redirect(base_url('admin/varian'));
@@ -71,26 +59,63 @@ class Crud extends CI_Controller {
 
 	public function edit($id)
 	{
-	   $data = array(
-			'username' => $this->input->post('username'),
-			'password' => $this->input->post('password'),
-			'fullname' => $this->input->post('fullname'),
-			'address' => $this->input->post('address'),
-			'phone' => $this->input->post('phone'),
-			'gender' => $this->input->post('gender')
-			// 'level' => $level 
-			);
+		if ($_FILES['edit-image']['error'] == UPLOAD_ERR_NO_FILE) {
+			$data = array(
+				'code' => $this->input->post('code'),
+				'name' => $this->input->post('name'),
+				'description' => $this->input->post('description'),
+				'price' => intval($this->input->post('price')),
+				);
 
-		$this->db->where('id', $id);
-		$data = $this->db->update('user', $data);
-		//$this->Core_Model->update('user', $data, array('id'=>$id));
+			$this->db->where('id', $id);
+			$data = $this->db->update('menu', $data);
+			//$this->Core_Model->update('user', $data, array('id'=>$id));
 
-		redirect(base_url("admin/user"),'refresh');
+			$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismisable" role="alert">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Success!</strong> Berhasil edit data
+		</div>');			
+
+			//$data = array('upload_data' => $this->upload->data());
+			redirect(base_url('admin/varian'), 'refresh');
+		}
+		else
+		{
+			if (! $this->Core_Model->upload_gambar('edit-image')){
+				$data['error'] = array($this->upload->display_errors());
+
+				foreach ($data['error'] as $error_msg) {
+					echo $error_msg;
+				}
+			}
+			else 
+			{
+				$data = array(
+					'code' => $this->input->post('code'),
+					'name' => $this->input->post('name'),
+					'description' => $this->input->post('description'),
+					'price' => intval($this->input->post('price')),
+					'image_path' => base_url('uploads/'.$this->upload->data("file_name")),
+					);
+
+				$this->db->where('id', $id);
+				$data = $this->db->update('menu', $data);
+				//$this->Core_Model->update('user', $data, array('id'=>$id));
+
+				$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismisable" role="alert">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Success!</strong> Berhasil edit data
+				</div>');			
+				redirect(base_url("admin/varian"),'refresh');
+			}
+		}
 	}
 	
-	public function hapusUser($id)
+	public function hapus($id)
 	{   
-		$this->Core_Model->delete('user', array( 'id' => $id));
-		redirect(base_url('admin/user'), 'refresh');
+		$this->Core_Model->delete('menu', array( 'id' => $id));
+		redirect(base_url('admin/varian'), 'refresh');
 	}
+
+	
 }
