@@ -2,7 +2,7 @@
 
 $(function () {
 
-	// var forms = $('.needs-validation');
+    // var forms = $('.needs-validation');
 
 	// var validation = Array.prototype.filter.call(forms, function(forms) {
     //   forms.on('submit', function(event) {
@@ -23,7 +23,7 @@ $(function () {
         }
         form.classList.add('was-validated');
       }, false);
-    });
+	});
 	
     $('#user').attr('active');
 
@@ -49,7 +49,7 @@ $(function () {
 
 		var actionValue = 'http://localhost/esduren/crud/edit/'+id;
 		$('#edit-form').attr('action', actionValue);
-	});
+	});	
 
 	$('.edit').click(function (){ 
 		$('#edit-form').submit(); 
