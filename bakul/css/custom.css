@@ -24,3 +24,11 @@ section.home-slider .owl-nav .owl-next {
 	background-color: transparent;
 	font-size: 5em;
 }
+
+.item .box-fm .bfm-img img{
+	min-width: 100%;
+}
+
+section.testimonial .item-testimonial .client-content {
+	padding: 0px; 
+}

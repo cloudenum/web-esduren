@@ -164,22 +164,33 @@
 		<div class="heading-featured">MENU UNGGULAN</div>
 	</div>
 	<div id="foodmenu" class="owl-carousel">
+		<?php
+		$query = $this->db->get('menu');
+
+		$nomor = 3;
+
+		if ($query->num_rows() > 0)
+		{
+			foreach ($query->result() as $row)
+			{
+				if ($nomor%2 ==1){
+		?>
 		<!-- item -->
 		<div class="item">
 			<div class="box-fm">
 				<div class="bfm-img">
-					<img src="<?php echo base_url(); ?>bakul/img/friedegg.jpg" alt="menu">
+					<img class="img-responsive" src="<?php echo $row->image_path ?>" alt="<?php echo $row->name ?>">
 				</div>
 				<div class="bfm-price">
 					<div class="info-menu-box">
 						<div class="bfm-text">
-							<div class="bfm-food-name">Telor Goreng</div>
+							<div class="bfm-food-name"><?php echo $row->name ?></div>
 							<div class="line-fm"></div>
 							<div class="bfm-food-info">
-								 Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+								<?php echo $row->description ?>
 							</div>
 							<div class="bfm-food-price">
-								<span class="dollar">$</span> 1.00
+								<span class="dollar">Rp </span><?php echo $row->price ?>
 							</div>
 						</div>
 					</div>
@@ -187,121 +198,42 @@
 			</div>
 		</div>
 		<!-- end item -->
+		<?php 
+				} 
+				else if ($nomor%2 == 0)
+				{
+		?>
 		<!-- item -->
 		<div class="item">
 			<div class="box-fm">
 				<div class="bfm-price">
 					<div class="info-menu-box">
 						<div class="bfm-text">
-							<div class="bfm-food-name">javanese noodles</div>
+							<div class="bfm-food-name"><?php echo $row->name ?></div>
 							<div class="line-fm"></div>
 							<div class="bfm-food-info">
-								 Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+								<?php echo $row->description ?>
 							</div>
 							<div class="bfm-food-price">
-								<span class="dollar">$</span> 1.80
+								<span class="dollar">Rp </span><?php echo $row->price ?>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="bfm-img">
-					<img src="<?php echo base_url(); ?>bakul/img/magelangnoodle.jpg" alt="menu">
+					<img class="img-responsive" src="<?php echo $row->image_path ?>" alt="<?php echo $row->name ?>">
 				</div>
 			</div>
 		</div>
 		<!-- end item -->
-		<!-- item -->
-		<div class="item">
-			<div class="box-fm">
-				<div class="bfm-img" >
-					<img src="<?php echo base_url(); ?>bakul/img/nasiuduk.jpg" alt="menu">
-				</div>
-				<div class="bfm-price">
-					<div class="info-menu-box">
-						<div class="bfm-text">
-							<div class="bfm-food-name">Rames with Rice</div>
-							<div class="line-fm"></div>
-							<div class="bfm-food-info">
-								 Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-							</div>
-							<div class="bfm-food-price">
-								<span class="dollar">$</span> 1.69
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- end item -->
-		<!-- item -->
-		<div class="item">
-			<div class="box-fm">
-				<div class="bfm-price">
-					<div class="info-menu-box">
-						<div class="bfm-text">
-							<div class="bfm-food-name">Gado-Gado</div>
-							<div class="line-fm"></div>
-							<div class="bfm-food-info">
-								 Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-							</div>
-							<div class="bfm-food-price">
-								<span class="dollar">$</span> 1.69
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="bfm-img">
-					<img src="<?php echo base_url(); ?>bakul/img/pare.jpg" alt="menu">
-				</div>
-			</div>
-		</div>
-		<!-- end item -->
-		<!-- item -->
-		<div class="item">
-			<div class="box-fm">
-				<div class="bfm-img">
-					<img src="<?php echo base_url(); ?>bakul/img/fm1.jpg" alt="menu">
-				</div>
-				<div class="bfm-price">
-					<div class="info-menu-box">
-						<div class="bfm-text">
-							<div class="bfm-food-name">squid grilled oyster sauce</div>
-							<div class="line-fm"></div>
-							<div class="bfm-food-info">
-								 Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-							</div>
-							<div class="bfm-food-price">
-								<span class="dollar">$</span> 2.19
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- end item -->
-		<!-- item -->
-		<div class="item">
-			<div class="box-fm">
-				<div class="bfm-price">
-					<div class="info-menu-box">
-						<div class="bfm-text">
-							<div class="bfm-food-name">BeefSteak</div>
-							<div class="line-fm"></div>
-							<div class="bfm-food-info">
-								 Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-							</div>
-							<div class="bfm-food-price">
-								<span class="dollar">$</span> 2.19
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="bfm-img">
-					<img src="<?php echo base_url(); ?>bakul/img/cumi.jpg" alt="menu">
-				</div>
-			</div>
-		</div>
-		<!-- end item --></div>
+		<?php 
+				}
+			
+				$nomor++;
+			}
+		}
+		?>
+	</div>
 </div>
 <div class="explore-menu-btn">
 	<div class="rounded-button fadetransition">EXPLORE FULL MENU</div>
@@ -371,14 +303,23 @@
 			<div class="col-md-12">
 				<div class="heading-section">
 					<div class="heading-title">What Customers Say</div>
-					<div class="heading-text">100000+ Satisfied Costumers</div>
+					<?php
+						$query = $this->db->get('testimonials');
+					?>
+					<div class="heading-text"><?php echo $query->num_rows() ?>+ Satisfied Costumers</div>
 				</div>
 				<div class="wrap-item-testimonial">
 					<div id="testimonial" class="owl-carousel">
+					<?php
+						if ($query->num_rows() > 0)
+						{
+							foreach ($query->result_array() as $row)
+							{
+						?>
 						<!-- item -->
 						<div class="item">
 							<div class="item-testimonial">
-								<div class="client-info">
+								<!-- <div class="client-info">
 									<div class="client-img">
 										<img src="<?php echo base_url(); ?>bakul/img/profile.jpg" alt="profile">
 									</div>
@@ -389,153 +330,48 @@
 										<span class="fa fa-star"></span>
 										<span class="fa fa-star"></span>
 									</div>
-								</div>
-								<div class="client-content">
+								</div> -->
+								<div class="client-content text-center">
+									<div class="rating">
+									<?php	
+											// $sisa = 5-$this->$row->rating
+											for ($i = 1; $i <= $row['rating']; $i++ )
+											{
+									?>
+											<span class="fa fa-star" style="color: #ffc700;"></span>
+									<?php 
+											}
+
+											for ($i = 1; $i <= 5 - $row['rating'] ; $i++)
+											{	
+									?>
+											<span class="fa fa-star"></span>
+									<?php
+											}
+										 
+									?>
+											<!-- <span class="fa fa-star" style="color: #ffc700;"></span>
+											<span class="fa fa-star" style="color: #ffc700;"></span>
+											<span class="fa fa-star" style="color: #ffc700;"></span>
+											<span class="fa fa-star" style="color: #ffc700;"></span>
+											<span class="fa fa-star"></span> -->
+									</div>
 									<p>
-										 i like to eat pizza but eating rames rice is my dream since childhood .. Thank You!
+										 <?php echo $row['testimonials']; ?>
 									</p>
 									<div class="client-title">
-										<h4>Lillia Doe</h4>
+										<h4><?php echo $row['name']; ?></h4>
 										<h5>Entrepreneur</h5>
 									</div>
 								</div>
 							</div>
 						</div>
 						<!-- end item -->
-						<!-- item -->
-						<div class="item">
-							<div class="item-testimonial">
-								<div class="client-info">
-									<div class="client-img">
-										<img src="<?php echo base_url(); ?>bakul/img/profile2.jpg" alt="profile">
-									</div>
-									<div class="rating">
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-									</div>
-								</div>
-								<div class="client-content">
-									<p>
-										 a wonderful place to eat.. I always come first in this place!
-									</p>
-									<div class="client-title">
-										<h4>Smitty Werbenjagermanjensen</h4>
-										<h5>the number one</h5>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- end item -->
-						<!-- item -->
-						<div class="item">
-							<div class="item-testimonial">
-								<div class="client-info">
-									<div class="client-img">
-										<img src="<?php echo base_url(); ?>bakul/img/profile3.jpg" alt="profile">
-									</div>
-									<div class="rating">
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-									</div>
-								</div>
-								<div class="client-content">
-									<p>
-										 The service was absolutely fantastic and so was all the food! We can’t thank you enough!!!!
-									</p>
-									<div class="client-title">
-										<h4>Popuri</h4>
-										<h5>Student</h5>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- end item -->
-						<!-- item -->
-						<div class="item">
-							<div class="item-testimonial">
-								<div class="client-info">
-									<div class="client-img">
-										<img src="<?php echo base_url(); ?>bakul/img/profile4.jpg" alt="profile">
-									</div>
-									<div class="rating">
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-									</div>
-								</div>
-								<div class="client-content">
-									<p>
-										 Thank you Rames Restaurant for being a wonderful place to eat. We are always guaranteed of perfectly cooked food every time.
-									</p>
-									<div class="client-title">
-										<h4>Jeff Doe</h4>
-										<h5>Officer</h5>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- end item -->
-						<!-- item -->
-						<div class="item">
-							<div class="item-testimonial">
-								<div class="client-info">
-									<div class="client-img">
-										<img src="<?php echo base_url(); ?>bakul/img/profile5.jpg" alt="profile">
-									</div>
-									<div class="rating">
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-									</div>
-								</div>
-								<div class="client-content">
-									<p>
-										 Hi guys I just wanted to say a quick thank you for everything yesterday...
-									</p>
-									<div class="client-title">
-										<h4>Manna Walker</h4>
-										<h5>Traveller</h5>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- end item -->
-						<!-- item -->
-						<div class="item">
-							<div class="item-testimonial">
-								<div class="client-info">
-									<div class="client-img">
-										<img src="<?php echo base_url(); ?>bakul/img/profile6.jpg" alt="profile">
-									</div>
-									<div class="rating">
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-									</div>
-								</div>
-								<div class="client-content">
-									<p>
-										 Playing the game while eating at this place is my hobby since childhood, thank you..
-									</p>
-									<div class="client-title">
-										<h4>Rick Dangerous</h4>
-										<h5>Gamer</h5>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- end item --></div>
+						<?php
+							}
+						}
+						?>
+					</div>
 				</div>
 			</div>
 		</div>

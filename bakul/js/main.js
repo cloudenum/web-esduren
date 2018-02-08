@@ -179,21 +179,20 @@ NOTE: This is the custom js file for the template
              navText: ["<i class=\"fa fa-angle-left\" aria-hidden=\"true\"></i>", "<i class=\"fa fa-angle-right\" aria-hidden=\"true\"></i>"], 
           responsive: {
             0: {
-              items: 1,
-              nav: false
+              	items: 1,
+              	nav: false
             },
             480: {
-              items: 1,
-              nav: false
+              	items: 1,
+              	nav: false
             },
             600: {
-              items: 1,
-             nav: false
+              	items: 1,
+             	nav: false
             },
             1000: {
-              items: 2,
-              nav: false, 
-              margin: 0
+              	items: 1,
+			  	nav: false,
             }
           }
            

@@ -46,6 +46,9 @@
 						<div class="form-group ">
 							<label>Deskripsi</label>
 							<textarea name="description" class="form-control" placeholder="Deskripsi" rows="3" required></textarea>
+							<!-- <textarea id="editor1" name="editor1" rows="10" cols="80" style="visibility: hidden; display: none;">
+								This is my textarea to be replaced with CKEditor.
+                    		</textarea> -->
 							<div class="valid-feedback">
 								Looks good!
 							</div>
@@ -56,10 +59,8 @@
 						<div class="form-group">
 							<label for="price">Harga</label>    
 							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text">Rp</span>
-								</div>
-								<input id="price"class="form-control" name="price" placeholder="Harga" type="text" required>
+								<span class="input-group-text">Rp</span>
+								<input id="price"class="form-control" name="price" placeholder="Harga" type="number" required>
 								<div class="valid-feedback">
 									Looks good!
 								</div>

@@ -15,6 +15,8 @@ user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
 /vendor/
 
+bakul/vendor/bootstrap-4/*
+
 uploads/*
 
 # IDE Files
@@ -29,3 +31,4 @@ uploads/*
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
+*.code-workspace

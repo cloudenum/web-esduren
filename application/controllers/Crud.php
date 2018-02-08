@@ -28,12 +28,12 @@ class Crud extends CI_Controller {
 				'code' => $this->input->post('code'),
 				'name' => $this->input->post('name'),
 				'description' => $this->input->post('description'),
-				'price' => intval($this->input->post('price')),
+				'price' => $this->input->post('price'),
 				'image_path' => base_url('uploads/'.$this->upload->data("file_name")),
 				);
 			$data = $this->Core_Model->insert('menu', $data);
 
-			$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismisable" role="alert">
+			$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 			<strong>Success!</strong> Berhasil tambah data
 		</div>');			
@@ -64,14 +64,14 @@ class Crud extends CI_Controller {
 				'code' => $this->input->post('code'),
 				'name' => $this->input->post('name'),
 				'description' => $this->input->post('description'),
-				'price' => intval($this->input->post('price')),
+				'price' => $this->input->post('price'),
 				);
 
 			$this->db->where('id', $id);
 			$data = $this->db->update('menu', $data);
 			//$this->Core_Model->update('user', $data, array('id'=>$id));
 
-			$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismisable" role="alert">
+			$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 			<strong>Success!</strong> Berhasil edit data
 		</div>');			
@@ -94,7 +94,7 @@ class Crud extends CI_Controller {
 					'code' => $this->input->post('code'),
 					'name' => $this->input->post('name'),
 					'description' => $this->input->post('description'),
-					'price' => intval($this->input->post('price')),
+					'price' => $this->input->post('price'),
 					'image_path' => base_url('uploads/'.$this->upload->data("file_name")),
 					);
 
@@ -102,7 +102,7 @@ class Crud extends CI_Controller {
 				$data = $this->db->update('menu', $data);
 				//$this->Core_Model->update('user', $data, array('id'=>$id));
 
-				$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismisable" role="alert">
+				$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 				<strong>Success!</strong> Berhasil edit data
 				</div>');			
