@@ -152,10 +152,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a id="home" href="<?php echo base_url() ?>admin/dashboard"><i class="fa fa-home"></i> <span>Home</span></a>
         </li>
         <li>
-            <a id="routes"href="#"><i class="fa fa-link"></i> <span>Routes</span></a>
+            <a id="testimoni"href="<?php echo base_url() ?>admin/testimoni"><i class="fa fa-thumbs-up"></i> <span>Testimoni</span></a>
         </li>
         <li>
-            <a id="user" href="<?php echo base_url() ?>admin/varian"><i class="fa fa-link"></i> <span>Varian</span></a>
+            <a id="varian" href="<?php echo base_url() ?>admin/varian"><i class="fa fa-cutlery"></i> <span>Varian</span></a>
         </li>
       </ul>
       <!-- /.sidebar-menu -->

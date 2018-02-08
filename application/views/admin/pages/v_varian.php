@@ -151,7 +151,7 @@
 													<span class="fa fa-pencil"/>
 													edit
 												</a>
-												<a class="btn btn-danger btn-s" href="<?php echo base_url('crud/hapus/').$row->id ?>">
+												<a class="btn btn-danger btn-s" href="<?php echo base_url('crud/hapus/').$row->id."/menu" ?>">
 													<span class="fa fa-trash"/>
 													hapus
 												</a>

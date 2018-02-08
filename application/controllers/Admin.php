@@ -68,6 +68,14 @@ class Admin extends CI_Controller {
 		// }
 	}
 
+	public function testimoni()
+	{
+		$data['js_to_load']= array('');
+		$this->load->view('admin/template/v_admin_header');
+		$this->load->view('admin/pages/v_testimoni');
+		$this->load->view('admin/template/v_admin_footer', $data);
+	}
+
 	public function varian()
 	{
 		$this->load->helper('form');

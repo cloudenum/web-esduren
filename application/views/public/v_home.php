@@ -319,22 +319,9 @@
 						<!-- item -->
 						<div class="item">
 							<div class="item-testimonial">
-								<!-- <div class="client-info">
-									<div class="client-img">
-										<img src="<?php echo base_url(); ?>bakul/img/profile.jpg" alt="profile">
-									</div>
-									<div class="rating">
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-									</div>
-								</div> -->
 								<div class="client-content text-center">
 									<div class="rating">
 									<?php	
-											// $sisa = 5-$this->$row->rating
 											for ($i = 1; $i <= $row['rating']; $i++ )
 											{
 									?>
@@ -347,14 +334,8 @@
 									?>
 											<span class="fa fa-star"></span>
 									<?php
-											}
-										 
+											} 
 									?>
-											<!-- <span class="fa fa-star" style="color: #ffc700;"></span>
-											<span class="fa fa-star" style="color: #ffc700;"></span>
-											<span class="fa fa-star" style="color: #ffc700;"></span>
-											<span class="fa fa-star" style="color: #ffc700;"></span>
-											<span class="fa fa-star"></span> -->
 									</div>
 									<p>
 										 <?php echo $row['testimonials']; ?>

@@ -74,10 +74,14 @@ class Crud extends CI_Controller {
 			$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 			<strong>Success!</strong> Berhasil edit data
-		</div>');			
+			</div>');			
 
 			//$data = array('upload_data' => $this->upload->data());
-			redirect(base_url('admin/varian'), 'refresh');
+			
+			$this->load->library('user_agent');
+			
+			$referrer_url = $this->agent->referrer();
+			redirect($referrer_url, 'refresh');
 		}
 		else
 		{
@@ -106,15 +110,23 @@ class Crud extends CI_Controller {
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 				<strong>Success!</strong> Berhasil edit data
 				</div>');			
-				redirect(base_url("admin/varian"),'refresh');
+				
+				$this->load->library('user_agent');
+				
+				$referrer_url = $this->agent->referrer();
+				redirect($referrer_url, 'refresh');
 			}
 		}
 	}
 	
-	public function hapus($id)
+	public function hapus($id, $table)
 	{   
-		$this->Core_Model->delete('menu', array( 'id' => $id));
-		redirect(base_url('admin/varian'), 'refresh');
+		$this->Core_Model->delete($table, array( 'id' => $id));
+
+		$this->load->library('user_agent');
+		
+		$referrer_url = $this->agent->referrer();
+		redirect($referrer_url, 'refresh');
 	}
 
 	
