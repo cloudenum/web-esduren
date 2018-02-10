@@ -32,3 +32,56 @@ section.home-slider .owl-nav .owl-next {
 section.testimonial .item-testimonial .client-content {
 	padding: 0px; 
 }
+
+section #left-promo .owl-nav {
+	position: absolute;
+	top: 280px;
+	width: 100%;
+	opacity: 0;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out; }
+  
+  section #left-promo:hover .owl-nav {
+	opacity: 1; 
+}
+section #left-promo .owl-nav {
+	height: 100%;
+}
+  section #left-promo .owl-nav .owl-prev,
+  section #left-promo .owl-nav .owl-next {
+	width: 50px;
+	display: table;
+	background-color: #000000;
+	color: #ffffff;
+	font-size: 24px;
+	position: absolute;
+	top: -40px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px; }
+  
+  section #left-promo .owl-nav .fa {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center; }
+  
+  section #left-promo .owl-nav .owl-prev {
+	left: 10px; }
+  
+  section #left-promo .owl-nav .owl-next {
+	right: 10px; }
+
+	@media screen and (max-width: 767px) {
+		section.promo .wrap-promo .wp-left {
+			padding: 0;
+		}
+	}
+
+	@media screen and (min-width: 620px) {
+		section.promo .wrap-promo .wp-left .item .pr-left-bg img {
+			width: 800px;
+		}
+	}

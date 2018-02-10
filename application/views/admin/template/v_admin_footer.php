@@ -105,6 +105,7 @@
 <script src="<?php echo base_url() ?>bakul/admin/js/demo.js"></script>
 <script src="<?php echo base_url() ?>bakul/vendor/iCheck/icheck.min.js"></script>
 
+<script src="<?php echo base_url() ?>bakul/js/custom.js"></script>
 <?php 
   if (is_array($js_to_load)) {
 	foreach ($js_to_load as $js_file) {?>

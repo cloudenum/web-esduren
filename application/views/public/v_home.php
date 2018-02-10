@@ -65,8 +65,76 @@
 							 non proident, iste natus error sit doloremque la udan tium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis ut labore et dolore magna aliqua. Ut enim ad minim veniam<br>
 							<br></div>
 					</div>
-					<div class="wp-left to-left ">
-						<div class="pr-left-bg">
+					<div id="left-promo" class="owl-carousel wp-left to-left">
+						<!-- Item -->
+						<div class="item">
+							<div class="pr-left-bg">
+								<img src="<?php echo base_url(); ?>bakul/img/p4.jpg" alt="img-promo">
+							</div>
+							<div class="pr-left-content">
+								<h1>Menu<br>hari ini</h1>
+								<p>
+									Sate Ayam <br>
+									Soup Jamur<br>
+									Carrot and Ginger Soup<br>Soup Brokoli</p>
+								<div class="explore-menu-btn">
+									<a href="#goto-reservation" class="rounded-button fadetransition page-scroll">RESERVE NOW</a>
+								</div>
+							</div>
+						</div>
+						<!-- End Item -->
+						<!-- Item -->
+						<div class="item">
+							<div class="pr-left-bg">
+								<img src="<?php echo base_url(); ?>bakul/img/p4.jpg" alt="img-promo">
+							</div>
+							<div class="pr-left-content">
+								<h1>Menu<br>hari ini</h1>
+								<p>
+									Sate Ayam <br>
+									Soup Jamur<br>
+									Carrot and Ginger Soup<br>Soup Brokoli</p>
+								<div class="explore-menu-btn">
+									<a href="#goto-reservation" class="rounded-button fadetransition page-scroll">RESERVE NOW</a>
+								</div>
+							</div>
+						</div>
+						<!-- End Item -->
+						<!-- Item -->
+						<div class="item">
+							<div class="pr-left-bg">
+								<img src="<?php echo base_url(); ?>bakul/img/p4.jpg" alt="img-promo">
+							</div>
+							<div class="pr-left-content">
+								<h1>Menu<br>hari ini</h1>
+								<p>
+									Sate Ayam <br>
+									Soup Jamur<br>
+									Carrot and Ginger Soup<br>Soup Brokoli</p>
+								<div class="explore-menu-btn">
+									<a href="#goto-reservation" class="rounded-button fadetransition page-scroll">RESERVE NOW</a>
+								</div>
+							</div>
+						</div>
+						<!-- End Item -->
+						<!-- Item -->
+						<div class="item">
+							<div class="pr-left-bg">
+								<img src="<?php echo base_url(); ?>bakul/img/p4.jpg" alt="img-promo">
+							</div>
+							<div class="pr-left-content">
+								<h1>Menu<br>hari ini</h1>
+								<p>
+									Sate Ayam <br>
+									Soup Jamur<br>
+									Carrot and Ginger Soup<br>Soup Brokoli</p>
+								<div class="explore-menu-btn">
+									<a href="#goto-reservation" class="rounded-button fadetransition page-scroll">RESERVE NOW</a>
+								</div>
+							</div>
+						</div>
+						<!-- End Item -->
+						<!-- <div class="pr-left-bg">
 							<img src="<?php echo base_url(); ?>bakul/img/p4.jpg" alt="img-promo">
 						</div>
 						<div class="pr-left-content">
@@ -78,7 +146,7 @@
 							<div class="explore-menu-btn">
 								<a href="#goto-reservation" class="rounded-button fadetransition page-scroll">RESERVE NOW</a>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<div class="clear"></div>
 				</div>

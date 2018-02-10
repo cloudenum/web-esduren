@@ -148,14 +148,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
        <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU</li>
         <!-- Optionally, you can add icons to the links -->
-        <li>
-            <a id="home" href="<?php echo base_url() ?>admin/dashboard"><i class="fa fa-home"></i> <span>Home</span></a>
+        <li id="nav-home">
+            <a href="<?php echo base_url() ?>admin/dashboard"><i class="fa fa-home"></i> <span>Home</span></a>
         </li>
-        <li>
-            <a id="testimoni"href="<?php echo base_url() ?>admin/testimoni"><i class="fa fa-thumbs-up"></i> <span>Testimoni</span></a>
+        <li id="nav-testimoni">
+            <a href="<?php echo base_url() ?>admin/testimoni"><i class="fa fa-thumbs-up"></i> <span>Testimoni</span></a>
         </li>
-        <li>
-            <a id="varian" href="<?php echo base_url() ?>admin/varian"><i class="fa fa-cutlery"></i> <span>Varian</span></a>
+        <li id="nav-varian">
+            <a href="<?php echo base_url() ?>admin/varian"><i class="fa fa-cutlery"></i> <span>Varian</span></a>
+		</li>
+		<li id="nav-profil-kami">
+            <a href="<?php echo base_url() ?>admin/profil"><i class="fa fa-users"></i> <span>Profil Usaha</span></a>
         </li>
       </ul>
       <!-- /.sidebar-menu -->

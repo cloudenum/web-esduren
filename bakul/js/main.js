@@ -130,7 +130,7 @@ NOTE: This is the custom js file for the template
           slideSpeed : 2000,
           margin: 0,
           responsiveClass: true,
-          nav: false, 
+          nav: true, 
              navText: ["<i class=\"fa fa-angle-left\" aria-hidden=\"true\"></i>", "<i class=\"fa fa-angle-right\" aria-hidden=\"true\"></i>"], 
           responsive: {
             0: {
@@ -160,6 +160,39 @@ NOTE: This is the custom js file for the template
               nav: true,
               loop: true,
               margin: 0
+            }
+          }
+           
+        });
+	}
+
+	// ======================= PROMO  ======================= // 
+	if($('#left-promo').length > 0){
+        $("#left-promo").owlCarousel({
+          dots: true,
+          loop: true,
+          autoplay: false,
+          slideSpeed : 1000,
+          margin: 0,
+          responsiveClass: true,
+          nav: false, 
+             navText: ["<i class=\"fa fa-angle-left\" aria-hidden=\"true\"></i>", "<i class=\"fa fa-angle-right\" aria-hidden=\"true\"></i>"], 
+          responsive: {
+            0: {
+              	items: 1,
+              	nav: true
+            },
+            480: {
+              	items: 1,
+              	nav: true
+            },
+            600: {
+              	items: 1,
+             	nav: true
+            },
+            1000: {
+              	items: 1,
+			  	nav: true,
             }
           }
            

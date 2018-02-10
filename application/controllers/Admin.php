@@ -89,4 +89,16 @@ class Admin extends CI_Controller {
 		// 	redirect(base_url("page404"), 'refresh');
 		// }
 	}
+
+	public function profil()
+	{
+		$data['js_to_load']= array('profil-page.js');
+		$this->load->view('admin/template/v_admin_header');
+		$this->load->view('admin/pages/v_profil');
+		$this->load->view('admin/template/v_admin_footer', $data);
+
+		// if($this->session->userdata('status') != "online"){
+		// 	redirect(base_url("page404"), 'refresh');
+		// }
+	}
 }

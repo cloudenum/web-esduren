@@ -19,6 +19,8 @@
 <!-- Custom js -->
 <script src="<?php echo base_url(); ?>bakul/js/main.js"> </script>
 
+<script src="<?php echo base_url() ?>bakul/js/custom.js"></script>
+
 <script type="text/javascript">
 	if (self==top) {
 		

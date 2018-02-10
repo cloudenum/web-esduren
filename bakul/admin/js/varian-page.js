@@ -25,7 +25,7 @@ $(function () {
       }, false);
 	});
 	
-    $('#varian').addClass('active');
+    $('#nav-varian').addClass('active');
 
 	$('#user-table').DataTable();
 	

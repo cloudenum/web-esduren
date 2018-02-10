@@ -7,7 +7,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url() ?>admin"><i class="fa fa-dashboard"></i> Admin</a></li>
-        <li class="active">Home</li>
+        <li class="active">Testimoni</li>
       </ol>
     </section>
 
