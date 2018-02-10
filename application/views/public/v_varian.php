@@ -17,22 +17,30 @@
 <!-- BEGIN CONTENT PAGE -->
 <section class="inner-page-content food-menu-page">
 <div class="container">
+<?php
+		$query = $this->db->query('SELECT menu.food_category_id as id, food_category.category as name, food_category.description FROM menu, food_category WHERE menu.food_category_id = food_category.id GROUP BY menu.food_category_id ORDER BY menu.food_category_id');
+
+		if ($query->num_rows() > 0)
+		{
+			foreach ($query->result() as $category)
+			{
+		?>
 	<div class="row-menu">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="heading-menu">
-					<h1 class="page-title">Es Duren</h1>
-					<div>Es duren terenak di Purwokerto</div>
+					<h1 class="page-title"><?php echo $category->name ?></h1>
+					<div><?php echo $category->description ?></div>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 		<?php
-		$query = $this->db->get('menu');
+		$query = $this->db->query('SELECT menu.* FROM menu WHERE menu.food_category_id = '.$category->id.' ORDER BY menu.food_category_id ASC');
 
 		if ($query->num_rows() > 0)
 		{
-			foreach ($query->result() as $row)
+			foreach ($query->result() as $menu)
 			{
 		?>
 			<div class="col-md-6 col-sm-12">
@@ -40,18 +48,18 @@
 				<div class="menu-item">
 					<div class="menu-item-wrap">
 						<div class="miw-left">
-							<div class="menu-item-img" style="background-image: url('<?php echo $row->image_path ?>')">
+							<div class="menu-item-img" style="background-image: url('<?php echo $menu->image_path ?>')">
 							</div>
 						</div>
 						<div class="miw-right">
 							<div class="miw-info">
 								<div class="menu-title">
-									<h3><?php echo $row->name ?></h3>
+									<h3><?php echo $menu->name ?></h3>
 								</div>
-								<div class="menu-rate">Rp <?php echo $row->price ?></div>
+								<div class="menu-rate">Rp <?php echo $menu->price ?></div>
 							</div>
 							<p>
-								<?php echo $row->description ?>
+								<?php echo $menu->description ?>
 							</p>
 						</div>
 					</div>
@@ -69,41 +77,10 @@
 		
 		</div>
 	</div>
-	<div class="row-menu">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="heading-menu">
-					<h1 class="page-title">Dessert</h1>
-					<div>Best quality Dessert Food</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6 col-sm-12">
-				<!-- menu item -->
-				<div class="menu-item">
-					<div class="menu-item-wrap">
-						<div class="miw-left">
-							<div class="menu-item-img" style="background-image: url('<?php echo base_url(); ?>bakul/img/menu-fruit-yogurt.jpg')">
-							</div>
-						</div>
-						<div class="miw-right">
-							<div class="miw-info">
-								<div class="menu-title">
-									<h3>Fruit Yoghurt</h3>
-								</div>
-								<div class="menu-rate">$2.19</div>
-							</div>
-							<p>
-								 combination of fresh fruits and yogurt.
-							</p>
-						</div>
-					</div>
-				</div>
-				<!-- end menu item -->
-			</div>
-		</div>
-	</div>
+	<?php
+			}
+		}
+	?>
 </div>
 </section>
 <!-- END CONTENT PAGE -->

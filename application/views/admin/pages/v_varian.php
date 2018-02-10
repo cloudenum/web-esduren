@@ -70,6 +70,38 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label for="category">Kategori Menu</label>    
+							<div class="input-group">
+								<select class="form-control" name="category" id="category">
+								<?php 
+									$category = $this->db->get('food_category');
+
+									if ($category->num_rows() > 0)
+									{ 
+										foreach($category->result() as $value)
+										{
+								?>
+											<option value="<?php echo $value->id ?>"><?php echo $value->category ?></option>
+								<?php
+										}
+									}
+									else
+									{
+								?>
+										<option>Kategori belum ada silahkan tambahkan terlebih dahulu</option>
+								<?php
+									}
+								?>
+								</select>
+								<div class="valid-feedback">
+									Looks good!
+								</div>
+								<div class="invalid-feedback">
+									Masukkan Harga Varian.
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
 							<label for="upload-gambar">Upload Foto</label>
 							<input id="upload-gambar" name="image" type="file" required>
 							<p class="help-block">Upload gambar/foto varian es durian yang akan ditambahkan.</p>
@@ -94,7 +126,7 @@
 				<div class="box-body">
 					<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 						<div class="row">
-							<div class="col-sm-12">
+							<div class="col-sm-12"  style="overflow: auto; background: white;">
 								<table id="varian-table" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
 									<thead>
 										<tr role="row">
@@ -114,6 +146,9 @@
 												Harga
 											</th>
 											<th class="sorting" aria-controls="varian-table">
+												Kategori
+											</th>
+											<th class="sorting" aria-controls="varian-table">
 												Image
 											</th>
 											<th class="sorting" aria-controls="varian-table"  style="width: 20%;">
@@ -123,7 +158,7 @@
 									</thead>
 									<tbody>
 										<?php 
-											$query = $this->db->get('menu');
+											$query = $this->db->query('SELECT M.*, F.id as food_id, F.category FROM menu M, food_category F WHERE M.food_category_id = F.id');
 
 											$nomor = 1;
 
@@ -139,6 +174,7 @@
 											<td><?php echo $row->name;?></td>
 											<td><?php echo $row->description;?></td>
 											<td><?php echo 'Rp '.$row->price;?></td>
+											<td><?php echo $row->category;?></td>
 											<td><img class="img-responsive img-rounded" src="<?php echo $row->image_path;?>" alt="<?php echo $row->name;?>"></td>
 											<td>
 												<a class="btn btn-warning btn-s" data-toggle="modal" data-target="#editModal" 
@@ -147,7 +183,8 @@
 													data-name="<?php echo $row->name;?>"
 													data-desc="<?php echo $row->description;?>"
 													data-price="<?php echo $row->price;?>"
-													data-img-path="<?php echo $row->image_path;?>">
+													data-img-path="<?php echo $row->image_path;?>"
+													data-category="<?php echo $row->food_id;?>">
 													<span class="fa fa-pencil"/>
 													edit
 												</a>
@@ -166,11 +203,12 @@
 									<tfoot>
 										<tr>
 											<th>No.</th>
-											<th>Username</th>
-											<th>Password</th>
-											<th>Fullname</th>
-											<th>Address</th>
-											<th>Phone</th>
+											<th>Kode Varian</th>
+											<th>Nama</th>
+											<th>Deskripsi</th>
+											<th>Harga</th>
+											<th>Kategori</th>
+											<th>Image</th>
 											<th>Action</th>
 										</tr>
 									</tfoot>
@@ -213,6 +251,32 @@
 						<div class="form-group ">
 							<label>Harga</label>    
 							<input id="edit-price" class="form-control" name="price" placeholder="Harga" type="text">
+						</div>
+						<div class="form-group">
+							<label for="edit-category">Kategori Menu</label>    
+							<div class="input-group">
+								<select class="form-control" name="category" id="edit-category">
+								<?php 
+									$category = $this->db->get('food_category');
+
+									if ($category->num_rows() > 0)
+									{ 
+										foreach($category->result() as $value)
+										{
+								?>
+											<option value="<?php echo $value->id ?>"><?php echo $value->category ?></option>
+								<?php
+										}
+									}
+									else
+									{
+								?>
+										<option>Kategori belum ada silahkan tambahkan terlebih dahulu</option>
+								<?php
+									}
+								?>
+								</select>
+							</div>
 						</div>
 						<img id="img-edit-varian" class="img-responsive img-rounded" src="">
 						<div class="form-group ">

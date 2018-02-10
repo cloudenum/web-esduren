@@ -70,7 +70,7 @@ class Admin extends CI_Controller {
 
 	public function testimoni()
 	{
-		$data['js_to_load']= array('');
+		$data['js_to_load']= array('testimoni-page.js');
 		$this->load->view('admin/template/v_admin_header');
 		$this->load->view('admin/pages/v_testimoni');
 		$this->load->view('admin/template/v_admin_footer', $data);

@@ -157,8 +157,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li id="nav-varian">
             <a href="<?php echo base_url() ?>admin/varian"><i class="fa fa-cutlery"></i> <span>Varian</span></a>
 		</li>
-		<li id="nav-profil-kami">
-            <a href="<?php echo base_url() ?>admin/profil"><i class="fa fa-users"></i> <span>Profil Usaha</span></a>
+		<li id="nav-profil" class="treeview">
+          <a href="#">
+            <i class="fa fa-industry"></i>
+            <span>Profil</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url() ?>admin/profil"><i class="fa fa-users"></i> Profil Usaha</a></li>
+            <li><a href="<?php echo base_url() ?>admin/profil"><i class="fa fa-clock-o"></i> Jam Buka</a></li>
+          </ul>
         </li>
       </ul>
       <!-- /.sidebar-menu -->

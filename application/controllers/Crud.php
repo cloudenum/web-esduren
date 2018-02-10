@@ -30,7 +30,9 @@ class Crud extends CI_Controller {
 				'description' => $this->input->post('description'),
 				'price' => $this->input->post('price'),
 				'image_path' => base_url('uploads/'.$this->upload->data("file_name")),
+				'food_category_id' => $this->input->post('category'),
 				);
+
 			$data = $this->Core_Model->insert('menu', $data);
 
 			$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
@@ -39,7 +41,7 @@ class Crud extends CI_Controller {
 		</div>');			
 
 			//$data = array('upload_data' => $this->upload->data());
-			redirect(base_url('admin/varian'));
+			$this->redirect_back();
 
 			
 			// foreach ($data['upload_data'] as $upload) {
@@ -49,6 +51,38 @@ class Crud extends CI_Controller {
 		}
 	}
 	
+	public function edit_profil()
+	{
+		$query = $this->db->get('profil');
+
+		if ($query->num_rows() == 0){
+
+			$data = array(
+				'name'=> html_escape($this->input->post('name')),
+				'email'=> html_escape($this->input->post('email')),
+				'phone'=> html_escape($this->input->post('phone')),
+				'alamat'=> html_escape($this->input->post('alamat')),
+				'tentang'=> html_escape($this->input->post('tentang'))
+			);
+
+			$data = $this->Core_Model->insert('profil', $data);
+			$this->redirect_back();
+		}
+		else
+		{
+			$data = array(
+				'name'=> html_escape($this->input->post('name')),
+				'email'=> html_escape($this->input->post('email')),
+				'phone'=> html_escape($this->input->post('phone')),
+				'alamat'=> html_escape($this->input->post('alamat')),
+				'tentang'=> html_escape($this->input->post('tentang'))
+			);
+
+			$this->db->update('profil', $data, array('id' => 1));
+			$this->redirect_back();
+		}
+	}
+
 	public function success()
 	{			
 		$this->load->view('template/style');
@@ -65,6 +99,7 @@ class Crud extends CI_Controller {
 				'name' => $this->input->post('name'),
 				'description' => $this->input->post('description'),
 				'price' => $this->input->post('price'),
+				'food_category_id' => $this->input->post('category')
 				);
 
 			$this->db->where('id', $id);
@@ -78,10 +113,7 @@ class Crud extends CI_Controller {
 
 			//$data = array('upload_data' => $this->upload->data());
 			
-			$this->load->library('user_agent');
-			
-			$referrer_url = $this->agent->referrer();
-			redirect($referrer_url, 'refresh');
+			$this->redirect_back();
 		}
 		else
 		{
@@ -100,6 +132,7 @@ class Crud extends CI_Controller {
 					'description' => $this->input->post('description'),
 					'price' => $this->input->post('price'),
 					'image_path' => base_url('uploads/'.$this->upload->data("file_name")),
+					'food_category_id' => $this->input->post('category')
 					);
 
 				$this->db->where('id', $id);
@@ -109,12 +142,9 @@ class Crud extends CI_Controller {
 				$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 				<strong>Success!</strong> Berhasil edit data
-				</div>');			
+				</div>');					
 				
-				$this->load->library('user_agent');
-				
-				$referrer_url = $this->agent->referrer();
-				redirect($referrer_url, 'refresh');
+				$this->redirect_back();
 			}
 		}
 	}
@@ -122,12 +152,14 @@ class Crud extends CI_Controller {
 	public function hapus($id, $table)
 	{   
 		$this->Core_Model->delete($table, array( 'id' => $id));
-
-		$this->load->library('user_agent');
 		
+		$this->redirect_back();
+	}
+
+	public function redirect_back()
+	{
+		$this->load->library('user_agent');
 		$referrer_url = $this->agent->referrer();
 		redirect($referrer_url, 'refresh');
 	}
-
-	
 }

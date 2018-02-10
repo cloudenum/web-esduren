@@ -22,7 +22,7 @@
 					<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 						<div class="row">
 							<div class="col-sm-12">
-								<table id="varian-table" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+								<table id="testimoni-table" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
 									<thead>
 										<tr role="row">
 											<th class="sorting_asc" aria-controls="varian-table"  aria-sort="ascending">
