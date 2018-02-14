@@ -304,7 +304,7 @@
 	</div>
 </div>
 <div class="explore-menu-btn">
-	<div class="rounded-button fadetransition">EXPLORE FULL MENU</div>
+	<a class="rounded-button fadetransition" href="<?php echo base_url()?>varian">EXPLORE FULL MENU</a>
 </div>
 </section>
 <!-- END FOOD MENU -->
@@ -390,27 +390,28 @@
 								<div class="client-content text-center">
 									<div class="rating">
 									<?php	
-											for ($i = 1; $i <= $row['rating']; $i++ )
-											{
-									?>
-											<span class="fa fa-star" style="color: #ffc700;"></span>
-									<?php 
+										for($i=1; $i<=5; $i++) 
+										{	
+											if($i <= $row["rating"])
+											{ 
+												$selected = "color: #ffc700;"; 
 											}
-
-											for ($i = 1; $i <= 5 - $row['rating'] ; $i++)
-											{	
+											else
+											{ 
+												$selected = ""; 
+											}
 									?>
-											<span class="fa fa-star"></span>
-									<?php
-											} 
+											<span class="fa fa-star" style="<?php echo $selected; ?>"></span>
+									<?php 
+										}
 									?>
 									</div>
 									<p>
-										 <?php echo $row['testimonials']; ?>
+										 <?php echo $row['testimonial']; ?>
 									</p>
 									<div class="client-title">
 										<h4><?php echo $row['name']; ?></h4>
-										<h5>Entrepreneur</h5>
+										<h5><?php echo $row['submited_date'].' '.$row['submited_time']; ?></h5>
 									</div>
 								</div>
 							</div>
@@ -440,63 +441,44 @@
 			<div class="well-block">
 				<div class="well-title">
 					<div class="heading-section">
-						<div class="heading-title">Make a Reservation</div>
-						<div class="heading-text">Please fill this form to make your reservation</div>
+						<div class="heading-title">Menurutmu Es Duren itu Seperti Apa sih?</div>
+						<div class="heading-text">Tulis Ulasanmu disini</div>
 					</div>
 				</div>
-				<div class="form-reservation">
-					<form>
+				<div class="form-testimonial">
+					<form action="<?php echo base_url(); ?>crud/add_testimonial" method="POST">
 						<!-- Form start -->
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label" for="name">Name</label>
-									<input id="name" name="name" type="text" placeholder="Name" class="form-control input-md"></div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label class="control-label" for="name">Persons</label>
-									<select id="persons" name="persons" class="form-control">
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-									</select>
+									<label class="control-label" for="name">Nama</label>
+									<input id="name" name="name" type="text" placeholder="Nama" class="form-control input-md">
 								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label class="control-label" for="phone">Phone</label>
-									<input id="phone" name="phone" placeholder="Phone" class="form-control input-md" required="" type="text"></div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label class="control-label" for="email">Email</label>
-									<input id="email" name="email" type="text" placeholder="E-Mail" class="form-control input-md"></div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label class="control-label" for="datepicker">Preferred Date</label>
-									<input id="datepicker" class="form-control input-md"></div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label class="control-label" for="timepicker3">Preferred Time</label>
-									<input id="timepicker3" type="text" class="form-control input-md"></div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label" for="comments">Notes</label>
-									<textarea class="form-control" id="comments" name="comments"></textarea>
+									<label class="control-label" for="testimonial">Ulasanmu</label>
+									<textarea class="form-control" id="testimonial" name="testimonial"></textarea>
 								</div>
 							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<input type='hidden' name='rating' id='rating'>
+									<div class="rating">
+										<span id="star-0" class="fa fa-star" onmouseover="highlightStar(0)" onmouseout="removeHighlight(0)" onClick="selectStar(0)"></span>
+										<span id="star-1" class="fa fa-star" onmouseover="highlightStar(1)" onmouseout="removeHighlight(1)" onClick="selectStar(1)"></span>
+										<span id="star-2" class="fa fa-star" onmouseover="highlightStar(2)" onmouseout="removeHighlight(2)" onClick="selectStar(2)"></span>
+										<span id="star-3" class="fa fa-star" onmouseover="highlightStar(3)" onmouseout="removeHighlight(3)" onClick="selectStar(3)"></span>
+										<span id="star-4" class="fa fa-star" onmouseover="highlightStar(4)" onmouseout="removeHighlight(4)" onClick="selectStar(4)"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group btn-booknow">
-									<input class="rounded-button fadetransition" value="Book Now" type="submit"></div>
+									<input type="submit" class="rounded-button fadetransition" value="Kirim!"/>
+								</div>
 							</div>
 						</div>
 					</form>

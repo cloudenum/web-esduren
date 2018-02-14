@@ -12,87 +12,87 @@ NOTE: This is stylesheet of theme color.
 
 /*============================
 body class name : .theme-green  
-primary-color   : #1ee012;
+primary-color   : #21cb71;
 secondary-color : #090909;
 ==============================*/
 
 
 
 body.theme-green .text-theme {
-  color: #1ee012; }
+  color: #21cb71; }
 
 body.theme-green .outline-btn:hover { 
-  background: #1ee012;
-  border: 1px solid #1ee012; }
+  background: #21cb71;
+  border: 1px solid #21cb71; }
 
 body.theme-green .rounded-button {
-  background: #1ee012;  
+  background: #21cb71;  
   color: #ffffff !important;}
 
 body.theme-green .form-control:focus,
 body.theme-green .form-control:active {
-  border: 1px solid #1ee012; }
+  border: 1px solid #21cb71; }
 
 body.theme-green .back-to-top { 
-  background: #1ee012;  }
+  background: #21cb71;  }
 
 body.theme-green .back-to-top.btn-primary:hover,
 body.theme-green .back-to-top.btn-primary:focus,
 body.theme-green .back-to-top.btn-primary:active,
 body.theme-green .back-to-top.btn-primary.active,
 body.theme-green .open .back-to-top.dropdown-toggle.btn-primary { 
- background: #1ee012;  }
+ background: #21cb71;  }
 
 @media screen and (min-width: 768px) {
 
 body.theme-green .sticky .nav-header nav .navbar-nav > li > a:hover {
-border-bottom: 5px solid #1ee012; }
+border-bottom: 5px solid #21cb71; }
 
 body.theme-green .header.sticky .nav-header .nav > li.active > a {
-border-bottom: 5px solid #1ee012; }
+border-bottom: 5px solid #21cb71; }
 
 }
 
 body.theme-green section.promo .box-menu-package .bmp-text h3 {
-  color: #1ee012; } 
+  color: #21cb71; } 
 
 body.theme-green section.foodmenu .owl-nav .owl-prev,
 body.theme-green section.foodmenu .owl-nav .owl-next {
-  background: #1ee012; }
+  background: #21cb71; }
 
 body.theme-green section.testimonial .heading-text {
-  color: #1ee012; }
+  color: #21cb71; }
 
 body.theme-green section.testimonial .item-testimonial .client-info .rating {
-  color: #1ee012; }
+  color: #21cb71; }
 
 body.theme-green section.testimonial .item-testimonial .client-content h4 {
-  color: #1ee012; } 
+  color: #21cb71; } 
 
 body.theme-green section.footer .footer-wrap-b .footer-content-right .open-hours-wrap { 
- border: 1px solid #1ee012; }
+ border: 1px solid #21cb71; }
 
 body.theme-green section.footer .footer-wrap-b .footer-content-right .open-hours-wrap .oh-day .ohd-day {
-  color: #1ee012; }
+  color: #21cb71; }
 
 body.theme-green section.footer .footer-wrap-b .footer-content-left .footer-row-c .footer-info .footer-info-left { 
-  color: #1ee012; }
+  color: #21cb71; }
 
 body.theme-green footer .footer-sosmed-icon .wrap-circle-sosmed .circle-sosmed { 
-  border: 1px solid #1ee012; }
+  border: 1px solid #21cb71; }
 
 body.theme-green footer .footer-sosmed-icon .wrap-circle-sosmed .circle-sosmed:hover {
-  border: 1px solid #1ee012;
-  background: #1ee012; }
+  border: 1px solid #21cb71;
+  background: #21cb71; }
 
 body.theme-green .contact-page .form-group .btn { 
-  background-color: #1ee012; }
+  background-color: #21cb71; }
 
 body.theme-green .hovereffect p a {
-  background: #1ee012; }
+  background: #21cb71; }
 
 body.theme-green .style-option-wrap .style-btn-class { 
-  background: #1ee012; }
+  background: #21cb71; }
 
 body.theme-green a:hover, a:focus, a:active { 
   color: #090909; }
@@ -110,3 +110,11 @@ body.theme-green .back-to-top {
 
 body.theme-green .hovereffect p a { 
   color: #ffffff; }
+  
+  section #left-promo .owl-dots .owl-dot {
+	border: 1px solid #21cb71;
+}
+
+section #left-promo .owl-dots .owl-dot.active {
+	background: #21cb71;
+}

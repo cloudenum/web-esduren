@@ -51,16 +51,14 @@ class Core_Model extends CI_Model{
         return $res;
 	}
 	
-	public function upload_gambar($name_attr)
+	public function upload_gambar($name_attr, $config, $random_name = true)
 	{
-		$this->load->helper('string');
 
-		$config['upload_path']          = './uploads/';
-		$config['file_name']			= random_string('alnum', 8);
-		$config['allowed_types']        = '|gif|jpeg|jpg|png';
-		$config['max_size']             = 4096;
-		$config['max_width']            = 4096;
-		$config['max_height']           = 4096;
+		if ( $random_name == true )
+		{
+			$this->load->helper('string');
+			$config['file_name'] = random_string('alnum', 8);
+		}
 
 		$this->load->library('upload', $config);
 		

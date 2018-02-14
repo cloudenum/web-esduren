@@ -7,7 +7,7 @@ class Admin extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Core_Model');
-		
+		$this->load->helper('form');
 		// if($this->session->userdata('status') == "online"){
 		// 	redirect(base_url("admin/dashboard"));
 		// }
@@ -78,8 +78,6 @@ class Admin extends CI_Controller {
 
 	public function varian()
 	{
-		$this->load->helper('form');
-
 		$data['js_to_load']= array('varian-page.js');
 		$this->load->view('admin/template/v_admin_header');
 		$this->load->view('admin/pages/v_varian');
@@ -95,6 +93,18 @@ class Admin extends CI_Controller {
 		$data['js_to_load']= array('profil-page.js');
 		$this->load->view('admin/template/v_admin_header');
 		$this->load->view('admin/pages/v_profil');
+		$this->load->view('admin/template/v_admin_footer', $data);
+
+		// if($this->session->userdata('status') != "online"){
+		// 	redirect(base_url("page404"), 'refresh');
+		// }
+	}
+
+	public function jam_buka()
+	{
+		$data['js_to_load']= array('jambuka-page.js');
+		$this->load->view('admin/template/v_admin_header');
+		$this->load->view('admin/pages/v_jambuka');
 		$this->load->view('admin/template/v_admin_footer', $data);
 
 		// if($this->session->userdata('status') != "online"){

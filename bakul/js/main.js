@@ -171,7 +171,7 @@ NOTE: This is the custom js file for the template
         $("#left-promo").owlCarousel({
           dots: true,
           loop: true,
-          autoplay: false,
+          autoplay: true,
           slideSpeed : 1000,
           margin: 0,
           responsiveClass: true,

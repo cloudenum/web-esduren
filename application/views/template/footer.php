@@ -1,3 +1,8 @@
+<?php	
+	$query = $this->db->get('profil');
+
+	$profil = $query->result();
+							?>
 <!-- BEGIN SECTION FOOTER-->
 <section class="footer">
 <div class="footer-wrap">
@@ -9,12 +14,12 @@
 						<div class="row footer-row-a">
 							<div class="col-md-3">
 								<div class="logo-footer">
-									<img src="<?php echo base_url(); ?>bakul/img/logo-white.png" alt="logo">
+									<img src="<?php echo $profil[0]->logo_path; ?>" alt="logo">
 								</div>
 							</div>
 							<div class="col-md-9">
 								<div class="info-footer">
-									 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+								<?php echo $profil[0]->tentang; ?>
 								</div>
 							</div>
 						</div>
@@ -30,8 +35,7 @@
 										<div class="icon-location-pin"></div>
 									</div>
 									<div class="footer-info-right">
-										 Jl. Prof. Dr. Suharso <br>
-										 Purwokerto Utara <br>Banyumas</div>
+									<?php echo $profil[0]->alamat; ?></div>
 								</div>
 							</div>
 							<div class="col-md-4 col-sm-12 footer-address">
@@ -40,7 +44,7 @@
 										<div class="icon-phone"></div>
 									</div>
 									<div class="footer-info-right">
-										 (+62)-274-123456 <br>(+62)-274-654321</div>
+									<?php echo $profil[0]->phone; ?></div>
 								</div>
 							</div>
 							<div class="col-md-4 col-sm-12 footer-address">
@@ -49,7 +53,7 @@
 										<div class="icon-envelope"></div>
 									</div>
 									<div class="footer-info-right">
-										 support@ramestr.com <br>reservation@ramestr.com</div>
+									<?php echo $profil[0]->email; ?></div>
 								</div>
 							</div>
 						</div>
@@ -57,44 +61,28 @@
 					<div class="footer-content-right">
 						<div class="open-hours-wrap">
 							<div class="oh-title">JAM BUKA</div>
+							<?php 
+				$query = $this->db->get('open_hours');
+
+				 $value = $query->result();
+				 
+				if ($query->num_rows() > 0)
+				{
+					foreach($value as $row)
+					{
+			?>
 							<div class="oh-day">
-								<div class="ohd-day">Senin</div>
-								<div class="ohd-time">8AM - 9PM</div>
+								<div class="ohd-day"><?php echo $row->day; ?></div>
+								<div class="ohd-time"><?php if ($row->flag != 0){ echo substr($row->open_hour, 0, 5); ?> - <?php echo substr($row->close_hour, 0, 5); }else{ echo "Tutup";}?></div>
 								<div class="clear"></div>
 							</div>
-							<div class="oh-day">
-								<div class="ohd-day">Selasa</div>
-								<div class="ohd-time">8AM - 9PM</div>
-								<div class="clear"></div>
-							</div>
-							<div class="oh-day">
-								<div class="ohd-day">Rabu</div>
-								<div class="ohd-time">8AM - 9PM</div>
-								<div class="clear"></div>
-							</div>
-							<div class="oh-day">
-								<div class="ohd-day">Kamis</div>
-								<div class="ohd-time">8AM - 9PM</div>
-								<div class="clear"></div>
-							</div>
-							<div class="oh-day">
-								<div class="ohd-day">Jum'at</div>
-								<div class="ohd-time">8AM - 9PM</div>
-								<div class="clear"></div>
-							</div>
-							<div class="oh-day">
-								<div class="ohd-day">Sabtu</div>
-								<div class="ohd-time">8AM - 9PM</div>
-								<div class="clear"></div>
-							</div>
-							<div class="oh-day">
-								<div class="ohd-day">Minggu</div>
-								<div class="ohd-time">Close</div>
-								<div class="clear"></div>
-							</div>
+					<?php
+					}
+				}
+					?>
 							<div class="reserphone">
 								 Telephone Pemesanan<br>
-								 Call <span class="text-theme">&nbsp;&nbsp;(+62)-274-654321</span>
+								 Call <span class="text-theme">&nbsp;&nbsp;<?php echo $profil[0]->phone; ?></span>
 							</div>
 						</div>
 					</div>

@@ -13,19 +13,23 @@
 
     <!-- Main content -->
     <section class="content container-fluid">
-	 
+	<?php 
+				echo $this->session->flashdata('alert');
+			?>
       <div class="row">
         <div class="col-md-3">
 
           <!-- Profile Image -->
           <div class="box box-primary">
 		  
-            <div class="box-body box-profile">
-			<h3>Logo</h3>
-              <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
-
-              <h3 class="profile-username text-center">Es Duren Kombinasi</h3>
-              <a href="#" class="btn btn-primary btn-block"><b>Edit Logo</b></a>
+            <div class="box-body box-profile text-center">
+				<h3>Logo</h3>
+				<img class="profile-user-img img-responsive img-circle with-invert" alt="Logo Es Duren" src="<?php echo base_url(); ?>bakul/logo.png">
+				<h3 class="profile-username text-center">Es Duren Kombinasi</h3>
+				<b>Edit Logo</b>
+				<?php echo form_open_multipart('crud/upload_logo', array('id' => 'form-logo','class' => 'needs-validation novalidate'));?>
+					<input name="edit-logo" type="file" class="btn btn-primary btn-block"/>
+				</form>
             </div>
             <!-- /.box-body -->
           </div>
@@ -76,7 +80,6 @@
 			  <form class="form-horizontal" action="<?php echo base_url() ?>crud/edit_profil" method="POST">
 			  <?php
 
-			  var_dump($query->num_rows());
 				if ($query->num_rows() > 0)
 				{
 

@@ -1,10 +1,15 @@
+<?php	
+	$query = $this->db->get('profil');
+
+	$profil = $query->result();
+							?>
 <body id="<?php 
 			if (is_array($body_id)){
 				foreach ($body_id as $id){
 					echo $id;
 				}
 			}
-		?>">
+		?>" class="theme-green">
 <!-- BEGIN PRELOADING -->
 <div class="preloading">
 	<div class="wrap-preload">
@@ -24,7 +29,7 @@
 						<div class="col-md-3 col-logo">
 							<a href="<?php echo base_url(); ?>">
 							<div class="logo">
-								<img class="with-invert" alt="logo-header" src="<?php echo base_url(); ?>bakul/img/logo-white.png">
+								<img class="with-invert" alt="logo-header" src="<?php echo $profil[0]->logo_path; ?>">
 							</div>
 							</a>
 						</div>

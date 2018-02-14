@@ -43,6 +43,9 @@
 											<th class="sorting" aria-controls="varian-table">
 												MAC Address
 											</th>
+											<th class="sorting" aria-controls="varian-table">
+												Tanggal Input
+											</th>
 											<th class="sorting" aria-controls="varian-table"  style="width: 10%;">
 												Action
 											</th>
@@ -63,7 +66,7 @@
 										<tr role="row">
 											<td><?php echo $nomor++?></td>
 											<td><?php echo $row['name'];?></td>
-											<td><?php echo $row['testimonials'];?></td>
+											<td><?php echo $row['testimonial'];?></td>
 											<td><div class="rating">
 													<?php	
 															for ($i = 1; $i <= $row['rating']; $i++ )
@@ -84,6 +87,7 @@
 											</td>
 											<td><?php echo $row['ip_address'];?></td>
 											<td><?php echo $row['mac_address'];?></td>
+											<td><?php echo $row['submited_date'].' '.$row['submited_time'];?></td>
 											<td>
 												<a class="btn btn-danger btn-s" href="<?php echo base_url('crud/hapus/').$row['id']."/testimonials"; ?>">
 													<span class="fa fa-trash"/>

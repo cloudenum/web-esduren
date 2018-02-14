@@ -98,6 +98,7 @@
 <script src="<?php echo base_url() ?>bakul/vendor/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="<?php echo base_url() ?>bakul/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="<?php echo base_url() ?>bakul/vendor/fastclick/lib/fastclick.js"></script>
+<script src="<?php echo base_url() ?>bakul/vendor/timepicker/bootstrap-timepicker.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url() ?>bakul/admin/js/adminlte.min.js"></script>
 <!-- Pace.js -->

@@ -16,6 +16,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/pace/pace.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/font-awesome/css/font-awesome.min.css">
+  <!-- Timepicker -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/timepicker/bootstrap-timepicker.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/Ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/iCheck/all.css">
@@ -157,6 +159,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li id="nav-varian">
             <a href="<?php echo base_url() ?>admin/varian"><i class="fa fa-cutlery"></i> <span>Varian</span></a>
 		</li>
+		<li id="nav-profil" class="treeview">
+          <a href="#">
+            <i class="fa fa-industry"></i>
+            <span>Galeri</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url() ?>admin/tambah_gambar"><i class="fa fa-users"></i> Tambah Gambar</a></li>
+            <li><a href="<?php echo base_url() ?>admin/profil"><i class="fa fa-clock-o"></i> </a></li>
+          </ul>
+        </li>
 		<li id="nav-profil" class="treeview">
           <a href="#">
             <i class="fa fa-industry"></i>
