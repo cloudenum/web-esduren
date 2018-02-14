@@ -101,7 +101,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function jam_buka()
-	{
+	{							
 		$data['js_to_load']= array('jambuka-page.js');
 		$this->load->view('admin/template/v_admin_header');
 		$this->load->view('admin/pages/v_jambuka');
