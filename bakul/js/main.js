@@ -282,25 +282,25 @@ NOTE: This is the custom js file for the template
       }); 
 
     /*=================== GALLERY FILTERING FUCTION  ===================*/
-    $(".filter-button").on("click", function() {
-        var value = $(this).attr('data-filter');
+    // $(".filter-button").on("click", function() {
+    //     var value = $(this).attr('data-filter');
         
-        if(value == "gallery-no-filter")
-        {
-            $('.gallery-img-box').removeClass("gallery-hidden");
-        }
-        else
-        { 
-            $(".gallery-img-box").not('.'+value).addClass("gallery-hidden");   
-            $('.gallery-img-box').filter('.'+value).removeClass("gallery-hidden");
+    //     if(value == "gallery-no-filter")
+    //     {
+    //         $('.gallery-img-box').removeClass("gallery-hidden");
+    //     }
+    //     else
+    //     { 
+    //         $(".gallery-img-box").not('.'+value).addClass("gallery-hidden");   
+    //         $('.gallery-img-box').filter('.'+value).removeClass("gallery-hidden");
             
-        }
-    });
+    //     }
+    // });
 
-    $('.filter-gallery .filter-button').on("click", function() {
-        $('.filter-gallery').find('.filter-button.active').removeClass('active');  
-        $(this).addClass('active');
-    });
+    // $('.filter-gallery .filter-button').on("click", function() {
+    //     $('.filter-gallery').find('.filter-button.active').removeClass('active');  
+    //     $(this).addClass('active');
+    // });
 
   /*=================== GALLERY FUNCTIONS ===================*/ 
     loadGallery(true, 'a.viewthumb');
@@ -334,8 +334,8 @@ NOTE: This is the custom js file for the template
         function updateGallery(selector) {
             var $sel = selector;
             current_image = $sel.data('image-id');
-            $('#image-gallery-caption').text($sel.data('caption'));
-            $('#image-gallery-title').text($sel.data('title'));
+            // $('#image-gallery-caption').text($sel.data('caption'));
+            // $('#image-gallery-title').text($sel.data('title'));
             $('#image-gallery-image').attr('src', $sel.data('image'));
             disableButtons(counter, $sel.data('image-id'));
         }

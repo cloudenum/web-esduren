@@ -5,6 +5,9 @@ class Varian extends CI_Controller {
 
 	public function index()
 	{	
+		$query = $this->db->get('profil');
+
+		$data['profil'] = $query->result();
 		$data['body_id'] = array('single-page');
 		$data['js_to_load'] = array('');
 
@@ -12,8 +15,8 @@ class Varian extends CI_Controller {
 		$this->load->view('template/style');
 		$this->load->view('template/header', $data);
 		$this->load->view('public/v_varian');
-		$this->load->view('template/footer');
-		$this->load->view('template/script');
+		$this->load->view('template/footer', $data);
+		$this->load->view('template/script', $data);
 		
 	}
 }

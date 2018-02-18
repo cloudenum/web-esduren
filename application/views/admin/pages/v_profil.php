@@ -24,11 +24,13 @@
 		  
             <div class="box-body box-profile text-center">
 				<h3>Logo</h3>
-				<img class="profile-user-img img-responsive img-circle with-invert" alt="Logo Es Duren" src="<?php echo base_url(); ?>bakul/logo.png">
+				<img class="profile-user-img img-responsive img-circle" alt="Logo Es Duren" src="<?php echo $profil[0]->logo_path; ?>">
 				<h3 class="profile-username text-center">Es Duren Kombinasi</h3>
-				<b>Edit Logo</b>
 				<?php echo form_open_multipart('crud/upload_logo', array('id' => 'form-logo','class' => 'needs-validation novalidate'));?>
-					<input name="edit-logo" type="file" class="btn btn-primary btn-block"/>
+				<label for="edit-logo" class="btn btn-primary btn-block">
+					<i class="fa fa-cloud-upload"></i> Edit Logo
+				</label>
+					<input id="edit-logo" name="edit-logo" type="file"/>
 				</form>
             </div>
             <!-- /.box-body -->
@@ -182,6 +184,22 @@
           <!-- /.nav-tabs-custom -->
         </div>
         <!-- /.col -->
+
+		<!-- BEGIN SECTION MAP -->
+		<section class="contact-map">
+		<div class="homepage-map">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div id="map_canvas"></div>
+					</div>
+				</div>
+			</div> 
+		</div>
+		</section>
+		<!-- END SECTION MAP -->
+
       </div>
       <!-- /.row -->
 	</section>
+</div>

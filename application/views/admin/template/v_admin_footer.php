@@ -3,92 +3,75 @@
   <footer class="main-footer">
 	<!-- To the right -->
 	<div class="pull-right hidden-xs">
-	  Anything you want
+	  Admin page
 	</div>
 	<!-- Default to the left -->
-	<strong>Copyright &copy; 2016 <a href="#">Hambuilt</a>.</strong> All rights reserved.
+	<strong>Copyright &copy; 2018 <a href="<?php echo base_url();?>">Es Duren Kombinasi</a>.</strong> All rights reserved.
   </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-	<!-- Create the tabs -->
-	<ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-	  <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-	  <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-	</ul>
-	<!-- Tab panes -->
-	<div class="tab-content">
-	  <!-- Home tab content -->
-	  <div class="tab-pane active" id="control-sidebar-home-tab">
-		<h3 class="control-sidebar-heading">Recent Activity</h3>
-		<ul class="control-sidebar-menu">
-		  <li>
-			<a href="javascript:;">
-			  <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-			  <div class="menu-info">
-				<h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-				<p>Will be 23 on April 24th</p>
-			  </div>
-			</a>
-		  </li>
-		</ul>
-		<!-- /.control-sidebar-menu -->
-
-		<h3 class="control-sidebar-heading">Tasks Progress</h3>
-		<ul class="control-sidebar-menu">
-		  <li>
-			<a href="javascript:;">
-			  <h4 class="control-sidebar-subheading">
-				Custom Template Design
-				<span class="pull-right-container">
-					<span class="label label-danger pull-right">70%</span>
-				  </span>
-			  </h4>
-
-			  <div class="progress progress-xxs">
-				<div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-			  </div>
-			</a>
-		  </li>
-		</ul>
-		<!-- /.control-sidebar-menu -->
-
-	  </div>
-	  <!-- /.tab-pane -->
-	  <!-- Stats tab content -->
-	  <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-	  <!-- /.tab-pane -->
-	  <!-- Settings tab content -->
-	  <div class="tab-pane" id="control-sidebar-settings-tab">
-		<form method="post">
-		  <h3 class="control-sidebar-heading">General Settings</h3>
-
-		  <div class="form-group">
-			<label class="control-sidebar-subheading">
-			  Report panel usage
-			  <input type="checkbox" class="pull-right" checked>
-			</label>
-
-			<p>
-			  Some information about this general settings option
-			</p>
-		  </div>
-		  <!-- /.form-group -->
-		</form>
-	  </div>
-	  <!-- /.tab-pane -->
-	</div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-  immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
+
+<!-- Google Analytics 
+<script>
+	(function(w,d,s,g,js,fjs){
+	g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(cb){this.q.push(cb)}};
+	js=d.createElement(s);fjs=d.getElementsByTagName(s)[0];
+	js.src='https://apis.google.com/js/platform.js';
+	fjs.parentNode.insertBefore(js,fjs);js.onload=function(){g.load('analytics')};
+	}(window,document,'script'));
+</script>
+<script>
+gapi.analytics.ready(function() {
+
+  // Step 3: Authorize the user.
+
+  var CLIENT_ID = '59054972301-ra57f9dg5ckj1b772n8jsruglgk0pp95.apps.googleusercontent.com';
+
+  gapi.analytics.auth.authorize({
+    container: 'auth-button',
+    clientid: CLIENT_ID,
+  });
+
+  // Step 4: Create the view selector.
+
+  var viewSelector = new gapi.analytics.ViewSelector({
+    container: 'view-selector'
+  });
+
+  // Step 5: Create the timeline chart.
+
+  var timeline = new gapi.analytics.googleCharts.DataChart({
+    reportType: 'ga',
+    query: {
+      'dimensions': 'ga:date',
+      'metrics': 'ga:sessions',
+      'start-date': '30daysAgo',
+      'end-date': 'yesterday',
+    },
+    chart: {
+      type: 'LINE',
+      container: 'timeline'
+    }
+  });
+
+  // Step 6: Hook up the components to work together.
+
+  gapi.analytics.auth.on('success', function(response) {
+    viewSelector.execute();
+  });
+
+  viewSelector.on('change', function(ids) {
+    var newIds = {
+      query: {
+        ids: ids
+      }
+    }
+    timeline.set(newIds).execute();
+  });
+});
+</script> -->
 
 <!-- jQuery 3 -->
 <script src="<?php echo base_url() ?>bakul/vendor/jquery/jquery.min.js"></script>
@@ -103,15 +86,61 @@
 <script src="<?php echo base_url() ?>bakul/admin/js/adminlte.min.js"></script>
 <!-- Pace.js -->
 <script src="<?php echo base_url() ?>bakul/vendor/pace/pace.min.js"></script>
+
 <script src="<?php echo base_url() ?>bakul/admin/js/demo.js"></script>
+
+<!-- iCheck -->
 <script src="<?php echo base_url() ?>bakul/vendor/iCheck/icheck.min.js"></script>
 
 <script src="<?php echo base_url() ?>bakul/js/custom.js"></script>
 <?php 
   if (is_array($js_to_load)) {
 	foreach ($js_to_load as $js_file) {?>
-<script type="text/javascript" src="<?php echo base_url() ?>bakul/admin/js/<?php echo $js_file;?>"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>bakul/<?php echo $js_file;?>"></script>
 <?php  }
   } ?>
+
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmLZvDyf6pl_7l_na5a13giNp7hSs7M2w&callback=initMap">
+</script>
+
+<script>
+// function start() {
+  // 2. Initialize the JavaScript client library.
+  //gapi.client.init({
+//     'apiKey': 'AIzaSyDmLZvDyf6pl_7l_na5a13giNp7hSs7M2w',
+//     // Your API key will be automatically added to the Discovery Document URLs.
+//     'discoveryDocs': ['https://people.googleapis.com/$discovery/rest'],
+//     // clientId and scope are optional if auth is not required.
+//     'clientId': '59054972301-ra57f9dg5ckj1b772n8jsruglgk0pp95.apps.googleusercontent.com',
+//     'scope': 'profile',
+//   }).then(function() {
+//     // 3. Initialize and make the API request.
+//     return gapi.client.people.people.get({
+//       'resourceName': 'people/me',
+//       'requestMask.includeField': 'person.names'
+//     });
+//   }).then(function(response) {
+//     console.log(response.result);
+//   }, function(reason) {
+//     console.log('Error: ' + reason.result.error.message);
+//   });
+// };
+// // 1. Load the JavaScript client library.
+// gapi.load('client', start);
+</script>
+
+<script>
+	//iCheck for checkbox and radio inputs
+	$('input[type="checkbox"].flat, input[type="radio"].flat').iCheck({
+	checkboxClass: 'icheckbox_flat-grey social-checkbox',
+	radioClass   : 'iradio_flat-blue'
+})
+
+$('input[type="checkbox"].line, input[type="radio"].line').iCheck({
+	checkboxClass: 'icheckbox_line social-checkbox',
+	radioClass   : 'iradio_line'
+})
+</script>
 </body>
 </html>

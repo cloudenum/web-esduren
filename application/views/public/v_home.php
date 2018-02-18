@@ -60,100 +60,47 @@
 						<h2>Tentang Kami</h2>
 						<br>
 						<div class="wp-right-about">
-							 Lorem ipsum dolor sit amet, di dunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Excepteur sint qui officia deserunt Excepteur sint occaecat cupidatat <br>
-							<br>
-							 non proident, iste natus error sit doloremque la udan tium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis ut labore et dolore magna aliqua. Ut enim ad minim veniam<br>
-							<br></div>
+							 <?php echo $profil[0]->tentang;?>
+							</div>
 					</div>
-					<div id="left-promo" class="owl-carousel wp-left to-left">
+					<div id="left-promo" class="owl-carousel wp-left to-left"  style="background: url('http://localhost/esduren/bakul/img/promo.jpg');">
+					<?php
+						$query = $this->db->get('promo');
+
+						if ($query->num_rows() > 0)
+						{
+							foreach ($query->result() as $row)
+							{
+						?>
 						<!-- Item -->
 						<div class="item">
-							<div class="pr-left-bg">
-								<img src="<?php echo base_url(); ?>bakul/img/p4.jpg" alt="img-promo">
-							</div>
+							<!-- <div class="pr-left-bg">
+								<img src="<?php echo base_url(); ?>bakul/img/promo.jpg" alt="img-promo">
+							</div> -->
 							<div class="pr-left-content">
-								<h1>Menu<br>hari ini</h1>
+								<img src="<?php echo $row->image_path; ?>" alt="<?php echo $row->name; ?>">
+								<!-- <h1>Menu<br>hari ini</h1>
 								<p>
 									Sate Ayam <br>
 									Soup Jamur<br>
 									Carrot and Ginger Soup<br>Soup Brokoli</p>
 								<div class="explore-menu-btn">
 									<a href="#goto-reservation" class="rounded-button fadetransition page-scroll">RESERVE NOW</a>
-								</div>
+								</div> -->
 							</div>
 						</div>
 						<!-- End Item -->
-						<!-- Item -->
-						<div class="item">
-							<div class="pr-left-bg">
-								<img src="<?php echo base_url(); ?>bakul/img/p4.jpg" alt="img-promo">
-							</div>
-							<div class="pr-left-content">
-								<h1>Menu<br>hari ini</h1>
-								<p>
-									Sate Ayam <br>
-									Soup Jamur<br>
-									Carrot and Ginger Soup<br>Soup Brokoli</p>
-								<div class="explore-menu-btn">
-									<a href="#goto-reservation" class="rounded-button fadetransition page-scroll">RESERVE NOW</a>
-								</div>
-							</div>
-						</div>
-						<!-- End Item -->
-						<!-- Item -->
-						<div class="item">
-							<div class="pr-left-bg">
-								<img src="<?php echo base_url(); ?>bakul/img/p4.jpg" alt="img-promo">
-							</div>
-							<div class="pr-left-content">
-								<h1>Menu<br>hari ini</h1>
-								<p>
-									Sate Ayam <br>
-									Soup Jamur<br>
-									Carrot and Ginger Soup<br>Soup Brokoli</p>
-								<div class="explore-menu-btn">
-									<a href="#goto-reservation" class="rounded-button fadetransition page-scroll">RESERVE NOW</a>
-								</div>
-							</div>
-						</div>
-						<!-- End Item -->
-						<!-- Item -->
-						<div class="item">
-							<div class="pr-left-bg">
-								<img src="<?php echo base_url(); ?>bakul/img/p4.jpg" alt="img-promo">
-							</div>
-							<div class="pr-left-content">
-								<h1>Menu<br>hari ini</h1>
-								<p>
-									Sate Ayam <br>
-									Soup Jamur<br>
-									Carrot and Ginger Soup<br>Soup Brokoli</p>
-								<div class="explore-menu-btn">
-									<a href="#goto-reservation" class="rounded-button fadetransition page-scroll">RESERVE NOW</a>
-								</div>
-							</div>
-						</div>
-						<!-- End Item -->
-						<!-- <div class="pr-left-bg">
-							<img src="<?php echo base_url(); ?>bakul/img/p4.jpg" alt="img-promo">
-						</div>
-						<div class="pr-left-content">
-							<h1>Menu<br>hari ini</h1>
-							<p>
-								 Sate Ayam <br>
-								 Soup Jamur<br>
-								 Carrot and Ginger Soup<br>Soup Brokoli</p>
-							<div class="explore-menu-btn">
-								<a href="#goto-reservation" class="rounded-button fadetransition page-scroll">RESERVE NOW</a>
-							</div>
-						</div> -->
+						<?php
+							}
+						}
+						?>
 					</div>
 					<div class="clear"></div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="menu-option">
+<!-- <div class="menu-option">
 		<div class="container">
 			<div class="col-md-3 col-sm-6">
 				<div class="box-menu-package">
@@ -220,7 +167,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 </div>
 <div class="bg-promo"></div>
 </section>
@@ -309,7 +256,7 @@
 </section>
 <!-- END FOOD MENU -->
 <!-- Counter Number -->
-<section id="counter" class="counter-number">
+<!-- <section id="counter" class="counter-number">
 <div class="container cn-box">
 	<div class="row">
 		<div class="col-md-3 col-sm-6">
@@ -362,7 +309,7 @@
 		</div>
 	</div>
 </div>
-</section>
+</section> -->
 <!-- TESTIMONIAL -->
 <section id="goto-testimonial" class="testimonial">
 <div class="tst-wrap">
@@ -462,9 +409,9 @@
 								</div>
 							</div>
 							<div class="col-md-12">
-								<div class="form-group">
+								<div class="form-group col-xs-4 col-xs-offset-4">
 									<input type='hidden' name='rating' id='rating'>
-									<div class="rating">
+									<div class="rating text-center">
 										<span id="star-0" class="fa fa-star" onmouseover="highlightStar(0)" onmouseout="removeHighlight(0)" onClick="selectStar(0)"></span>
 										<span id="star-1" class="fa fa-star" onmouseover="highlightStar(1)" onmouseout="removeHighlight(1)" onClick="selectStar(1)"></span>
 										<span id="star-2" class="fa fa-star" onmouseover="highlightStar(2)" onmouseout="removeHighlight(2)" onClick="selectStar(2)"></span>

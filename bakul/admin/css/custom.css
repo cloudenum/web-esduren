@@ -19,6 +19,18 @@
     box-shadow: 4px rgba(0,0,0,0.2), 5px rgba(0,0,0, 0.19)
 }
 
+input[name="edit-logo"] {
+    position: absolute;
+    width: 0.1px;
+    height: 0.1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+	border: 0;
+	z-index: -99;
+}
+
 .login-logo a{
     color: white;
 }
@@ -30,4 +42,38 @@
 
 .img-responsive {
 	height: 100px;  
+}
+
+.input-group .input-group-addon{
+	min-width: 100px;
+}
+
+.input-group .input-group-addon label {
+	display: inline-flex;
+	margin-bottom: 0;
+}
+.input-group .input-group-addon label span {
+	padding-left: 15px;
+	font-size: 1.7em;
+	color: white;
+}
+
+.input-group .input-group-addon label .social-checkbox {
+	margin: auto;
+}
+
+.input-group .input-group-addon.social-fb {
+	background-color: #116eb9; 
+}
+
+.input-group .input-group-addon.social-ig {
+	background-color: #e92a99; 
+}
+
+.input-group .input-group-addon.social-tw {
+	background-color: #3dbcee; 
+}
+
+.input-group .input-group-addon.social-yt {
+	background-color: #ee3d3d; 
 }

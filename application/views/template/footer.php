@@ -1,8 +1,3 @@
-<?php	
-	$query = $this->db->get('profil');
-
-	$profil = $query->result();
-							?>
 <!-- BEGIN SECTION FOOTER-->
 <section class="footer">
 <div class="footer-wrap">
@@ -101,38 +96,30 @@
 		<div class="col-md-12">
 			<div class="footer-b-left ">
 				<div class="footer-sosmed-icon ">
+				<?php 
+					$query = $this->db->get('socmed');
+
+					if ($query->num_rows() > 0)
+					{
+						foreach ($query->result() as $row)
+						{
+							
+				?>
 					<div class="wrap-circle-sosmed ">
-						<a href="#">
+						<a href="http://<?php echo $row->link ?>" target="_blank">
 						<div class="circle-sosmed fadetransition">
-							<i class="icon-social-instagram icons"></i>
+							<i class="icon-social-<?php echo $row->name ?> icons"></i>
 						</div>
 						</a>
 					</div>
-					<div class="wrap-circle-sosmed ">
-						<a href="#">
-						<div class="circle-sosmed fadetransition">
-							<i class="icon-social-youtube icons"></i>
-						</div>
-						</a>
-					</div>
-					<div class="wrap-circle-sosmed ">
-						<a href="#">
-						<div class="circle-sosmed fadetransition">
-							<i class="icon-social-twitter icons"></i>
-						</div>
-						</a>
-					</div>
-					<div class="wrap-circle-sosmed ">
-						<a href="#">
-						<div class="circle-sosmed fadetransition">
-							<i class="icon-social-facebook icons"></i>
-						</div>
-						</a>
-					</div>
+					<?php
+						}
+					}
+					?>
 				</div>
 			</div>
 			<div class="footer-b-right ">
-				 2017 Rames All rights reserved. Designed by HidraTheme
+				 2018 <?php echo $profil[0]->name ?> All rights reserved. Designed by HidraTheme
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -141,5 +128,5 @@
 </footer>
 <!-- END FOOTER-->
 <!-- BACK TO TOP BUTTON -->
-<a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><i class="icon-arrow-up icons"></i></a>
+<a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Kembali ke atas" data-toggle="tooltip" data-placement="left"><i class="icon-arrow-up icons"></i></a>
 <!-- END BACK TO TOP BUTTON -->

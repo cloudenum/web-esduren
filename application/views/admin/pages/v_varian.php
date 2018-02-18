@@ -124,10 +124,10 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-					<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+					<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap table-responsive">
 						<div class="row">
 							<div class="col-sm-12"  style="overflow: auto; background: white;">
-								<table id="varian-table" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+								<table id="varian-table" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example1_info">
 									<thead>
 										<tr role="row">
 											<th class="sorting_asc" aria-controls="varian-table"  aria-sort="ascending">
@@ -148,7 +148,7 @@
 											<th class="sorting" aria-controls="varian-table">
 												Kategori
 											</th>
-											<th class="sorting" aria-controls="varian-table">
+											<th class="sorting" aria-controls="varian-table" style="min-width: 200px;">
 												Image
 											</th>
 											<th class="sorting" aria-controls="varian-table"  style="width: 20%;">

@@ -7,6 +7,7 @@ class Crud extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Core_Model');
+		$this->load->helper('file');
 	}
 	
 	public function insertVarian()
@@ -25,12 +26,12 @@ class Crud extends CI_Controller {
 		else
 		{	
 			$data = array(
-				'code' => $this->input->post('code'),
-				'name' => $this->input->post('name'),
-				'description' => $this->input->post('description'),
-				'price' => $this->input->post('price'),
-				'image_path' => base_url('uploads/'.$this->upload->data("file_name")),
-				'food_category_id' => $this->input->post('category'),
+				'code' => html_escape($this->input->post('code')),
+				'name' => html_escape($this->input->post('name')),
+				'description' => html_escape($this->input->post('description')),
+				'price' => html_escape($this->input->post('price')),
+				'image_path' => html_escape(base_url('uploads/'.$this->upload->data("file_name"))),
+				'food_category_id' => html_escape($this->input->post('category')),
 				);
 
 			$data = $this->Core_Model->insert('menu', $data);
@@ -102,11 +103,11 @@ class Crud extends CI_Controller {
 	{
 		if ($_FILES['edit-image']['error'] == UPLOAD_ERR_NO_FILE) {
 			$data = array(
-				'code' => $this->input->post('code'),
-				'name' => $this->input->post('name'),
-				'description' => $this->input->post('description'),
-				'price' => $this->input->post('price'),
-				'food_category_id' => $this->input->post('category')
+				'code' => html_escape($this->input->post('code')),
+				'name' => html_escape($this->input->post('name')),
+				'description' => html_escape($this->input->post('description')),
+				'price' => html_escape($this->input->post('price')),
+				'food_category_id' => html_escape($this->input->post('category'))
 				);
 
 			$this->db->where('id', $id);
@@ -134,12 +135,12 @@ class Crud extends CI_Controller {
 			else 
 			{
 				$data = array(
-					'code' => $this->input->post('code'),
-					'name' => $this->input->post('name'),
-					'description' => $this->input->post('description'),
-					'price' => $this->input->post('price'),
-					'image_path' => base_url('uploads/'.$this->upload->data("file_name")),
-					'food_category_id' => $this->input->post('category')
+					'code' => html_escape($this->input->post('code')),
+					'name' => html_escape($this->input->post('name')),
+					'description' => html_escape($this->input->post('description')),
+					'price' => html_escape($this->input->post('price')),
+					'image_path' => html_escape(base_url('uploads/'.$this->upload->data("file_name"))),
+					'food_category_id' => html_escape($this->input->post('category'))
 					);
 
 				$this->db->where('id', $id);
@@ -184,8 +185,14 @@ class Crud extends CI_Controller {
 		}
 		else 
 		{
+			$data = array(
+				'logo_path'=> html_escape(base_url('bakul/'.$this->upload->data("file_name")))
+			);
+
+			$this->db->update('profil', $data, array('id' => 1));
+
 			$config['image_library'] = 'gd2';
-			$config['source_image'] = $this->upload->data('full_path');
+			$config['source_image'] = html_escape($this->upload->data('full_path'));
 			$config['create_thumb'] = FALSE;
 			$config['maintain_ratio'] = TRUE;
 			$config['width']         = 120;
@@ -257,6 +264,54 @@ class Crud extends CI_Controller {
 		</div>');					
 		
 		$this->redirect_back();
+	}
+
+	public function medsos(){
+		$data = array(
+			'name' => html_escape($this->input->get('type')),
+			'link' => html_escape($this->input->get('link')),
+		);
+
+		$x = $this->db->get_where('socmed', array('name'=>html_escape($this->input->get('type'))));
+		if ($x->num_rows() == 0){
+
+			if (! $this->Core_Model->insert('socmed', $data))
+			{
+				$data['error'] = array($this->db->display_errors());
+				echo json_encode($data['error']);
+			}
+			// else
+			// {
+			// 	echo json_encode(array('alert'=> 'success'));
+			// }
+		}else{
+			if( !$this->Core_Model->update('socmed', array('link' => html_escape($this->input->get('link'))), array('name' => html_escape($this->input->get('type'))))){
+				
+				$data['error'] = array($this->db->display_errors());
+				echo json_encode($data['error']);
+			}//else {
+			// 	echo json_encode(array('alert'=> 'success'));	
+			// }
+		}
+
+		$data = $this->db->get('socmed');
+
+		echo json_encode($data->result_array());
+
+	}
+	public function upload_galeri(){
+
+        $config['upload_path']   = FCPATH.'/uploads/gallery';
+        $config['allowed_types'] = 'gif|jpg|png|ico';
+
+        if($this->Core_Model->upload_gambar('userfile', $config, false)){
+			$data = array(
+				'image_path' => html_escape($this->upload->data('file_name')),
+				);
+        	$this->db->insert('gallery',$data);
+        }
+
+
 	}
 
 	public function redirect_back()

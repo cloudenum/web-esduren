@@ -3,7 +3,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Welcome, <?php //echo $_SESSION['nama'] ?><small>Have Fun!</small>
+        Testimoni
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url() ?>admin"><i class="fa fa-dashboard"></i> Admin</a></li>
@@ -13,9 +13,9 @@
 
     <!-- Main content -->
     <section class="content container-fluid">
-	<div class="box">
+	        <div class="box">
 				<div class="box-header">
-					<h3 class="box-title">User Database</h3>
+					<h3 class="box-title">Testimoni</h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">

@@ -21,6 +21,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Ionicons -->
   <link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/Ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/iCheck/all.css">
+
+  <?php 
+  if (is_array($css_to_load)) {
+	foreach ($css_to_load as $css_file) {?>
+<link rel="stylesheet" href="<?php echo base_url() ?>bakul/<?php echo $css_file;?>"></script>
+<?php  }
+  } ?>
+
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url() ?>bakul/admin/css/AdminLTE.min.css">
   <link rel="stylesheet" href="<?php echo base_url() ?>bakul/admin/css/custom.css">
@@ -57,63 +65,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      	<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
-      </a>
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- User Account Menu -->
-          <li class="dropdown user user-menu">
-            <!-- Menu Toggle Button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <!-- The user image in the navbar-->
-              <img src="<?php echo base_url() ?>bakul/admin/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs"><?php // echo $_SESSION['nama'] ?></span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- The user image in the menu -->
-              <li class="user-header">
-                <img src="<?php echo base_url() ?>bakul/admin/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                <p>
-                  <?php // echo $_SESSION['nama'];?>
-                  <small>Member since Nov. 2012</small>
-                </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="<?php echo base_url()?>admin/logout" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
-        </ul>
-      </div>
+		</a>
+		<div class="pull-right">
+			<a href="<?php echo base_url()?>admin/logout" class="btn btn-danger" style="height: 50px; line-height:2.25;">Sign out</a>
+		</div>
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
@@ -128,9 +85,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="<?php echo base_url() ?>bakul/admin/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><?php // echo $_SESSION['nama'];?></p>
+          <p><?php echo $this->session->nama;?></p>
           <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> <?php // echo $_SESSION['status'] ?></a>
+		  <span><i class="fa fa-circle text-success"></i> <?php echo $this->session->status ?></span>
+		  
         </div>
       </div>
 
@@ -159,17 +117,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li id="nav-varian">
             <a href="<?php echo base_url() ?>admin/varian"><i class="fa fa-cutlery"></i> <span>Varian</span></a>
 		</li>
-		<li id="nav-profil" class="treeview">
+		<li id="nav-galeri" class="treeview">
           <a href="#">
-            <i class="fa fa-industry"></i>
+            <i class="fa fa-file-image-o"></i>
             <span>Galeri</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url() ?>admin/tambah_gambar"><i class="fa fa-users"></i> Tambah Gambar</a></li>
-            <li><a href="<?php echo base_url() ?>admin/profil"><i class="fa fa-clock-o"></i> </a></li>
+            <li><a href="<?php echo base_url() ?>admin/tambah_gambar"><i class="fa fa-plus"></i> Tambah Gambar</a></li>
           </ul>
         </li>
 		<li id="nav-profil" class="treeview">
@@ -182,7 +139,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </a>
           <ul class="treeview-menu">
             <li><a href="<?php echo base_url() ?>admin/profil"><i class="fa fa-users"></i> Profil Usaha</a></li>
-            <li><a href="<?php echo base_url() ?>admin/profil"><i class="fa fa-clock-o"></i> Jam Buka</a></li>
+			<li><a href="<?php echo base_url() ?>admin/medsos"><i class="fa  fa-comments"></i> Media Sosial</a></li>
+			<li><a href="<?php echo base_url() ?>admin/jam_buka"><i class="fa fa-clock-o"></i> Jam Buka</a></li>
           </ul>
         </li>
       </ul>

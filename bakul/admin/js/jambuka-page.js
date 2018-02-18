@@ -1,6 +1,7 @@
 
 $(document).ready(function() 
 {
+	$(document).ajaxStart(function() { Pace.restart(); });
 	$.ajax({                                      
 		url: 'http://localhost/esduren/crud/select_time',
 		data: 'd='+$('#day').val(),
@@ -30,10 +31,6 @@ $(document).ready(function()
 		showInputs: false,
 		showMeridian: false
 	})
-
-	$('input[type="radio"].flat').iCheck({
-		radioClass   : 'iradio_flat-green'
-	});
 
 	function getData(data)          //on recieve of reply
 	{

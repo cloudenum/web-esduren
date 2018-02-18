@@ -1,13 +1,6 @@
-<?php	
-	$query = $this->db->get('profil');
-
-	$profil = $query->result();
-							?>
 <body id="<?php 
 			if (is_array($body_id)){
-				foreach ($body_id as $id){
-					echo $id;
-				}
+				echo $body_id[0];
 			}
 		?>" class="theme-green">
 <!-- BEGIN PRELOADING -->
@@ -102,9 +95,6 @@
 										</li>
 										<li>
 											<a href="<?php echo base_url(); ?>galeri" class="page-scroll">GALERI</a>
-										</li>
-										<li>
-											<a href="<?php echo base_url(); ?>tentang" class="page-scroll">TENTANG</a>
 										</li>
 										<li>
 											<a href="<?php echo base_url(); ?>kontak" class="page-scroll">KONTAK</a>

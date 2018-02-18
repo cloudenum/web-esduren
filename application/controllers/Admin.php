@@ -13,28 +13,27 @@ class Admin extends CI_Controller {
 		// }
 	}
 
-	public function index($error)
+	public function index()
 	{			
-		$this->load->view('admin/v_login', $error);
+		$this->load->view('admin/v_login');
 	}
 
 	public function aksiLogin(){
-		$username = $this->input->post('username');
-		$password = $this->input->post('password');
+		$username = html_escape($this->input->post('username'));
+		$password = html_escape($this->input->post('password'));
 		$where = array(
 			'username' => $username,
 			'password' => $password,
-			//'level' => 1
 			);
-		$cek = $this->Core_Model->getWhere("user", $where)->num_rows();
+		$cek = $this->Core_Model->getWhere("user", $where);
 		if (!$cek){
 			redirect(base_url('admin/index/error'));
 		}else{
-			if($cek > 0){
+			if($cek->num_rows() > 0){
 
 				// $query = "SELECT * FROM user WHERE username = '$username'";
 			
-				$fullname = $this->Core_Model->getWhere("user", $where)->row()->fullname;
+				$fullname = $cek->row()->nama;
 				$data_session = array(
 					'nama' => $fullname,
 					'status' => "online"
@@ -58,57 +57,108 @@ class Admin extends CI_Controller {
 
 	public function dashboard()
 	{
-		$data['js_to_load']= array('dashboard-page.js');
-		$this->load->view('admin/template/v_admin_header');
-		$this->load->view('admin/v_dashboard');
+		$data['js_to_load']= array('admin/js/dashboard-page.js');
+		$data['css_to_load'] = '';
+		$data['jumlah']= array(
+			'menu' => $this->db->query('SELECT count(id) as hasil FROM menu')->result(),
+			'testimonials' => $this->db->query('SELECT count(id) as hasil FROM testimonials')->result(),
+			'gallery' => $this->db->query('SELECT count(id) as hasil FROM gallery')->result(),
+		);
+
+		$this->load->view('admin/template/v_admin_header', $data);
+		$this->load->view('admin/v_dashboard', $data);
 		$this->load->view('admin/template/v_admin_footer', $data);
 		
-		// if($this->session->userdata('status') != "online"){
-		// 	redirect(base_url("page404"), 'refresh');
-		// }
+		if($this->session->userdata('status') != "online"){
+			redirect(base_url("page404"), 'refresh');
+		}
 	}
 
 	public function testimoni()
 	{
-		$data['js_to_load']= array('testimoni-page.js');
-		$this->load->view('admin/template/v_admin_header');
+		$data['js_to_load']= array('admin/js/testimoni-page.js');
+		$data['css_to_load'] = '';
+
+		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_testimoni');
 		$this->load->view('admin/template/v_admin_footer', $data);
+
+		if($this->session->userdata('status') != "online"){
+			redirect(base_url("page404"), 'refresh');
+		}
 	}
 
 	public function varian()
 	{
-		$data['js_to_load']= array('varian-page.js');
-		$this->load->view('admin/template/v_admin_header');
+		$data['js_to_load']= array('admin/js/varian-page.js');
+		$data['css_to_load'] = '';
+
+		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_varian');
 		$this->load->view('admin/template/v_admin_footer', $data);
 
-		// if($this->session->userdata('status') != "online"){
-		// 	redirect(base_url("page404"), 'refresh');
-		// }
+		if($this->session->userdata('status') != "online"){
+			redirect(base_url("page404"), 'refresh');
+		}
 	}
 
 	public function profil()
 	{
-		$data['js_to_load']= array('profil-page.js');
-		$this->load->view('admin/template/v_admin_header');
-		$this->load->view('admin/pages/v_profil');
+		$query = $this->db->get('profil');
+
+		$data['profil'] = $query->result();
+		
+		$data['js_to_load']= array('admin/js/profil-page.js');
+		$data['css_to_load'] = '';
+
+		$this->load->view('admin/template/v_admin_header', $data);
+		$this->load->view('admin/pages/v_profil', $data);
 		$this->load->view('admin/template/v_admin_footer', $data);
 
-		// if($this->session->userdata('status') != "online"){
-		// 	redirect(base_url("page404"), 'refresh');
-		// }
+		if($this->session->userdata('status') != "online"){
+			redirect(base_url("page404"), 'refresh');
+		}
+	}
+
+	public function medsos()
+	{
+		$data['js_to_load']= array('admin/js/medsos-page.js');
+		$data['css_to_load'] = '';
+
+		$this->load->view('admin/template/v_admin_header', $data);
+		$this->load->view('admin/pages/v_medsos');
+		$this->load->view('admin/template/v_admin_footer', $data);
+
+		if($this->session->userdata('status') != "online"){
+			redirect(base_url("page404"), 'refresh');
+		}
+	}
+
+	public function tambah_gambar()
+	{							
+		$data['js_to_load']= array('vendor/dropzone/dist/dropzone.min.js', 'admin/js/tambah-gambar-page.js');
+		$data['css_to_load'] = array('vendor/dropzone/dist/dropzone.min.css', 'vendor/dropzone/dist/basic.min.css');
+
+		$this->load->view('admin/template/v_admin_header', $data);
+		$this->load->view('admin/pages/v_tambah_gambar');
+		$this->load->view('admin/template/v_admin_footer', $data);
+
+		if($this->session->userdata('status') != "online"){
+			redirect(base_url("page404"), 'refresh');
+		}
 	}
 
 	public function jam_buka()
 	{							
-		$data['js_to_load']= array('jambuka-page.js');
-		$this->load->view('admin/template/v_admin_header');
+		$data['js_to_load']= array('admin/js/jambuka-page.js');
+		$data['css_to_load'] = '';
+
+		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_jambuka');
 		$this->load->view('admin/template/v_admin_footer', $data);
 
-		// if($this->session->userdata('status') != "online"){
-		// 	redirect(base_url("page404"), 'refresh');
-		// }
+		if($this->session->userdata('status') != "online"){
+			redirect(base_url("page404"), 'refresh');
+		}
 	}
 }
