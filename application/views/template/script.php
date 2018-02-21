@@ -19,23 +19,17 @@
 <!-- Custom js -->
 <script src="<?php echo base_url(); ?>bakul/js/main.js"> </script>
 
-<script src="<?php echo base_url() ?>bakul/js/custom.js"></script>
+<script src="<?php echo base_url(); ?>bakul/js/custom.js"></script>
 
-<script src="<?php echo base_url() ?>bakul/js/map.js"></script>
+<script src="<?php echo base_url(); ?>bakul/js/map.js"></script>
 
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmLZvDyf6pl_7l_na5a13giNp7hSs7M2w&callback=initMap">
-</script>
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114341965-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-114341965-1');
-</script>
+<?php 
+  if (is_array($map_js)) {
+	?>
+<script type="text/javascript" src="<?php echo $map_js[0];?>"></script>
+<?php  
+  }   
+?>
 
 <?php 
   if (is_array($js_to_load)) {

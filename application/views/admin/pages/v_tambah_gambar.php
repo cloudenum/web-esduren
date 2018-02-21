@@ -3,11 +3,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Profil Usaha
+        Galeri
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url() ?>admin"><i class="fa fa-dashboard"></i> Admin</a></li>
-        <li class="active">Profil</li>
+        <li class="active"><a href="<?php echo base_url() ?>admin/tambah_gambar">Galeri</a></li>
       </ol>
     </section>
 
@@ -15,22 +15,8 @@
     <section class="content container-fluid">
 	
 	<?php 
-		echo $this->session->flashdata('alert');
-		
-		// echo form_open_multipart('crud/upload_galeri', array('id' => 'formgaleri','class' => 'dropzone'));
+		echo $this->session->flashdata('alert');		
 	?>
-			<!-- <div class="fallback">
-				<input name="upload-gambar" type="file" multiple />
-			</div>
-			<input id="upload-gambar" name="upload-gambar" type="hidden" multiple /> -->
-			<!-- HTML heavily inspired by http://blueimp.github.io/jQuery-File-Upload/
-			<div class="table table-striped files" id="previews">
-			<input id="upload-gambar" name="upload-gambar" type="hidden"/>
-			</div>
-		</form>
-		<button type="submit" class="start">Upload</button> -->
-		
-		
 		<div class="dropzone">
 
 			<div class="dz-message">

@@ -7,7 +7,8 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url() ?>admin"><i class="fa fa-dashboard"></i> Admin</a></li>
-        <li class="active">Profil</li>
+        <li><a href="<?php echo base_url() ?>admin/profil">Profil</a></li>
+        <li class="active"><a href="<?php echo base_url() ?>admin/jam_buka">Jam Buka</a></li>
       </ol>
     </section>
 

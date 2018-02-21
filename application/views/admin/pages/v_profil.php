@@ -7,7 +7,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url() ?>admin"><i class="fa fa-dashboard"></i> Admin</a></li>
-        <li class="active">Profil</li>
+        <li class="active"><a href="<?php echo base_url() ?>admin/profil">Profil</a></li>
       </ol>
     </section>
 
@@ -39,165 +39,182 @@
         </div>
         <!-- /.col -->
         <div class="col-md-9">
-          <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#activity" data-toggle="tab">Data Usaha</a></li>
-              <li><a href="#settings" data-toggle="tab">Edit Data Usaha</a></li>
-            </ul>
-            <div class="tab-content">
-              <div class="active tab-pane" id="activity">
-			  <?php 
-				$query = $this->db->get('profil');
+			<div class="nav-tabs-custom">
+				<ul class="nav nav-tabs">
+				<li class="active"><a href="#activity" data-toggle="tab">Data Usaha</a></li>
+				<li><a href="#settings" data-toggle="tab">Edit Data Usaha</a></li>
+				</ul>
+				<div class="tab-content">
+				<div class="active tab-pane" id="activity">
+				<?php 
+					$query = $this->db->get('profil');
 
-				 $value = $query->result_array();
-				 
-				if ($query->num_rows() > 0)
-				{
-				
-			?>
-			  <dl class="dl-horizontal">
-                <dt>Nama Usaha</dt>
-                <dd><?php echo $value[0]["name"] ?></dd>
-                <dt>Email</dt>
-                <dd><?php echo $value[0]['email'] ?></dd>
-                
-                <dt>Alamat</dt>
-                <dd><?php echo $value[0]['alamat'] ?></dd>
-                <dt>Tentang/Sejarah Usaha</dt>
-                <dd><?php echo $value[0]['tentang'] ?>
-                </dd>
-				<dt>Telepon</dt>
-				<dd><?php echo $value[0]['phone'] ?></dd>
-              </dl>
-			  <?php
-				}
-				else
-				{
-					echo 'Sepertinya ada masalah.';
-				} 
-			  ?>
-              </div>
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="settings">
-			  <form class="form-horizontal" action="<?php echo base_url() ?>crud/edit_profil" method="POST">
-			  <?php
-
-				if ($query->num_rows() > 0)
-				{
-
-					echo 1;
-			  ?>
-                <div class="form-group">
-                    <label for="name" class="col-sm-2 control-label">Nama Usaha</label>
-
-                    <div class="col-sm-10">
-                      <input name="name" type="text" class="form-control" id="name" placeholder="Nama Usaha" value="<?php echo $value[0]['name']?>">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="email" class="col-sm-2 control-label">Email</label>
-
-                    <div class="col-sm-10">
-                      <input name="email" type="email" class="form-control" id="email" placeholder="Email" value="<?php echo $value[0]['email']?>">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="alamat" class="col-sm-2 control-label">Alamat</label>
-
-                    <div class="col-sm-10">
-                      <textarea name="alamat" type="text" class="form-control" id="alamat" placeholder="Alamat"><?php echo $value[0]['alamat']?></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="tentang" class="col-sm-2 control-label">Tentang/Sejarah Usaha</label>
-
-                    <div class="col-sm-10">
-                      <textarea name="tentang" class="form-control" id="tentang" placeholder="Tentang/Sejarah Usaha"><?php echo $value[0]['tentang']?></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="phone" class="col-sm-2 control-label">Telepon</label>
-
-                    <div class="col-sm-10">
-                      <input name="phone" type="text" class="form-control" id="phone" placeholder="Telepon" value="<?php echo $value[0]['phone']?>">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">Submit</button>
-                    </div>
-                  </div>
-				<?php
-				}
-				else
-				{
+					$value = $query->result_array();
+					
+					if ($query->num_rows() > 0)
+					{
+					
 				?>
-                  <div class="form-group">
-                    <label for="name" class="col-sm-2 control-label">Nama Usaha</label>
-
-                    <div class="col-sm-10">
-                      <input name="name" type="text" class="form-control" id="name" placeholder="Nama Usaha">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="email" class="col-sm-2 control-label">Email</label>
-
-                    <div class="col-sm-10">
-                      <input name="email" type="email" class="form-control" id="email" placeholder="Email">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="alamat" class="col-sm-2 control-label">Alamat</label>
-
-                    <div class="col-sm-10">
-                      <textarea name="alamat" type="text" class="form-control" id="alamat" placeholder="Alamat"></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="tentang" class="col-sm-2 control-label">Tentang/Sejarah Usaha</label>
-
-                    <div class="col-sm-10">
-                      <textarea name="tentang" class="form-control" id="tentang" placeholder="Tentang/Sejarah Usaha"></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="phone" class="col-sm-2 control-label">Telepon</label>
-
-                    <div class="col-sm-10">
-                      <input name="phone" type="text" class="form-control" id="phone" placeholder="Telepon">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">Submit</button>
-                    </div>
-                  </div>
+				<dl class="dl-horizontal">
+					<dt>Nama Usaha</dt>
+					<dd><?php echo $value[0]["name"] ?></dd>
+					<dt>Email</dt>
+					<dd><?php echo $value[0]['email'] ?></dd>
+					
+					<dt>Alamat</dt>
+					<dd><?php echo $value[0]['alamat'] ?></dd>
+					<dt>Tentang/Sejarah Usaha</dt>
+					<dd><?php echo $value[0]['tentang'] ?>
+					</dd>
+					<dt>Telepon</dt>
+					<dd><?php echo $value[0]['phone'] ?></dd>
+				</dl>
 				<?php
-				}
+					}
+					else
+					{
+						echo 'Sepertinya ada masalah.';
+					} 
 				?>
-				</form>
-              </div>
-              <!-- /.tab-pane -->
-            </div>
-            <!-- /.tab-content -->
-          </div>
-          <!-- /.nav-tabs-custom -->
+				</div>
+				<!-- /.tab-pane -->
+				<div class="tab-pane" id="settings">
+				<form class="form-horizontal" action="<?php echo base_url() ?>crud/edit_profil" method="POST">
+				<?php
+
+					if ($query->num_rows() > 0)
+					{
+				?>
+					<div class="form-group">
+						<label for="name" class="col-sm-2 control-label">Nama Usaha</label>
+
+						<div class="col-sm-10">
+						<input name="name" type="text" class="form-control" id="name" placeholder="Nama Usaha" value="<?php echo $value[0]['name']?>">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="email" class="col-sm-2 control-label">Email</label>
+
+						<div class="col-sm-10">
+						<input name="email" type="email" class="form-control" id="email" placeholder="Email" value="<?php echo $value[0]['email']?>">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="alamat" class="col-sm-2 control-label">Alamat</label>
+
+						<div class="col-sm-10">
+						<textarea name="alamat" type="text" class="form-control" id="alamat" placeholder="Alamat"><?php echo $value[0]['alamat']?></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="tentang" class="col-sm-2 control-label">Tentang/Sejarah Usaha</label>
+
+						<div class="col-sm-10">
+						<textarea name="tentang" class="form-control" id="tentang" placeholder="Tentang/Sejarah Usaha"><?php echo $value[0]['tentang']?></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="phone" class="col-sm-2 control-label">Telepon</label>
+
+						<div class="col-sm-10">
+						<input name="phone" type="text" class="form-control" id="phone" placeholder="Telepon" value="<?php echo $value[0]['phone']?>">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-danger">Submit</button>
+						</div>
+					</div>
+					<?php
+					}
+					else
+					{
+					?>
+					<div class="form-group">
+						<label for="name" class="col-sm-2 control-label">Nama Usaha</label>
+
+						<div class="col-sm-10">
+						<input name="name" type="text" class="form-control" id="name" placeholder="Nama Usaha">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="email" class="col-sm-2 control-label">Email</label>
+
+						<div class="col-sm-10">
+						<input name="email" type="email" class="form-control" id="email" placeholder="Email">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="alamat" class="col-sm-2 control-label">Alamat</label>
+
+						<div class="col-sm-10">
+						<textarea name="alamat" type="text" class="form-control" id="alamat" placeholder="Alamat"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="tentang" class="col-sm-2 control-label">Tentang/Sejarah Usaha</label>
+
+						<div class="col-sm-10">
+						<textarea name="tentang" class="form-control" id="tentang" placeholder="Tentang/Sejarah Usaha"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="phone" class="col-sm-2 control-label">Telepon</label>
+
+						<div class="col-sm-10">
+						<input name="phone" type="text" class="form-control" id="phone" placeholder="Telepon">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-danger">Submit</button>
+						</div>
+					</div>
+					<?php
+					}
+					?>
+					</form>
+				</div>
+				<!-- /.tab-pane -->
+				</div>
+				<!-- /.tab-content -->
+			</div>
+			<!-- /.nav-tabs-custom -->
+			<div class="box box-primary">
+				<div class="box-header with-border">
+				<h3 class="box-title">Edit Menu</h3>
+
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+					</button>
+				</div>
+				<!-- /.box-tools -->
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<!-- BEGIN SECTION MAP -->
+					<section class="contact-map">
+						<div class="homepage-map">
+							<div id="map-container" class="container-fluid">
+								<div class="row">
+									<div class="col-md-12">
+										<div id="map_canvas"></div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12" style="padding: 15px;">
+										<button id="save-map" class="btn btn-block btn-primary" disabled>Save</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					<!-- END SECTION MAP -->
+				</div>
+				<!-- /.box-body -->
+			</div>
         </div>
         <!-- /.col -->
-
-		<!-- BEGIN SECTION MAP -->
-		<section class="contact-map">
-		<div class="homepage-map">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div id="map_canvas"></div>
-					</div>
-				</div>
-			</div> 
-		</div>
-		</section>
-		<!-- END SECTION MAP -->
 
       </div>
       <!-- /.row -->

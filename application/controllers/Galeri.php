@@ -11,7 +11,7 @@ class Galeri extends CI_Controller {
 		$data['body_id'] = array('single-page');
 		$data['js_to_load'] = array('');
 
-		$this->load->view('template/style');
+		$this->load->view('template/style', $data);
 		$this->load->view('template/header', $data);
 		$this->load->view('public/v_galeri');
 		$this->load->view('template/footer', $data);

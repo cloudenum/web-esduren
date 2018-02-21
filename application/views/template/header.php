@@ -22,7 +22,7 @@
 						<div class="col-md-3 col-logo">
 							<a href="<?php echo base_url(); ?>">
 							<div class="logo">
-								<img class="with-invert" alt="logo-header" src="<?php echo $profil[0]->logo_path; ?>">
+								<img class="x" alt="logo-header" src="<?php echo $profil[0]->logo_path; ?>">
 							</div>
 							</a>
 						</div>
@@ -45,53 +45,8 @@
 										<li>
 											<a href="<?php echo base_url(); ?>" class="page-scroll">HOME</a>
 										</li>
-										<!-- <li class="dropdown">
-											<a href="#" class="dropdown-toggle" data-toggle="dropdown">SINGLE PAGE<b class="caret"></b></a>
-											<ul class="dropdown-menu">
-												<li>
-													<a href="singlepage-about.html">ABOUT US</a>
-												</li>
-												<li>
-													<a href="singlepage-reservation.html">RESERVATION</a>
-												</li>
-												<li>
-													<a href="singlepage-menu.html">FULL MENU</a>
-												</li>
-												<li>
-													<a href="singlepage-gallery.html">GALLERY</a>
-												</li>
-												<li>
-													<a href="singlepage-contact.html">CONTACT US</a>
-												</li>
-												<li class="dropdown-submenu">
-													<a href="#" class="dropdown-toggle" data-toggle="dropdown">SUBMENU</a>
-													<ul class="dropdown-menu">
-														<li>
-															<a href="#">SUBMENU A</a>
-														</li>
-														<li>
-															<a href="#">SUBMENU B</a>
-														</li>
-														<li>
-															<a href="#">SUBMENU C</a>
-														</li>
-													</ul>
-												</li>
-											</ul>
-										</li>
-										<li class="dropdown">
-											<a href="#" class="dropdown-toggle" data-toggle="dropdown">MENU<b class="caret"></b></a>
-											<ul class="dropdown-menu">
-												<li>
-													<a href="#goto-featured-menu" class="page-scroll">FEATURED MENU</a>
-												</li>
-												<li>
-													<a href="singlepage-menu.html">FULL MENU - SINGLE PAGE</a>
-												</li>
-											</ul>
-										</li> -->
 										<li>
-											<a href="<?php echo base_url(); ?>varian" class="page-scroll">VARIAN</a>
+											<a href="<?php echo base_url(); ?>menu" class="page-scroll">MENU</a>
 										</li>
 										<li>
 											<a href="<?php echo base_url(); ?>galeri" class="page-scroll">GALERI</a>

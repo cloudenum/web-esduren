@@ -1,0 +1,16 @@
+
+section.contact-map {
+  position: relative;
+  z-index: 0;
+}
+
+section.contact-map h2 {
+  margin: 0px 0px 20px; }
+
+section.contact-map #map_canvas {
+  height: 400px;
+}
+section.contact-map .homepage-map {
+  width: 100%;
+  overflow: hidden;
+  position: relative; }

@@ -11,31 +11,7 @@ class Core_Model extends CI_Model{
         $res = $this->db->get_where($table, $where); // Kode ini berfungsi untuk memilih tabel yang akan ditampilkan
         return $res;
     }
-
-    public function selectFrom($field, $table, $limit){
-        
-        if ($limit == NULL)
-        {
-            $query = "SELECT $field FROM $table";
-        }
-        elseif($limit != NULL)
-        {
-            $query = "SELECT $field FROM $table LIMIT $limit";
-        }
-        
-        return $this->db->query($query);
-
-        // $this->db->select($field);
-        // $res = $this->db->get($table);
-        // return $res;
-    }
-    public function selectWhere($field, $table, $where)
-    {
-        $this->db->select($field);
-        $res = $this->db->get_where($table, $where);
-        return $res;
-    }
-
+    
     public function insert($table, $data){
         $res = $this->db->insert($table, $data); // Kode ini digunakan untuk memasukan record baru kedalam sebuah tabel
         return $res; // Kode ini digunakan untuk mengembalikan hasil $res

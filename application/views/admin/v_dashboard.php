@@ -15,7 +15,7 @@
 	<section class="content container-fluid">
 
 		<div class="row">
-			<div class="col-lg-3 col-xs-6">
+			<div class="col-lg-4 col-xs-6">
 			<!-- small box -->
 			<div class="small-box bg-aqua">
 				<div class="inner">
@@ -26,13 +26,13 @@
 				<div class="icon">
 				<i class="fa fa-cutlery"></i>
 				</div>
-				<a href="<?php echo base_url() ?>admin/varian" class="small-box-footer">
+				<a href="<?php echo base_url() ?>admin/menu" class="small-box-footer">
 				Selengkapnya <i class="fa fa-arrow-circle-right"></i>
 				</a>
 				</div>
 			</div>
 			<!-- ./col -->
-			<div class="col-lg-3 col-xs-6">
+			<div class="col-lg-4 col-xs-6">
 			<!-- small box -->
 			<div class="small-box bg-green">
 				<div class="inner">
@@ -49,7 +49,7 @@
 				</div>
 			</div>
 			<!-- ./col -->
-			<div class="col-lg-3 col-xs-6">
+			<div class="col-lg-4 col-xs-6">
 			<!-- small box -->
 			<div class="small-box bg-yellow">
 				<div class="inner">
@@ -65,24 +65,6 @@
 				</a>
 				</div>
 			</div>
-			<!-- ./col -->
-			<div class="col-lg-3 col-xs-6">
-			<!-- small box -->
-			<div class="small-box bg-red">
-				<div class="inner">
-					<h3>65</h3>
-
-					<p>Unique Visitors</p>
-				</div>
-				<div class="icon">
-					<i class="ion ion-pie-graph"></i>
-				</div>
-					<a href="#" class="small-box-footer">
-					More info <i class="fa fa-arrow-circle-right"></i>
-					</a>
-				</div>
-			</div>
-			<!-- ./col -->
 		</div>
 
 		<section id="auth-button"></section>

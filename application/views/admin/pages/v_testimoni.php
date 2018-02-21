@@ -21,32 +21,32 @@
 				<div class="box-body">
 					<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 						<div class="row">
-							<div class="col-sm-12">
+							<div class="col-sm-12 table-responsive">
 								<table id="testimoni-table" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
 									<thead>
 										<tr role="row">
-											<th class="sorting_asc" aria-controls="varian-table"  aria-sort="ascending">
+											<th class="sorting_asc" aria-controls="testimoni-table"  aria-sort="ascending">
 												No.
 											</th>
-											<th class="sorting" aria-controls="varian-table">
+											<th class="sorting" aria-controls="testimoni-table">
 												Nama
 											</th>
-											<th class="sorting" aria-controls="varian-table">
+											<th class="sorting" aria-controls="testimoni-table"  style="min-width: 400px;">
 												Testimoni
 											</th>
-											<th class="sorting" aria-controls="varian-table">
+											<th class="sorting" aria-controls="testimoni-table"  style="min-width: 120px;">
 												Rating
 											</th>
-											<th class="sorting" aria-controls="varian-table">
+											<th class="sorting" aria-controls="testimoni-table">
 												IP Address
 											</th>
-											<th class="sorting" aria-controls="varian-table">
-												MAC Address
-											</th>
-											<th class="sorting" aria-controls="varian-table">
+											<th class="sorting" aria-controls="testimoni-table"  style="min-width: 200px;">
 												Tanggal Input
 											</th>
-											<th class="sorting" aria-controls="varian-table"  style="width: 10%;">
+											<th class="sorting" aria-controls="testimoni-table"  style="width: 100px;">
+												Status
+											</th>
+											<th class="sorting" aria-controls="testimoni-table"  style="min-width: 200px;">
 												Action
 											</th>
 										</tr>
@@ -86,9 +86,41 @@
 												</div>
 											</td>
 											<td><?php echo $row['ip_address'];?></td>
-											<td><?php echo $row['mac_address'];?></td>
 											<td><?php echo $row['submited_date'].' '.$row['submited_time'];?></td>
+											<td><?php 
+											switch ($row['status']) {
+												case 0:?> 
+													<span class="label label-warning">
+														Pending
+													</span>
+												<?php
+													break;
+												case 1 :?> 
+													<span class="label label-success">
+														Disetejui
+													</span>
+												<?php
+													break;
+												case 2 :?> 
+													<span class="label label-danger">
+														Ditolak
+													</span>
+												<?php
+													break;
+											} ?>
+											</td>
 											<td>
+												<div class="btn-group">
+													<button type="button" class="btn btn-info">Aksi</button>
+													<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+														<span class="caret"></span>
+														<span class="sr-only">Aksi</span>
+													</button>
+													<ul class="dropdown-menu" role="menu">
+														<li><a href="<?php echo base_url('crud/update_status_testimoni').'?id='.$row['id'].'&s=1'; ?>" id="setujui" data-id="$row['id']">Setujui</a></li>
+														<li><a href="<?php echo base_url('crud/update_status_testimoni').'?id='.$row['id'].'&s=2'; ?>" id="tolak"  data-id="$row['id']">Tolak</a></li>
+													</ul>
+												</div>
 												<a class="btn btn-danger btn-s" href="<?php echo base_url('crud/hapus/').$row['id']."/testimonials"; ?>">
 													<span class="fa fa-trash"/>
 													hapus
@@ -101,17 +133,6 @@
 												echo '<td>No data</td>';
 											} ?>
 									</tbody>
-									<tfoot>
-										<tr>
-											<th>No.</th>
-											<th>Name</th>
-											<th>Testimoni</th>
-											<th>Rating</th>
-											<th>IP Address</th>
-											<th>MAC Address</th>
-											<th>Action</th>
-										</tr>
-									</tfoot>
 								</table>
 							</div>
 						</div>

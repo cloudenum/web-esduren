@@ -9,7 +9,7 @@
 	</div>
 </div>
 <div class="tb-text">
-	<h1>OUR GALLERY</h1>
+	<h1>GALERI</h1>
 	<div class="tb-line"></div>
 </div>
 </section>

@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114341965-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-114341965-1');
+</script>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rames - Restaurant Cafe Responsive HTML Template</title>
-<link rel="icon" href="<?php echo base_url(); ?>bakul/durian-ico.png" type="image/x-icon">
+<title><?php echo $profil[0]->name ?></title>
+<link rel="icon" href="<?php echo $profil[0]->logo_path; ?>" type="image/x-icon">
 <!-- Bootstrap -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>bakul/vendor/bootstrap/css/bootstrap.min.css">
 <!-- custom css -->

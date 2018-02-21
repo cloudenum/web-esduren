@@ -3,12 +3,12 @@
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
-		<i class="fa fa-comments"></i>  Media Sosial
+                Media Sosial
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="<?php echo base_url() ?>admin"><i class="fa fa-dashboard"></i> Admin</a></li>
-		<li class="active">Profil</li>
-		<li class="active">Media Sosial</li>
+                <li><a href="<?php echo base_url() ?>admin/profil">Profil</a></li>
+                <li class="active"><a href="<?php echo base_url() ?>admin/medsos">Media Sosial</a></li>
 			</ol>
 		</section>
 

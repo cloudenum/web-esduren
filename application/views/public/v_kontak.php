@@ -22,11 +22,6 @@
 				<div class="col-md-7 section-left">
 					<div class="contact-wrapper-left">
 						<h2>Hubungi kami via :</h2>
-						<p>
-							we are ready 24/7 hours to support. <br>
-							<br>
-							Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut nisl ut aliquip ex ea commodo consequat.
-						</p>
 						<ul class="list-ul">
 							<li>
 								<i class="fa fa-home"></i><?php echo $profil[0]->alamat;?>
@@ -53,7 +48,8 @@
 								<textarea class="form-control" required="" id="message" placeholder="Text" rows="3" spellcheck="true" style="background: rgb(238, 241, 245) none repeat scroll 0% 0%; z-index: auto; position: relative; line-height: 22.85px; font-size: 16px; transition: none 0s ease 0s ;"></textarea>
 							</div>
 							<div class="form-group text-center">
-								<input class="rounded-button fadetransition" value="SEND" type="submit"></div>
+								<input class="rounded-button fadetransition" value="SEND" type="submit">
+                            </div>
 						</form>
 					</div>
 				</div>

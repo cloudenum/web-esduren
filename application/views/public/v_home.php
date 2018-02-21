@@ -74,25 +74,23 @@
 						?>
 						<!-- Item -->
 						<div class="item">
-							<!-- <div class="pr-left-bg">
-								<img src="<?php echo base_url(); ?>bakul/img/promo.jpg" alt="img-promo">
-							</div> -->
 							<div class="pr-left-content">
 								<img src="<?php echo $row->image_path; ?>" alt="<?php echo $row->name; ?>">
-								<!-- <h1>Menu<br>hari ini</h1>
-								<p>
-									Sate Ayam <br>
-									Soup Jamur<br>
-									Carrot and Ginger Soup<br>Soup Brokoli</p>
-								<div class="explore-menu-btn">
-									<a href="#goto-reservation" class="rounded-button fadetransition page-scroll">RESERVE NOW</a>
-								</div> -->
 							</div>
 						</div>
 						<!-- End Item -->
 						<?php
 							}
-						}
+						}else{?>
+                            <!-- Item -->
+						<div class="item">
+							<div class="pr-left-content">
+								<img src="<?php echo base_url(); ?>bakul/img" alt="Tidak ada promo">
+							</div>
+						</div>
+						<!-- End Item -->
+                        <?php
+                        }
 						?>
 					</div>
 					<div class="clear"></div>
@@ -100,74 +98,6 @@
 			</div>
 		</div>
 	</div>
-<!-- <div class="menu-option">
-		<div class="container">
-			<div class="col-md-3 col-sm-6">
-				<div class="box-menu-package">
-					<div class="bmp-icon">
-						<img src="<?php echo base_url(); ?>bakul/img/breakfast.png" alt="menu">
-					</div>
-					<div class="bmp-text">
-						<h3>Menu Sarapan</h3>
-						<p>
-							 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-						</p>
-					</div>
-					<div class="bmp-button">
-						<a href="#" class="outline-btn fadetransition">More</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="box-menu-package">
-					<div class="bmp-icon">
-						<img src="<?php echo base_url(); ?>bakul/img/lunch.png" alt="menu">
-					</div>
-					<div class="bmp-text">
-						<h3>Makan Siang</h3>
-						<p>
-							 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-						</p>
-					</div>
-					<div class="bmp-button">
-						<a href="#" class="outline-btn fadetransition">More</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="box-menu-package">
-					<div class="bmp-icon">
-						<img src="<?php echo base_url(); ?>bakul/img/special.png" alt="menu">
-					</div>
-					<div class="bmp-text">
-						<h3>Menu Spesial</h3>
-						<p>
-							 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-						</p>
-					</div>
-					<div class="bmp-button">
-						<a href="#" class="outline-btn fadetransition">More</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="box-menu-package">
-					<div class="bmp-icon">
-						<img src="<?php echo base_url(); ?>bakul/img/dinner.png" alt="menu">
-					</div>
-					<div class="bmp-text">
-						<h3>Makan Malam</h3>
-						<p>
-							 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-						</p>
-					</div>
-					<div class="bmp-button">
-						<a href="#" class="outline-btn fadetransition">More</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
 </div>
 <div class="bg-promo"></div>
 </section>
@@ -180,7 +110,7 @@
 	</div>
 	<div id="foodmenu" class="owl-carousel">
 		<?php
-		$query = $this->db->get('menu');
+		$query = $this->db->query('SELECT M.*, F.category FROM menu M, food_category F WHERE M.food_category_id = F.id AND M.food_category_id = 1');
 
 		$nomor = 3;
 
@@ -251,65 +181,10 @@
 	</div>
 </div>
 <div class="explore-menu-btn">
-	<a class="rounded-button fadetransition" href="<?php echo base_url()?>varian">EXPLORE FULL MENU</a>
+	<a class="rounded-button fadetransition" href="<?php echo base_url()?>menu">MENU</a>
 </div>
 </section>
 <!-- END FOOD MENU -->
-<!-- Counter Number -->
-<!-- <section id="counter" class="counter-number">
-<div class="container cn-box">
-	<div class="row">
-		<div class="col-md-3 col-sm-6">
-			<div class="counter-box">
-				<div class="counter-circle">
-					<div class="cc-number">
-						<div class="cc-number-value">
-							<span class="count">9020</span>+
-						</div>
-					</div>
-				</div>
-				<div class="cc-title">Daily Customers</div>
-			</div>
-		</div>
-		<div class="col-md-3 col-sm-6">
-			<div class="counter-box">
-				<div class="counter-circle">
-					<div class="cc-number">
-						<div class="cc-number-value">
-							<span class="count">45</span>+
-						</div>
-					</div>
-				</div>
-				<div class="cc-title">Our Chefs</div>
-			</div>
-		</div>
-		<div class="col-md-3 col-sm-6">
-			<div class="counter-box">
-				<div class="counter-circle">
-					<div class="cc-number">
-						<div class="cc-number-value">
-							<span class="count">122</span>+
-						</div>
-					</div>
-				</div>
-				<div class="cc-title">Food Menus</div>
-			</div>
-		</div>
-		<div class="col-md-3 col-sm-6">
-			<div class="counter-box">
-				<div class="counter-circle">
-					<div class="cc-number">
-						<div class="cc-number-value">
-							<span class="count">34</span>+
-						</div>
-					</div>
-				</div>
-				<div class="cc-title">Awwards Won</div>
-			</div>
-		</div>
-	</div>
-</div>
-</section> -->
 <!-- TESTIMONIAL -->
 <section id="goto-testimonial" class="testimonial">
 <div class="tst-wrap">
@@ -317,11 +192,11 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="heading-section">
-					<div class="heading-title">What Customers Say</div>
+					<div class="heading-title">PENDAPAT MEREKA TENTANG KAMI</div>
 					<?php
-						$query = $this->db->get('testimonials');
+						$query = $this->db->query('SELECT * FROM testimonials WHERE status = 1');
 					?>
-					<div class="heading-text"><?php echo $query->num_rows() ?>+ Satisfied Costumers</div>
+					<div class="heading-text"><?php echo $query->num_rows() ?>+ Pelanggan yang senang </div>
 				</div>
 				<div class="wrap-item-testimonial">
 					<div id="testimonial" class="owl-carousel">
@@ -409,7 +284,7 @@
 								</div>
 							</div>
 							<div class="col-md-12">
-								<div class="form-group col-xs-4 col-xs-offset-4">
+								<div class="form-group col-md-4 col-md-offset-4">
 									<input type='hidden' name='rating' id='rating'>
 									<div class="rating text-center">
 										<span id="star-0" class="fa fa-star" onmouseover="highlightStar(0)" onmouseout="removeHighlight(0)" onClick="selectStar(0)"></span>
@@ -424,11 +299,21 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group btn-booknow">
-									<input type="submit" class="rounded-button fadetransition" value="Kirim!"/>
+									<button id="kirim-testimoni" type="button" class="rounded-button fadetransition">Kirim!</button>
 								</div>
 							</div>
 						</div>
 					</form>
+					<div id="failed-testimonial" class="alert alert-danger alert-dismissible" style="display: none; transition: all 0.5s ease-in">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="fa fa-times"></i></button>
+						<h4><i class="fa fa-ban"></i> Error!</h4>
+							Kami mohon maaf sepertinya terjadi masalah
+					</div>
+					<div id="success-testimonial" class="alert alert-success alert-dismissible" style="display: none; transition: all 0.5s ease-in">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="fa fa-times"></i></button>
+						<h4><i class="fa fa-check"></i> Berhasil</h4>
+							Kami akan mereview testimoni anda sebelum muncul di halaman ini
+					</div>
 					<!-- form end --></div>
 			</div>
 		</div>

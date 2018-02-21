@@ -10,8 +10,7 @@ class Page404 extends CI_Controller {
 		$data['body_id'] = array('single-page');
 		$data['js_to_load'] = array('');
 
-		// $body_id = '';
-		$this->load->view('template/style');
+		$this->load->view('template/style', $data);
 		$this->load->view('template/header', $data);
 		$this->load->view('errors/html/error_404');
 		$this->load->view('template/footer', $data);

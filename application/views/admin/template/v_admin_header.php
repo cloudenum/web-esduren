@@ -1,13 +1,9 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Flyer</title>
+  <title>Manage Web</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap -->
@@ -45,8 +41,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <![endif]-->
 
   <!-- Google Font -->
-  <!-- <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="fixed hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -81,28 +77,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
-        <div class="pull-left image">
-          <img src="<?php echo base_url() ?>bakul/admin/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
+        <div class="info">
           <p><?php echo $this->session->nama;?></p>
           <!-- Status -->
 		  <span><i class="fa fa-circle text-success"></i> <?php echo $this->session->status ?></span>
 		  
         </div>
       </div>
-
-      <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-        </div>
-      </form>
-      <!-- /.search form -->
 
        <!-- Sidebar Menu -->
        <ul class="sidebar-menu" data-widget="tree">
@@ -114,8 +95,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li id="nav-testimoni">
             <a href="<?php echo base_url() ?>admin/testimoni"><i class="fa fa-thumbs-up"></i> <span>Testimoni</span></a>
         </li>
-        <li id="nav-varian">
-            <a href="<?php echo base_url() ?>admin/varian"><i class="fa fa-cutlery"></i> <span>Varian</span></a>
+        <li id="nav-menu" class="treeview">
+			<a href="<?php echo base_url() ?>admin/menu">
+				<i class="fa fa-cutlery"></i>
+				<span>Menu</span>
+				<span class="pull-right-container">
+				<i class="fa fa-angle-left pull-right"></i>
+				</span>
+			</a>
+			<ul class="treeview-menu">
+                <li><a href="<?php echo base_url() ?>admin/menu"><span>Daftar Menu</span></a></li>
+				<li><a href="<?php echo base_url() ?>admin/kategori"><span>Ketegori Menu</span></a></li>
+			</ul>
 		</li>
 		<li id="nav-galeri" class="treeview">
           <a href="#">
@@ -139,8 +130,43 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </a>
           <ul class="treeview-menu">
             <li><a href="<?php echo base_url() ?>admin/profil"><i class="fa fa-users"></i> Profil Usaha</a></li>
-			<li><a href="<?php echo base_url() ?>admin/medsos"><i class="fa  fa-comments"></i> Media Sosial</a></li>
+			<li><a href="<?php echo base_url() ?>admin/medsos"><i class="fa fa-comments"></i> Media Sosial</a></li>
 			<li><a href="<?php echo base_url() ?>admin/jam_buka"><i class="fa fa-clock-o"></i> Jam Buka</a></li>
+          </ul>
+        </li>
+		<li id="nav-promo" class="treeview">
+          <a href="#">
+            <i class="fa fa-industry"></i>
+            <span>Promo</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url(); ?>admin/promo"><i class="fa fa-users"></i>Daftar Promo</a></li>
+			<li><a href="<?php echo base_url(); ?>admin/tambahpromo"><i class="fa fa-plus"></i> Tambah Promo</a></li>
+          </ul>
+        </li>
+		<li id="nav-akun" class="treeview">
+          <a href="#">
+            <i class="fa fa-user"></i>
+            <span>Akun</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          <?php
+          $level =$this->session->level; 
+          if ($level == '1')
+          {
+        ?>
+            <li><a href="<?php echo base_url(); ?>admin/akun"><i class="fa fa-user"></i> Daftar Akun</a></li>
+			<li><a href="<?php echo base_url(); ?>admin/tambahakun"><i class="fa fa-plus"></i> Tambah Akun</a></li>
+          <?php
+            }
+        ?>
+			<li><a href="<?php echo base_url(); ?>admin/editakun"><i class="fa fa-clock-o"></i> Edit Akun</a></li>
           </ul>
         </li>
       </ul>

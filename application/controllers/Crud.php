@@ -8,48 +8,79 @@ class Crud extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Core_Model');
 		$this->load->helper('file');
+		$this->load->library('user_agent');
 	}
 	
-	public function insertVarian()
+	public function insert_menu()
 	{
-	
-		if ( ! $this->Core_Model->upload_gambar('image') )
-		{
-			$data['error'] = array($this->upload->display_errors());
+        if ($_FILES['image']['error'] == UPLOAD_ERR_NO_FILE) 
+        {
+            $data = array(
+                'code' => html_escape($this->input->post('code')),
+                'name' => html_escape($this->input->post('name')),
+                'description' => html_escape($this->input->post('description')),
+                'price' => html_escape($this->input->post('price')),
+                'food_category_id' => html_escape($this->input->post('category')),
+                );
 
-			foreach ($data['error'] as $error_msg) {
-				echo $error_msg;
-			}
-			//varian($data);
-			// $this->load->view('admin/varian', $data);
-		}
-		else
-		{	
-			$data = array(
-				'code' => html_escape($this->input->post('code')),
-				'name' => html_escape($this->input->post('name')),
-				'description' => html_escape($this->input->post('description')),
-				'price' => html_escape($this->input->post('price')),
-				'image_path' => html_escape(base_url('uploads/'.$this->upload->data("file_name"))),
-				'food_category_id' => html_escape($this->input->post('category')),
-				);
+            $data = $this->Core_Model->insert('menu', $data);
 
-			$data = $this->Core_Model->insert('menu', $data);
+            $this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+            <strong>Success!</strong> Berhasil tambah data
+            </div>');			
 
-			$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			<strong>Success!</strong> Berhasil tambah data
-		</div>');			
+            $this->agent->redirect_back();
+        }
+        else
+        {
+            $config['upload_path']          = './uploads/';
+            $config['allowed_types']        = '|gif|jpeg|jpg|png';
+            $config['max_size']             = 8192;
+            
+            if ( ! $this->Core_Model->upload_gambar('image', $config) )
+            {
+                $data['error'] = array($this->upload->display_errors());
+                foreach ($data['error'] as $error_msg) {
+                    $error .= $error_msg.'<br/>';
+                }
+                $this->session->set_flashdata('success', '<div class="alert alert-danger alert-dismissable" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                <strong>Gagal!</strong>'.$error.'
+                </div>');
+                $this->agent->redirect_back();
+            }
+            else
+            {	
+                $data = array(
+                    'code' => html_escape($this->input->post('code')),
+                    'name' => html_escape($this->input->post('name')),
+                    'description' => html_escape($this->input->post('description')),
+                    'price' => html_escape($this->input->post('price')),
+                    'image_path' => html_escape(base_url('uploads/'.$this->upload->data("file_name"))),
+                    'food_category_id' => html_escape($this->input->post('category')),
+                    );
 
-			//$data = array('upload_data' => $this->upload->data());
-			$this->redirect_back();
+                $data = $this->Core_Model->insert('menu', $data);
 
-			
-			// foreach ($data['upload_data'] as $upload) {
-			// 	echo $upload;
-			// }
-			// $this->load->view('admin/varian', $data);
-		}
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = html_escape($this->upload->data('full_path'));
+                $config['maintain_ratio'] = TRUE;
+                $config['width']         = 600;
+                $config['height']       = 600;
+                
+                $this->load->library('image_lib', $config);
+                
+                $this->image_lib->resize();
+
+                $this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                <strong>Success!</strong> Berhasil tambah data
+                </div>');			
+
+                $this->agent->redirect_back();
+            }
+        }
 	}
 	
 	public function edit_profil()
@@ -67,7 +98,7 @@ class Crud extends CI_Controller {
 			);
 
 			$data = $this->Core_Model->insert('profil', $data);
-			$this->redirect_back();
+			$this->agent->redirect_back();
 		}
 		else
 		{
@@ -80,7 +111,7 @@ class Crud extends CI_Controller {
 			);
 
 			$this->db->update('profil', $data, array('id' => 1));
-			$this->redirect_back();
+			$this->agent->redirect_back();
 		}
 	}
 
@@ -96,7 +127,7 @@ class Crud extends CI_Controller {
 	{   
 		$this->Core_Model->delete($table, array( 'id' => $id));
 		
-		$this->redirect_back();
+		$this->agent->redirect_back();
 	}
 
 	public function edit($id)
@@ -112,25 +143,32 @@ class Crud extends CI_Controller {
 
 			$this->db->where('id', $id);
 			$data = $this->db->update('menu', $data);
-			//$this->Core_Model->update('user', $data, array('id'=>$id));
 
 			$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
 			<strong>Success!</strong> Berhasil edit data
 			</div>');			
-
-			//$data = array('upload_data' => $this->upload->data());
 			
-			$this->redirect_back();
+			$this->agent->redirect_back();
 		}
 		else
 		{
-			if (! $this->Core_Model->upload_gambar('edit-image', 'uploads')){
+            $config['upload_path']          = './uploads/';
+            $config['allowed_types']        = '|gif|jpeg|jpg|png';
+            $config['max_size']             = 8192;
+            $config['max_width']            = 2048;
+            $config['max_height']           = 2048;
+            
+			if (! $this->Core_Model->upload_gambar('edit-image', $config, false)){
 				$data['error'] = array($this->upload->display_errors());
-
-				foreach ($data['error'] as $error_msg) {
-					echo $error_msg;
-				}
+                foreach ($data['error'] as $error_msg) {
+                    $error .= $error_msg.'<br/>';
+                }
+                $this->session->set_flashdata('success', '<div class="alert alert-danger alert-dismissable" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                <strong>Gagal!</strong>'.$error.'
+                </div>');
+                $this->agent->redirect_back();
 			}
 			else 
 			{
@@ -145,16 +183,46 @@ class Crud extends CI_Controller {
 
 				$this->db->where('id', $id);
 				$data = $this->db->update('menu', $data);
-				//$this->Core_Model->update('user', $data, array('id'=>$id));
 
 				$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
-				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
 				<strong>Success!</strong> Berhasil edit data
 				</div>');					
 				
-				$this->redirect_back();
+				$this->agent->redirect_back();
 			}
 		}
+	}
+
+
+	public function update_category(){
+		$data = array(
+			'category' => html_escape($this->input->post('c')),
+			'description' => html_escape($this->input->post('d')),
+		);
+
+		$this->db->update('food_category', $data, array('id' => intval(html_escape($this->input->post('id')))));
+
+		$data = $this->db->get('food_category');
+		
+		echo json_encode($data->result_array());
+	}
+
+	public function insert_category()
+	{
+		$data = array(
+			'category' => html_escape($this->input->post('category')),
+			'description' => html_escape($this->input->post('description')),
+			);
+
+		$data = $this->Core_Model->insert('food_category', $data);
+
+		$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+		<strong>Success!</strong> Berhasil tambah data
+		</div>');			
+
+		$this->agent->redirect_back();
 	}
 
 	public function upload_logo()
@@ -173,7 +241,7 @@ class Crud extends CI_Controller {
 			$data['error'] = array($this->upload->display_errors());
 			
 			$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
 			<strong>Gagal!</strong> Upload gagal.
 			</div>');
 			
@@ -181,7 +249,7 @@ class Crud extends CI_Controller {
 				echo $error_msg;
 			}
 
-			$this->redirect_back();
+			$this->agent->redirect_back();
 		}
 		else 
 		{
@@ -201,41 +269,39 @@ class Crud extends CI_Controller {
 			$this->load->library('image_lib', $config);
 			
 			$this->image_lib->resize();
-			//$this->Core_Model->update('user', $data, array('id'=>$id));
 
 			$this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
 			<strong>Success!</strong> Berhasil upload
 			</div>');					
 			
-			$this->redirect_back();
+			$this->agent->redirect_back();
 		}
 	}
 
 	public function add_testimonial()
 	{
 		$data = array(
-			'name'=> html_escape($this->input->post('name')),
-			'testimonial'=> html_escape($this->input->post('testimonial')),
-			'rating'=> html_escape($this->input->post('rating')),
+			'name'=> html_escape($this->input->get('n')),
+			'testimonial'=> html_escape($this->input->get('t')),
+			'rating'=> html_escape($this->input->get('r')),
 			'ip_address'=> html_escape($_SERVER['REMOTE_ADDR']),
 			'submited_date'=> html_escape(date("Y-m-d")),
-			'submited_time'=> html_escape(date("H:i:s"))
+			'submited_time'=> html_escape(date("H:i:s")),
+			'status' => 0
 		);
 
-		if (! $this->Core_Model->insert('testimonials', $data))
-		{
-			$data['error'] = array($this->db->display_errors());
+		$this->Core_Model->insert('testimonials', $data);
 
-			foreach ($data['error'] as $error_msg) {
-				echo $error_msg;
-			}
-		}
-		else
-		{
-			$this->redirect_back();
-		}
+        $this->agent->redirect_back();
 		
+	}
+
+	public function update_status_testimoni(){
+		$this->db->where('id', html_escape($this->input->get('id')));
+		$this->db->update('testimonials', array('status' => intval(html_escape($this->input->get('s')))));
+
+		$this->agent->redirect_back();
 	}
 
 	public function select_time()
@@ -256,14 +322,13 @@ class Crud extends CI_Controller {
 
 		$this->db->where('day', html_escape($this->input->post('day')));
 		$data = $this->db->update('open_hours', $data);
-		//$this->Core_Model->update('user', $data, array('id'=>$id));
 
 		$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
-		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
 		<strong>Success!</strong> Berhasil edit data
 		</div>');					
 		
-		$this->redirect_back();
+		$this->agent->redirect_back();
 	}
 
 	public function medsos(){
@@ -273,25 +338,14 @@ class Crud extends CI_Controller {
 		);
 
 		$x = $this->db->get_where('socmed', array('name'=>html_escape($this->input->get('type'))));
-		if ($x->num_rows() == 0){
-
-			if (! $this->Core_Model->insert('socmed', $data))
-			{
-				$data['error'] = array($this->db->display_errors());
-				echo json_encode($data['error']);
-			}
-			// else
-			// {
-			// 	echo json_encode(array('alert'=> 'success'));
-			// }
-		}else{
-			if( !$this->Core_Model->update('socmed', array('link' => html_escape($this->input->get('link'))), array('name' => html_escape($this->input->get('type'))))){
-				
-				$data['error'] = array($this->db->display_errors());
-				echo json_encode($data['error']);
-			}//else {
-			// 	echo json_encode(array('alert'=> 'success'));	
-			// }
+       
+        if ($x->num_rows() == 0)
+        {
+            $this->Core_Model->insert('socmed', $data);
+        }
+        else
+        {
+			$this->Core_Model->update('socmed', array('link' => html_escape($this->input->get('link'))), array('name' => html_escape($this->input->get('type'))));
 		}
 
 		$data = $this->db->get('socmed');
@@ -310,14 +364,305 @@ class Crud extends CI_Controller {
 				);
         	$this->db->insert('gallery',$data);
         }
-
-
-	}
-
-	public function redirect_back()
+    }
+    
+    public function insert_promo()
 	{
-		$this->load->library('user_agent');
-		$referrer_url = $this->agent->referrer();
-		redirect($referrer_url, 'refresh');
-	}
+        if ($_FILES['image']['error'] == UPLOAD_ERR_NO_FILE) 
+        {
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+            <strong>Gagal!</strong> Pilih file terlebih dahulu
+            </div>');			
+
+            $this->agent->redirect_back();
+        }
+        else
+        {
+            $config['upload_path']          = './uploads/promo';
+            $config['allowed_types']        = '|gif|jpeg|jpg|png';
+            $config['max_size']             = 8192;
+            
+            if ( ! $this->Core_Model->upload_gambar('image', $config, false) )
+            {
+                $data['error'] = array($this->upload->display_errors());
+                foreach ($data['error'] as $error_msg) {
+                    $error .= $error_msg.'<br/>';
+                }
+                $this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                <strong>Gagal!</strong>'.$error.'
+                </div>');
+                $this->agent->redirect_back();
+            }
+            else
+            {	
+                $data = array(
+                    'code' => html_escape($this->input->post('code')),
+                    'name' => html_escape($this->input->post('name')),
+                    'image_path' => html_escape(base_url('uploads/promo/'.$this->upload->data("file_name"))),
+                    );
+
+                $data = $this->Core_Model->insert('promo', $data);
+
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = html_escape($this->upload->data('full_path'));
+                $config['maintain_ratio'] = TRUE;
+                $config['width']         = 600;
+                $config['height']       = 600;
+                
+                $this->load->library('image_lib', $config);
+                
+                $this->image_lib->resize();
+
+                $this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                <strong>Success!</strong> Berhasil tambah data
+                </div>');			
+
+                $this->agent->redirect_back();
+            }
+        }
+    }
+    public function edit_promo($id = 0)
+    {
+		if ($_FILES['edit-image']['error'] == UPLOAD_ERR_NO_FILE) {
+			$data = array(
+				'code' => html_escape($this->input->post('code')),
+				'name' => html_escape($this->input->post('name')),
+				);
+
+			$this->db->where('id', $id);
+			$data = $this->db->update('promo', $data);
+
+			$this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+			<strong>Success!</strong> Berhasil edit data
+			</div>');			
+			
+			$this->agent->redirect_back();
+		}
+		else
+		{
+            $config['upload_path']          = './uploads/promo';
+            $config['allowed_types']        = '|gif|jpeg|jpg|png';
+            $config['max_size']             = 8192;
+
+			if (! $this->Core_Model->upload_gambar('edit-image', $config, false)){
+				$data['error'] = array($this->upload->display_errors());
+                foreach ($data['error'] as $error_msg) {
+                    $error .= $error_msg.'<br/>';
+                }
+                $this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                <strong>Gagal!</strong>'.$error.'
+                </div>');
+                $this->agent->redirect_back();
+			}
+			else 
+			{
+				$data = array(
+					'code' => html_escape($this->input->post('code')),
+					'name' => html_escape($this->input->post('name')),
+					'image_path' => html_escape(base_url('uploads/promo/'.$this->upload->data("file_name"))),
+					);
+
+				$this->db->where('id', $id);
+				$data = $this->db->update('promo', $data);
+
+				$this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+				<strong>Success!</strong> Berhasil edit data
+				</div>');					
+				
+				$this->agent->redirect_back();
+			}
+		}
+    }
+    
+	public function add_account()
+	{
+		$data = array(
+			'username'=> html_escape($this->input->post('username')),
+            'password'=> md5(html_escape($this->input->post('password'))),
+            'nama'=> html_escape($this->input->post('nama')),
+            'email'=> html_escape($this->input->post('email')),
+        );
+        
+        $cek = $this->db->query('SELECT id FROM user WHERE username =\''.$data['username'].'\' OR email = \''.$data['email'].'\'');
+        if($cek->num_rows() > 0)
+        {
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+            <strong>Gagal!</strong> Username atau email sudah ada
+            </div>');					
+        }
+        else
+        {
+            if ($this->Core_Model->insert('user', $data))
+            {
+                $this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                <strong>Sukses!</strong> Akun anda sudah dibuat
+                </div>');
+            }
+            else
+            {
+                $this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                <strong>Gagal!</strong> Terjadi masalah 
+                </div>');
+            }
+        }
+
+        $this->agent->redirect_back();
+    }
+    
+    public function edit_account()
+    {
+        $data = array(
+            'nama'=> html_escape($this->input->post('nama')),
+            'email'=> html_escape($this->input->post('email')),
+        );
+        $cek = $this->db->query('SELECT id FROM user WHERE email = \''.$data['email'].'\'');
+        if($cek->num_rows() > 0)
+        {
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+            <strong>Gagal Edit!</strong> Email sudah terdaftar
+            </div>');					
+        }
+        else
+        {
+            if ($this->db->update('user', $data, array('id' => html_escape($this->input->post('id')))))
+            {
+                $this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                <strong>Success!</strong> Berhasil edit data
+                </div>');
+            }
+            else
+            {
+                $this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                <strong>Gagal!</strong> Terjadi masalah
+                </div>');
+            }
+        }
+		
+		$this->agent->redirect_back();
+    }
+
+    public function edit_username()
+    {
+        $level= $this->session->level;
+        if($level != NULL)
+        {
+            $cek = $this->db->query('SELECT id FROM user WHERE username = \''.html_escape($this->input->post('username')).'\'');
+            if($cek->num_rows() == 0)
+            {
+                $old_username = $this->db->query('SELECT username FROM user WHERE id='.html_escape($this->session->id))->row()->username;
+                $new_username = html_escape($this->input->post('username'));
+                if ( $new_username != $old_username )
+                {
+                    if ($this->db->update('user', array('username' => $new_username), array('id' => html_escape($this->session->id))))
+                    {
+                        $this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                        <strong>Success!</strong> Username telah diganti dari '.$old_username.' ke '.$new_username.'</div>');
+                    }
+                    else
+                    {
+                        $this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                        <strong>Gagal!</strong> Terjadi masalah
+                        </div>');
+                    }
+                }
+                else
+                {
+                    $this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                    <strong>Gagal!</strong> Username sama dengan sebelumnya.
+                    </div>');
+                }
+            }
+            else
+            {
+                $this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                <strong>Gagal!</strong> Username sudah ada.
+                </div>');
+            }
+        }
+        $this->agent->redirect_back();
+    }
+
+    public function edit_password()
+    {
+        $level= $this->session->level;
+        if($level != NULL)
+        {
+            $cek = $this->db->query('SELECT password FROM user WHERE id = \''.html_escape($this->session->id).'\'');
+            if($cek->row()->password == md5(html_escape($this->input->post('old_password'))))
+            {
+                $new_password = md5(html_escape($this->input->post('new_password')));
+                if ($this->db->update('user', array('password' => $new_password), array('id' => html_escape($this->session->id))))
+                {
+                    $this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                    <strong>Success!</strong> Password telah diganti </div>');
+                }
+                else
+                {
+                    $this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                    <strong>Gagal!</strong> Terjadi masalah
+                    </div>');
+                }
+            }
+            else
+            {
+                $this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                <strong>Gagal!</strong> Password lama salah
+                </div>');
+            }
+        }
+        $this->agent->redirect_back();
+    }
+
+    public function get_location()
+    {
+		$data = $this->db->query('SELECT Lat, Lng FROM profil WHERE id = 1');
+
+        echo json_encode($data->result_array());
+    }
+
+    public function update_location()
+    {
+        $data = array(
+            'Lat' => html_escape($this->input->post('lat')),
+            'Lng' => html_escape($this->input->post('lng')),
+            );
+
+        if ($this->db->update('profil', $data, array('id' => 1)))
+        {
+			$data = array(
+				'status' => 'Berhasil!', 
+				'status_msg' => 'Lokasi telah diubah'
+			);
+        }
+        else
+        {
+			$data = array(
+				'status' => 'Gagal!', 
+				'status_msg' => 'Terjad masalah'
+			);
+        }
+
+		$data['location'] = $this->db->query('SELECT Lat, Lng FROM profil WHERE id = 1')->result_array();
+
+        echo json_encode($data);
+    }
 }
