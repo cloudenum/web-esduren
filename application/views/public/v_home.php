@@ -284,15 +284,24 @@
 								</div>
 							</div>
 							<div class="col-md-12">
-								<div class="form-group col-md-4 col-md-offset-4">
-									<input type='hidden' name='rating' id='rating'>
+								<div class="form-group col-md-4 col-md-offset-4 star-ratings">
+									<div class="stars stars-example-fontawesome">
+										<select class="rating text-center" id="example-fontawesome" name="rating" autocomplete="off">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+										</select>
+									</div>
+									<!-- <input type='hidden'  id='rating'>
 									<div class="rating text-center">
 										<span id="star-0" class="fa fa-star" onmouseover="highlightStar(0)" onmouseout="removeHighlight(0)" onClick="selectStar(0)"></span>
 										<span id="star-1" class="fa fa-star" onmouseover="highlightStar(1)" onmouseout="removeHighlight(1)" onClick="selectStar(1)"></span>
 										<span id="star-2" class="fa fa-star" onmouseover="highlightStar(2)" onmouseout="removeHighlight(2)" onClick="selectStar(2)"></span>
 										<span id="star-3" class="fa fa-star" onmouseover="highlightStar(3)" onmouseout="removeHighlight(3)" onClick="selectStar(3)"></span>
 										<span id="star-4" class="fa fa-star" onmouseover="highlightStar(4)" onmouseout="removeHighlight(4)" onClick="selectStar(4)"></span>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>

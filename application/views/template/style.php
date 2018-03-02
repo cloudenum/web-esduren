@@ -17,6 +17,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?php echo $profil[0]->name ?></title>
 <link rel="icon" href="<?php echo $profil[0]->logo_path; ?>" type="image/x-icon">
+<!-- jQuery -->
+<script src="<?php echo base_url(); ?>bakul/vendor/jquery/jquery.min.js"> </script>
+<!-- bootstrap-->
+<script src="<?php echo base_url(); ?>bakul/vendor/bootstrap/js/bootstrap.min.js"> </script>
+<!-- stellar -->
+<script src="<?php echo base_url(); ?>bakul/vendor/stellar/jquery.stellar.js"></script>
+<!-- scrollorama js-->
+<script src="<?php echo base_url(); ?>bakul/js/jquery.scrollorama.js"></script>
+<!-- Contact form-->
 <!-- Bootstrap -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>bakul/vendor/bootstrap/css/bootstrap.min.css">
 <!-- custom css -->
@@ -36,6 +45,8 @@
 <link href="<?php echo base_url(); ?>bakul/vendor/gijgo-combined/gijgo.min.css" rel="stylesheet" type="text/css"/>
 <!-- Timepicker-->
 <link rel="stylesheet" href="<?php echo base_url(); ?>bakul/vendor/bootstrap-timepicker/timepicker.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>bakul/vendor/jquery-bar-rating-master/dist/themes/fontawesome-stars.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>bakul/vendor/jquery-bar-rating-master/examples/css/examples.css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

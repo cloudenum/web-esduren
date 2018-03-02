@@ -100,12 +100,12 @@
 		background: #21cb71;
 	}
 	
-	.form-testimonial .rating {
+	/*.form-testimonial .rating option {
 		cursor: pointer;
 		font-size: 30px;
-	}
-
-    .form-testimonial .rating span.highlight {
+	}*/
+/*
+    .form-testimonial .rating option.highlight {
         color: #ffc700;
     }
 
@@ -115,6 +115,9 @@
 
     .form-testimonial .rating span {
 		color: #d7d7d7;
+	}*/
+	.br-theme-fontawesome-stars .br-widget a {
+		font-size: 30px;
 	}
 	
 	section.food-menu-page .menu-item-wrap .miw-right p {

@@ -10,6 +10,7 @@ class Home extends CI_Controller {
 		$data['profil'] = $query->result();
 		$data['body_id'] = array('home-page');
 		$data['js_to_load'] = array('rating.js', 'home.js');
+		$data['map_js'] = [];
 
 		$this->load->view('template/style', $data);
 		$this->load->view('template/header', $data);

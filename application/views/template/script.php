@@ -1,12 +1,4 @@
-<!-- jQuery -->
-<script src="<?php echo base_url(); ?>bakul/vendor/jquery/jquery.min.js"> </script>
-<!-- bootstrap-->
-<script src="<?php echo base_url(); ?>bakul/vendor/bootstrap/js/bootstrap.min.js"> </script>
-<!-- stellar -->
-<script src="<?php echo base_url(); ?>bakul/vendor/stellar/jquery.stellar.js"></script>
-<!-- scrollorama js-->
-<script src="<?php echo base_url(); ?>bakul/js/jquery.scrollorama.js"></script>
-<!-- Contact form-->
+
 <script src="<?php echo base_url(); ?>bakul/js/validator.min.js"></script> 
 <!--owl carousel -->
 <script src="<?php echo base_url(); ?>bakul/vendor/owlcarousel/owl.carousel.min.js"></script>
@@ -22,7 +14,8 @@
 <script src="<?php echo base_url(); ?>bakul/js/custom.js"></script>
 
 <script src="<?php echo base_url(); ?>bakul/js/map.js"></script>
-
+<script src="<?php echo base_url(); ?>bakul/vendor/jquery-bar-rating-master/examples/js/examples.js"> </script>
+<script src="<?php echo base_url(); ?>bakul/vendor/jquery-bar-rating-master/jquery.barrating.js"> </script>
 <?php 
   if (is_array($map_js)) {
 	?>
