@@ -1,10 +1,9 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Menu extends CI_Controller {
 
-	public function index()
-	{	
+	public function index() {
 		$query = $this->db->get('profil');
 
 		$data['profil'] = $query->result();
@@ -16,6 +15,5 @@ class Menu extends CI_Controller {
 		$this->load->view('public/v_menu');
 		$this->load->view('template/footer', $data);
 		$this->load->view('template/script', $data);
-		
 	}
 }

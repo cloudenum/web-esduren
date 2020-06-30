@@ -1,13 +1,12 @@
-
-  <!-- Main Footer -->
-  <footer class="main-footer">
+<!-- Main Footer -->
+<footer class="main-footer">
 	<!-- To the right -->
 	<div class="pull-right hidden-xs">
-	  Admin page
+		Admin page
 	</div>
 	<!-- Default to the left -->
-	<strong>Copyright &copy; 2018 <a href="<?php echo base_url();?>">Es Duren Kombinasi</a>.</strong> All rights reserved.
-  </footer>
+	<strong>Copyright &copy; <?php echo date('Y') ?> <a href="<?php echo base_url(); ?>"><?php echo $profil->name ?></a>.</strong> All rights reserved.
+</footer>
 </div>
 <!-- ./wrapper -->
 
@@ -33,27 +32,27 @@
 <script src="<?php echo base_url() ?>bakul/vendor/iCheck/icheck.min.js"></script>
 
 <script src="<?php echo base_url() ?>bakul/js/custom.js"></script>
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADTzcHTc1GK8Aiy1nkfhToPKJ5IK9HrFc&callback=initMap">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADTzcHTc1GK8Aiy1nkfhToPKJ5IK9HrFc&callback=initMap">
 </script>
-<?php 
-  if (is_array($js_to_load)) {
-	foreach ($js_to_load as $js_file) {?>
-<script type="text/javascript" src="<?php echo base_url() ?>bakul/<?php echo $js_file;?>"></script>
+<?php
+if (is_array($js_to_load)) {
+	foreach ($js_to_load as $js_file) { ?>
+		<script type="text/javascript" src="<?php echo base_url() ?>bakul/<?php echo $js_file; ?>"></script>
 <?php  }
-  } ?>
+} ?>
 
 <script>
 	//iCheck for checkbox and radio inputs
 	$('input[type="checkbox"].flat, input[type="radio"].flat').iCheck({
-	checkboxClass: 'icheckbox_flat-grey social-checkbox',
-	radioClass   : 'iradio_flat-blue'
-})
+		checkboxClass: 'icheckbox_flat-grey social-checkbox',
+		radioClass: 'iradio_flat-blue'
+	})
 
-$('input[type="checkbox"].line, input[type="radio"].line').iCheck({
-	checkboxClass: 'icheckbox_line social-checkbox',
-	radioClass   : 'iradio_line'
-})
+	$('input[type="checkbox"].line, input[type="radio"].line').iCheck({
+		checkboxClass: 'icheckbox_line social-checkbox',
+		radioClass: 'iradio_line'
+	})
 </script>
 </body>
+
 </html>

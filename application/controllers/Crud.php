@@ -100,7 +100,7 @@ class Crud extends CI_Controller {
 				'tentang' => html_escape($this->input->post('tentang'))
 			);
 
-			$this->db->update('profil', $data, array('id' => 1));
+			$this->Core_Model->update('profil', $data, array('id' => 1));
 			$this->agent->redirect_back();
 		}
 	}
@@ -128,8 +128,7 @@ class Crud extends CI_Controller {
 				'food_category_id' => html_escape($this->input->post('category'))
 			);
 
-			$this->db->where('id', $id);
-			$data = $this->db->update('menu', $data);
+			$data = $this->Core_Model->update('menu', $data, array('id' => $id));
 
 			$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
@@ -165,8 +164,7 @@ class Crud extends CI_Controller {
 					'food_category_id' => html_escape($this->input->post('category'))
 				);
 
-				$this->db->where('id', $id);
-				$data = $this->db->update('menu', $data);
+				$data = $this->Core_Model->update('menu', $data, array('id' => $id));
 
 				$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
@@ -185,7 +183,7 @@ class Crud extends CI_Controller {
 			'description' => html_escape($this->input->post('d')),
 		);
 
-		$this->db->update('food_category', $data, array('id' => intval(html_escape($this->input->post('id')))));
+		$this->Core_Model->update('food_category', $data, array('id' => intval(html_escape($this->input->post('id')))));
 
 		$data = $this->db->get('food_category');
 
@@ -237,7 +235,7 @@ class Crud extends CI_Controller {
 				'logo_path' => html_escape(base_url('bakul/' . $this->upload->data("file_name")))
 			);
 
-			$this->db->update('profil', $data, array('id' => 1));
+			$this->Core_Model->update('profil', $data, array('id' => 1));
 
 			$config['image_library'] = 'gd2';
 			$config['source_image'] = html_escape($this->upload->data('full_path'));
@@ -276,8 +274,11 @@ class Crud extends CI_Controller {
 	}
 
 	public function update_status_testimoni() {
-		$this->db->where('id', html_escape($this->input->get('id')));
-		$this->db->update('testimonials', array('status' => intval(html_escape($this->input->get('s')))));
+		$this->Core_Model->update(
+			'testimonials',
+			array('status' => intval(html_escape($this->input->get('s')))),
+			array('id' => $this->input->get('id'))
+		);
 
 		$this->agent->redirect_back();
 	}
@@ -296,8 +297,7 @@ class Crud extends CI_Controller {
 			'flag' => html_escape($this->input->post('flag')),
 		);
 
-		$this->db->where('day', html_escape($this->input->post('day')));
-		$data = $this->db->update('open_hours', $data);
+		$data = $this->Core_Model->update('open_hours', $data, array('day' => $this->input->post('day')));
 
 		$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
@@ -334,7 +334,7 @@ class Crud extends CI_Controller {
 			$data = array(
 				'image_path' => html_escape($this->upload->data('file_name')),
 			);
-			$this->db->insert('gallery', $data);
+			$this->Core_Model->insert('gallery', $data);
 		}
 	}
 
@@ -397,8 +397,7 @@ class Crud extends CI_Controller {
 				'name' => html_escape($this->input->post('name')),
 			);
 
-			$this->db->where('id', $id);
-			$data = $this->db->update('promo', $data);
+			$data = $this->Core_Model->update('promo', $data, array('id' => $id));
 
 			$this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
@@ -429,8 +428,7 @@ class Crud extends CI_Controller {
 					'image_path' => html_escape(base_url('uploads/promo/' . $this->upload->data("file_name"))),
 				);
 
-				$this->db->where('id', $id);
-				$data = $this->db->update('promo', $data);
+				$data = $this->Core_Model->update('promo', $data, array('id' => $id));
 
 				$this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
@@ -443,11 +441,13 @@ class Crud extends CI_Controller {
 	}
 
 	public function add_account() {
+		$numRows = $this->Core_Model->countAllRows('user');
 		$data = array(
 			'username' => html_escape($this->input->post('username')),
 			'password' => md5(html_escape($this->input->post('password'))),
 			'nama' => html_escape($this->input->post('nama')),
 			'email' => html_escape($this->input->post('email')),
+			'level' => $numRows === 0 ? 1 : 0
 		);
 
 		$cek = $this->db->query('SELECT id FROM user WHERE username =\'' . $data['username'] . '\' OR email = \'' . $data['email'] . '\'');
@@ -485,7 +485,7 @@ class Crud extends CI_Controller {
             <strong>Gagal Edit!</strong> Email sudah terdaftar
             </div>');
 		} else {
-			if ($this->db->update('user', $data, array('id' => html_escape($this->input->post('id'))))) {
+			if ($this->Core_Model->update('user', $data, array('id' => html_escape($this->input->post('id'))))) {
 				$this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
                 <strong>Success!</strong> Berhasil edit data
@@ -509,7 +509,7 @@ class Crud extends CI_Controller {
 				$old_username = $this->db->query('SELECT username FROM user WHERE id=' . html_escape($this->session->id))->row()->username;
 				$new_username = html_escape($this->input->post('username'));
 				if ($new_username != $old_username) {
-					if ($this->db->update('user', array('username' => $new_username), array('id' => html_escape($this->session->id)))) {
+					if ($this->Core_Model->update('user', array('username' => $new_username), array('id' => html_escape($this->session->id)))) {
 						$this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
                         <strong>Success!</strong> Username telah diganti dari ' . $old_username . ' ke ' . $new_username . '</div>');
@@ -541,7 +541,7 @@ class Crud extends CI_Controller {
 			$cek = $this->db->query('SELECT password FROM user WHERE id = \'' . html_escape($this->session->id) . '\'');
 			if ($cek->row()->password == md5(html_escape($this->input->post('old_password')))) {
 				$new_password = md5(html_escape($this->input->post('new_password')));
-				if ($this->db->update('user', array('password' => $new_password), array('id' => html_escape($this->session->id)))) {
+				if ($this->Core_Model->update('user', array('password' => $new_password), array('id' => html_escape($this->session->id)))) {
 					$this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
                     <strong>Success!</strong> Password telah diganti </div>');
@@ -573,7 +573,7 @@ class Crud extends CI_Controller {
 			'Lng' => html_escape($this->input->post('lng')),
 		);
 
-		if ($this->db->update('profil', $data, array('id' => 1))) {
+		if ($this->Core_Model->update('profil', $data, array('id' => 1))) {
 			$data = array(
 				'status' => 'Berhasil!',
 				'status_msg' => 'Lokasi telah diubah'
