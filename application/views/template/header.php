@@ -22,10 +22,9 @@
 								<div class="col-md-3 col-logo">
 									<a href="<?php echo base_url(); ?>">
 										<div class="logo">
-											<img class="x" alt="logo-header" src="<?php
-																					echo is_null($profil[0]->logo_path) ?
-																						'https://via.placeholder.com/400x250?text=YourLogo' :
-																						$profil[0]->logo_path; ?>" />
+											<img class="x" alt="logo-header" src="<?php echo $profil->logo_path ?
+																						$profil->logo_path :
+																						'https://via.placeholder.com/400x250?text=YourLogo'; ?>" />
 										</div>
 									</a>
 								</div>

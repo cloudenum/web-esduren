@@ -17,7 +17,7 @@ class Crud extends CI_Controller {
 				'name' => html_escape($this->input->post('name')),
 				'description' => html_escape($this->input->post('description')),
 				'price' => html_escape($this->input->post('price')),
-				'food_category_id' => html_escape($this->input->post('category')),
+				'menu_category_id' => html_escape($this->input->post('category')),
 			);
 
 			$data = $this->Core_Model->insert('menu', $data);
@@ -51,7 +51,7 @@ class Crud extends CI_Controller {
 					'description' => html_escape($this->input->post('description')),
 					'price' => html_escape($this->input->post('price')),
 					'image_path' => html_escape(base_url('uploads/' . $this->upload->data("file_name"))),
-					'food_category_id' => html_escape($this->input->post('category')),
+					'menu_category_id' => html_escape($this->input->post('category')),
 				);
 
 				$data = $this->Core_Model->insert('menu', $data);
@@ -125,7 +125,7 @@ class Crud extends CI_Controller {
 				'name' => html_escape($this->input->post('name')),
 				'description' => html_escape($this->input->post('description')),
 				'price' => html_escape($this->input->post('price')),
-				'food_category_id' => html_escape($this->input->post('category'))
+				'menu_category_id' => html_escape($this->input->post('category'))
 			);
 
 			$data = $this->Core_Model->update('menu', $data, array('id' => $id));
@@ -161,7 +161,7 @@ class Crud extends CI_Controller {
 					'description' => html_escape($this->input->post('description')),
 					'price' => html_escape($this->input->post('price')),
 					'image_path' => html_escape(base_url('uploads/' . $this->upload->data("file_name"))),
-					'food_category_id' => html_escape($this->input->post('category'))
+					'menu_category_id' => html_escape($this->input->post('category'))
 				);
 
 				$data = $this->Core_Model->update('menu', $data, array('id' => $id));
@@ -176,16 +176,15 @@ class Crud extends CI_Controller {
 		}
 	}
 
-
 	public function update_category() {
 		$data = array(
 			'category' => html_escape($this->input->post('c')),
 			'description' => html_escape($this->input->post('d')),
 		);
 
-		$this->Core_Model->update('food_category', $data, array('id' => intval(html_escape($this->input->post('id')))));
+		$this->Core_Model->update('menu_category', $data, array('id' => intval(html_escape($this->input->post('id')))));
 
-		$data = $this->db->get('food_category');
+		$data = $this->db->get('menu_category');
 
 		echo json_encode($data->result_array());
 	}
@@ -196,7 +195,7 @@ class Crud extends CI_Controller {
 			'description' => html_escape($this->input->post('description')),
 		);
 
-		$data = $this->Core_Model->insert('food_category', $data);
+		$data = $this->Core_Model->insert('menu_category', $data);
 
 		$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>

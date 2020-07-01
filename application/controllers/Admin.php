@@ -71,9 +71,9 @@ class Admin extends CI_Controller {
 		$data['js_to_load'] = array('admin/js/dashboard-page.js', 'admin/js/analytics.js');
 		$data['css_to_load'] = '';
 		$data['jumlah'] = array(
-			'product' => $this->db->query('SELECT count(id) as hasil FROM product')->result(),
-			'testimonials' => $this->db->query('SELECT count(id) as hasil FROM testimonials')->result(),
-			'gallery' => $this->db->query('SELECT count(id) as hasil FROM gallery')->result(),
+			'menu' => $this->db->get('menu')->num_rows(),
+			'testimonials' => $this->db->get('testimonials')->num_rows(),
+			'gallery' => $this->db->get('gallery')->num_rows(),
 		);
 		$query = $this->db->get('profil');
 		$data['profil'] = $query->result()[0];
@@ -118,18 +118,23 @@ class Admin extends CI_Controller {
 		}
 	}
 
-	public function produk() {
-		$data['js_to_load'] = array('admin/js/produk-page.js');
+	public function menu() {
+		$data['js_to_load'] = array('admin/js/menu-page.js');
 		$data['css_to_load'] = '';
 		$profil = $this->db->get('profil');
 		$data['profil'] = $profil->result()[0];
-		$product = $this->db->query('SELECT p.*, pc.category FROM product p INNER JOIN product_category pc ON p.product_category_id = pc.id');
-		$data['product'] = $product->result();
-		$category = $this->db->get('product_category');
+
+		$this->db->select('m.*, mc.category');
+		$this->db->from('menu m');
+		$this->db->join('menu_category mc', 'm.menu_category_id = mc.id');
+		$menu = $this->db->get();
+		$data['menu'] = $menu->result();
+
+		$category = $this->db->get('menu_category');
 		$data['category'] = $category->result();
 
 		$this->load->view('admin/template/v_admin_header', $data);
-		$this->load->view('admin/pages/v_produk');
+		$this->load->view('admin/pages/v_menu');
 		$this->load->view('admin/template/v_admin_footer', $data);
 
 		if ($this->session->userdata('status') != "online") {
@@ -151,8 +156,10 @@ class Admin extends CI_Controller {
 		$query = $this->db->get('profil');
 		$data['profil'] = $query->result()[0];
 
+		$main['category'] = $this->db->get('menu_category')->result();
+
 		$this->load->view('admin/template/v_admin_header', $data);
-		$this->load->view('admin/pages/v_kategori');
+		$this->load->view('admin/pages/v_kategori', $main);
 		$this->load->view('admin/template/v_admin_footer', $data);
 
 		if ($this->session->userdata('status') != "online") {

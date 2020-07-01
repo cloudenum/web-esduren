@@ -7,10 +7,10 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="slide-caption slider-caption-left">
-							<h2 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown">Es Duren Kombinasi</h2>
+							<h2 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown"><?php echo $profil->name ?></h2>
 							<div data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown" class="line"></div>
 							<p data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown">
-								Jl. Prof. Dr. Suharso, Purwokerto Utara, Banyumas, Jawa Tengah 53115
+								<?php echo $profil->alamat ?>
 							</p>
 						</div>
 						<div class="slide-layer-img">
@@ -31,10 +31,10 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="slide-caption">
-							<h2 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown"><?php echo $profil[0]->name; ?></h2>
+							<h2 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown"><?php echo $profil->name; ?></h2>
 							<div data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown" class="line"></div>
 							<p data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown" style="max-width: 500px">
-								<?php echo $profil[0]->alamat; ?>
+								<?php echo $profil->alamat; ?>
 							</p>
 						</div>
 					</div>
@@ -60,7 +60,7 @@
 							<h2>Tentang Kami</h2>
 							<br>
 							<div class="wp-right-about">
-								<?php echo $profil[0]->tentang; ?>
+								<?php echo $profil->tentang; ?>
 							</div>
 						</div>
 						<div id="left-promo" class="owl-carousel wp-left to-left" style="background: url('http://localhost/esduren/bakul/img/promo.jpg');">
@@ -102,16 +102,14 @@
 <section id="goto-featured-menu" class="foodmenu">
 	<div class="wrap-fm">
 		<div class="full-heading-featured">
-			<div class="heading-featured">MENU UNGGULAN</div>
+			<div class="heading-featured">DAFTAR MENU</div>
 		</div>
 		<div id="foodmenu" class="owl-carousel">
 			<?php
-			$query = $this->db->query('SELECT M.*, F.category FROM menu M, food_category F WHERE M.food_category_id = F.id AND M.food_category_id = 1');
-
 			$nomor = 3;
 
-			if ($query->num_rows() > 0) {
-				foreach ($query->result() as $row) {
+			if (count($menu) > 0) {
+				foreach ($menu as $row) {
 					if ($nomor % 2 == 1) {
 			?>
 						<!-- item -->
@@ -173,7 +171,7 @@
 		</div>
 	</div>
 	<div class="explore-menu-btn">
-		<a class="rounded-button fadetransition" href="<?php echo base_url() ?>menu">MENU</a>
+		<a class="rounded-button fadetransition" href="<?php echo base_url() ?>menu">Menu</a>
 	</div>
 </section>
 <!-- END FOOD MENU -->
@@ -204,12 +202,12 @@
 													<?php
 													for ($i = 1; $i <= 5; $i++) {
 														if ($i <= $row["rating"]) {
-															$selected = "color: #ffc700;";
+															$selected = 'style="color: #ffc700;"';
 														} else {
 															$selected = "";
 														}
 													?>
-														<span class="fa fa-star" style="<?php echo $selected; ?>"></span>
+														<span class="fa fa-star" <?php echo $selected; ?>></span>
 													<?php
 													}
 													?>
@@ -249,7 +247,7 @@
 				<div class="well-block">
 					<div class="well-title">
 						<div class="heading-section">
-							<div class="heading-title">Menurutmu Es Duren itu Seperti Apa sih?</div>
+							<div class="heading-title">Menurutmu <?php echo $profil->name ?> itu Seperti Apa sih?</div>
 							<div class="heading-text">Tulis Ulasanmu disini</div>
 						</div>
 					</div>

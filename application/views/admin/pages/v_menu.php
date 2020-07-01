@@ -7,8 +7,8 @@
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="<?php echo base_url() ?>admin"><i class="fa fa-dashboard"></i> Admin</a></li>
-				<li><a href="<?php echo base_url() ?>admin/produk">Produk</a></li>
-				<li class="active"><a href="<?php echo base_url() ?>admin/produk">Daftar Produk</a></li>
+				<li><a href="<?php echo base_url() ?>admin/menu">Produk</a></li>
+				<li class="active"><a href="<?php echo base_url() ?>admin/menu">Daftar Produk</a></li>
 			</ol>
 		</section>
 
@@ -24,13 +24,13 @@
 				<div class="box-body">
 					<?php echo form_open_multipart('crud/insert_menu', array('class' => 'needs-validation', 'novalidate' => '')); ?>
 					<div class="form-group ">
-						<label>Kode produk</label>
-						<input class="form-control " name="code" placeholder="Kode produk" type="text" required>
+						<label>Kode menu</label>
+						<input class="form-control " name="code" placeholder="Kode menu" type="text" required>
 
 					</div>
 					<div class="form-group ">
-						<label>Nama produk</label>
-						<input class="form-control" name="name" placeholder="Nama produk" type="text" required>
+						<label>Nama menu</label>
+						<input class="form-control" name="name" placeholder="Nama menu" type="text" required>
 
 					</div>
 					<div class="form-group ">
@@ -71,7 +71,7 @@
 					<div class="form-group">
 						<label for="upload-gambar">Upload Foto</label>
 						<input id="upload-gambar" name="image" type="file">
-						<p class="help-block">Upload gambar/foto produk atau item yang akan ditambahkan.</p>
+						<p class="help-block">Upload gambar/foto menu atau item yang akan ditambahkan.</p>
 
 					</div>
 					<button type="submit" class="btn btn-primary">Submit</button>
@@ -96,10 +96,10 @@
 												No.
 											</th>
 											<th class="sorting" aria-controls="menu-table">
-												Kode produk
+												Kode menu
 											</th>
 											<th class="sorting" aria-controls="menu-table" style="min-width: 200px;">
-												Nama produk
+												Nama menu
 											</th>
 											<th class="sorting" aria-controls="menu-table" style="min-width: 500px;">
 												Deskripsi
@@ -123,8 +123,8 @@
 
 										$nomor = 1;
 
-										if (count($product) > 0) {
-											foreach ($product as $row) {
+										if (count($menu) > 0) {
+											foreach ($menu as $row) {
 
 										?>
 												<tr role="row">
@@ -163,7 +163,7 @@
 									<tfoot>
 										<tr>
 											<th>No.</th>
-											<th>Kode produk</th>
+											<th>Kode menu</th>
 											<th>Nama</th>
 											<th>Deskripsi</th>
 											<th>Harga</th>
@@ -197,12 +197,12 @@
 				<div class="modal-body">
 					<?php echo form_open_multipart('crud', array('id' => 'edit-form')); ?>
 					<div class="form-group ">
-						<label>Kode produk</label>
-						<input id="edit-code" class="form-control" name="code" placeholder="Kode produk atau item" type="text">
+						<label>Kode menu</label>
+						<input id="edit-code" class="form-control" name="code" placeholder="Kode menu atau item" type="text">
 					</div>
 					<div class="form-group ">
-						<label>Nama produk</label>
-						<input id="edit-name" class="form-control" name="name" placeholder="Nama produk atau item" type="text">
+						<label>Nama menu</label>
+						<input id="edit-name" class="form-control" name="name" placeholder="Nama menu atau item" type="text">
 					</div>
 					<div class="form-group ">
 						<label>Deskripsi</label>
@@ -236,7 +236,7 @@
 					<div class="form-group ">
 						<label for="edit-gambar">Edit Foto</label>
 						<input id="edit-gambar" name="edit-image" type="file">
-						<p class="help-block">Upload gambar/foto produk atau item yang akan ditambahkan.</p>
+						<p class="help-block">Upload gambar/foto menu atau item yang akan ditambahkan.</p>
 					</div>
 					</form>
 				</div>

@@ -100,7 +100,7 @@
 					</li>
 					<li id="nav-menu" class="treeview">
 						<a href="<?php echo base_url() ?>admin/menu">
-							<i class="fa fa-cutlery"></i>
+							<i class="fa fa-archive"></i>
 							<span>Produk/Item</span>
 							<span class="pull-right-container">
 								<i class="fa fa-angle-left pull-right"></i>
