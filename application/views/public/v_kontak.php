@@ -1,17 +1,17 @@
 <!-- BEGIN BANNER SECTION -->
 <section class="title-banner">
-<div class="wrap-tb-bg">
-	<div class="tb-background">
-		<div class="tb-background-bgoverlay"></div>
-		<div class="tb-background-img" style="bottom: 0px">
-			<img src="<?php echo base_url(); ?>bakul/img/contact.jpg" alt="banner">
+	<div class="wrap-tb-bg">
+		<div class="tb-background">
+			<div class="tb-background-bgoverlay"></div>
+			<div class="tb-background-img" style="bottom: 0px">
+				<img src="<?php echo base_url(); ?>bakul/img/contact.jpg" alt="banner">
+			</div>
 		</div>
 	</div>
-</div>
-<div class="tb-text">
-	<h1>HUBUNGI KAMI</h1>
-	<div class="tb-line"></div>
-</div>
+	<div class="tb-text">
+		<h1>HUBUNGI KAMI</h1>
+		<div class="tb-line"></div>
+	</div>
 </section>
 <!-- END BANNER SECTION -->
 <!-- BEGIN CONTENT PAGE -->
@@ -24,13 +24,13 @@
 						<h2>Hubungi kami via :</h2>
 						<ul class="list-ul">
 							<li>
-								<i class="fa fa-home"></i><?php echo $profil[0]->alamat;?>
+								<i class="fa fa-home"></i><?php echo $profil->alamat; ?>
 							</li>
 							<li>
-								<i class="fa fa-phone"></i><?php echo $profil[0]->phone;?>
+								<i class="fa fa-phone"></i><?php echo $profil->phone; ?>
 							</li>
 							<li>
-								<i class="fa fa-envelope"></i><?php echo $profil[0]->email;?>
+								<i class="fa fa-envelope"></i><?php echo $profil->email; ?>
 							</li>
 						</ul>
 					</div>
@@ -49,7 +49,7 @@
 							</div>
 							<div class="form-group text-center">
 								<input class="rounded-button fadetransition" value="SEND" type="submit">
-                            </div>
+							</div>
 						</form>
 					</div>
 				</div>
@@ -60,14 +60,14 @@
 <!-- END CONTENT PAGE -->
 <!-- BEGIN SECTION MAP -->
 <section class="contact-map">
-<div class="homepage-map">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div id="map_canvas"></div>
+	<div class="homepage-map">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div id="map_canvas"></div>
+				</div>
 			</div>
 		</div>
-	</div> 
-</div>
+	</div>
 </section>
 <!-- END SECTION MAP -->
