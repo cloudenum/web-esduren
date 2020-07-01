@@ -1,12 +1,19 @@
 {
-    "name": "cloudenum/web-resto",
-    "description": "Universal Restaurant Web",
-    "type": "project",
-    "authors": [
-        {
-            "name": "cloudenum",
-            "email": "23111954+cloudenum@users.noreply.github.com"
-        }
-    ],
-    "require": {}
+	"name": "cloudenum/web-resto",
+	"description": "Universal Restaurant Web",
+	"type": "project",
+	"authors": [
+		{
+			"name": "cloudenum",
+			"email": "23111954+cloudenum@users.noreply.github.com"
+		}
+	],
+	"require": {
+		"php": "7.3.7"
+	},
+	"config": {
+		"platform": {
+			"php": "7.3.7"
+		}
+	}
 }
