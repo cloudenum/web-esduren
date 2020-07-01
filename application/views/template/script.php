@@ -1,37 +1,40 @@
-
-<script src="<?php echo base_url(); ?>bakul/js/validator.min.js"></script> 
+<script src="<?php echo base_url(); ?>bakul/js/validator.min.js"></script>
 <!--owl carousel -->
-<script src="<?php echo base_url(); ?>bakul/vendor/owlcarousel/owl.carousel.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/owl.carousel@2.2.0/dist/owl.carousel.min.js"></script>
 <!-- Inview js -->
-<script src="<?php echo base_url(); ?>bakul/vendor/jquery.inview-master/jquery.inview.min.js"> </script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-inview@1.1.2/jquery.inview.min.js"> </script>
 <!-- Datepicker js -->
-<script src="<?php echo base_url(); ?>bakul/vendor/gijgo-combined/gijgo.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
+<!-- Gijgo -->
+<script src="https://cdn.jsdelivr.net/npm/gijgo-combined@1.4.0/combined/js/gijgo.min.js"></script>
 <!-- Timepicker js -->
-<script src="<?php echo base_url(); ?>bakul/vendor/bootstrap-timepicker/bootstrap-timepicker.js"> </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-timepicker@0.5.2/js/bootstrap-timepicker.min.js"> </script>
 <!-- Custom js -->
 <script src="<?php echo base_url(); ?>bakul/js/main.js"> </script>
 
 <script src="<?php echo base_url(); ?>bakul/js/custom.js"></script>
 
 <script src="<?php echo base_url(); ?>bakul/js/map.js"></script>
-<script src="<?php echo base_url(); ?>bakul/vendor/jquery-bar-rating-master/examples/js/examples.js"> </script>
-<script src="<?php echo base_url(); ?>bakul/vendor/jquery-bar-rating-master/jquery.barrating.js"> </script>
-<?php 
-  if (is_array($map_js)) {
-	?>
-<script type="text/javascript" src="<?php echo $map_js[0];?>"></script>
-<?php  
-  }   
+<script src="https://cdn.jsdelivr.net/npm/jquery-bar-rating@1.2.2/examples/js/examples.js"> </script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-bar-rating@1.2.2/jquery.barrating.min.js"> </script>
+<?php
+if (isset($map_js) && is_array($map_js)) {
 ?>
+	<script type="text/javascript" src="<?php echo $map_js[0]; ?>"></script>
+	<?php
+}
 
-<?php 
-  if (is_array($js_to_load)) {
-	foreach ($js_to_load as $js_file) {?>
-<script type="text/javascript" src="<?php echo base_url() ?>bakul/js/<?php echo $js_file;?>"></script>
-<?php  
+if (isset($js_to_load) && is_array($js_to_load)) {
+	foreach ($js_to_load as $js_file) {
+		if (!preg_match('/https?:\/\//', $js_file)) { ?>
+			<script type="text/javascript" src="<?php echo base_url() ?>bakul/<?php echo $js_file; ?>"></script>
+		<?php
+		} else { ?>
+			<script type="text/javascript" src="<?php echo $js_file; ?>"></script>
+<?php
+		}
 	}
-  }   
-?>
+} ?>
 
 </body>
 

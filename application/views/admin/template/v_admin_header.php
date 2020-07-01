@@ -8,42 +8,47 @@
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<!-- Bootstrap -->
-	<link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
 	<!-- Pace -->
-	<link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/pace/pace.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/white/pace-theme-flash.min.css">
 	<!-- Font Awesome -->
-	<link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 	<!-- Timepicker -->
-	<link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/timepicker/bootstrap-timepicker.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.2.3/css/bootstrap-timepicker.min.css">
 	<!-- Ionicons -->
-	<link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/Ionicons/css/ionicons.min.css">
-	<link rel="stylesheet" href="<?php echo base_url() ?>bakul/vendor/iCheck/all.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.0/css/ionicons.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.1/skins/all.css">
 
 	<?php
-	if (is_array($css_to_load)) {
-		foreach ($css_to_load as $css_file) { ?>
-			<link rel="stylesheet" href="<?php echo base_url() ?>bakul/<?php echo $css_file; ?>">
-			</script>
-	<?php  }
+	if (isset($css_to_load) && is_array($css_to_load)) {
+		foreach ($css_to_load as $css_file) {
+			if (!preg_match('/https?:\/\//', $css_file)) { ?>?>
+	<link rel="stylesheet" href="<?php echo base_url() ?>bakul/<?php echo $css_file; ?>">
+<?php
+			} else { ?>
+	<link rel="stylesheet" href="<?php echo $css_file; ?>">
+<?php
+			}
+		}
 	} ?>
 
-	<!-- Theme style -->
-	<link rel="stylesheet" href="<?php echo base_url() ?>bakul/admin/css/AdminLTE.min.css">
-	<link rel="stylesheet" href="<?php echo base_url() ?>bakul/admin/css/custom.css">
-	<!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+<!-- Theme style -->
+<link rel="stylesheet" href="<?php echo base_url() ?>bakul/admin/css/AdminLTE.min.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>bakul/admin/css/custom.css">
+<!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-	<link rel="stylesheet" href="<?php echo base_url() ?>bakul/admin/css/skins/skin-blue.min.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>bakul/admin/css/skins/skin-blue.min.css">
 
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-	<!-- Google Font -->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+<!-- Google Font -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class="fixed hold-transition skin-blue sidebar-mini">

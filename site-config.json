@@ -1,0 +1,23 @@
+{
+	"gtag": "",
+	"gmap": "",
+	"pages": {
+		"home": {
+			"slides": [
+				{
+					"images": "",
+					"text": ""
+				}
+			]
+		},
+		"menu": {
+			"headerImage": ""
+		},
+		"gallery": {
+			"headerImage": ""
+		},
+		"contact": {
+			"headerImage": ""
+		}
+	}
+}

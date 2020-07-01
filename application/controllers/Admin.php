@@ -236,8 +236,14 @@ class Admin extends CI_Controller {
 	}
 
 	public function tambah_gambar() {
-		$data['js_to_load'] = array('vendor/dropzone/dist/dropzone.min.js', 'admin/js/tambah-gambar-page.js');
-		$data['css_to_load'] = array('vendor/dropzone/dist/dropzone.min.css', 'vendor/dropzone/dist/basic.min.css');
+		$data['js_to_load'] = array(
+			'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js',
+			'admin/js/tambah-gambar-page.js'
+		);
+		$data['css_to_load'] = array(
+			'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.css',
+			'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/basic.min.css'
+		);
 		$query = $this->db->get('profil');
 		$data['profil'] = $query->result()[0];
 
