@@ -1,5 +1,3 @@
+$("#nav-testimoni").addClass("active");
 
-    $('#nav-testimoni').addClass('active');
-
-	$('#testimoni-table').DataTable();
-
+$("#testimoni-table").DataTable();

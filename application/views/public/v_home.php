@@ -14,17 +14,52 @@
 							</p>
 						</div>
 						<div class="slide-layer-img">
-							<img src="<?php echo base_url(); ?>bakul/img/chef2.png" alt="slide-layer" data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown">
+							<img class="img-responsive" src="<?php echo base_url(); ?>bakul/img/chef2.png" alt="slide-layer" data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown">
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="filter-slider"></div>
 			<div class="slide-item">
-				<img src="<?php echo base_url(); ?>bakul/img/esduren1.jpg" alt="slide">
+				<img class="img-responsive" src="<?php
+													echo (count($home_settings->slides) > 0) && $home_settings->slides[0]->image_path ?
+														$home_settings->slides[0]->image_path :
+														base_url('bakul/img/esduren1.jpg'); ?>" alt="slide">
 			</div>
 		</div>
 		<!-- end slide item -->
+		<?php
+		if (count($promo) > 0) {
+			foreach ($promo as $row) {
+		?>
+				<!-- slide item -->
+				<div class="item">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="slide-caption slider-caption-bottom">
+									<h4 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown"><?php echo $row->name; ?></h4>
+									<?php if ($row->name) { ?>
+										<div data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown" class="line"></div>
+									<?php
+									}
+									?>
+									<p data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutDown" style="max-width: 500px">
+										<?php echo $row->description; ?>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="filter-slider"></div>
+					<div class="slide-item">
+						<img class="img-responsive" src="<?php echo $row->image_path; ?>" alt="slide">
+					</div>
+				</div>
+				<!-- end slide item -->
+		<?php
+			}
+		} ?>
 		<!-- slide item -->
 		<div class="item">
 			<div class="container">
@@ -42,10 +77,14 @@
 			</div>
 			<div class="filter-slider"></div>
 			<div class="slide-item">
-				<img src="<?php echo base_url(); ?>bakul/img/esduren2.jpg" alt="slide">
+				<img class="img-responsive" src="<?php
+													echo (count($home_settings->slides) > 1) && $home_settings->slides[1]->image_path ?
+														$home_settings->slides[1]->image_path :
+														base_url('bakul/img/esduren2.jpg'); ?>" alt="slide">
 			</div>
 		</div>
 		<!-- end slide item -->
+
 	</div>
 </section>
 <!-- END SLIDER -->
@@ -63,31 +102,8 @@
 								<?php echo $profil->tentang; ?>
 							</div>
 						</div>
-						<div id="left-promo" class="owl-carousel wp-left to-left" style="background: url('http://localhost/esduren/bakul/img/promo.jpg');">
-							<?php
-							if ($promo) {
-								foreach ($promo as $row) {
-							?>
-									<!-- Item -->
-									<div class="item">
-										<div class="pr-left-content">
-											<img src="<?php echo $row->image_path; ?>" alt="<?php echo $row->name; ?>">
-										</div>
-									</div>
-									<!-- End Item -->
-								<?php
-								}
-							} else { ?>
-								<!-- Item -->
-								<div class="item">
-									<div class="pr-left-content">
-										<span class="text-white">Tidak ada promo</span>
-									</div>
-								</div>
-								<!-- End Item -->
-							<?php
-							}
-							?>
+						<div id="left-promo" class="wp-left to-left" style="background-size: cover; background-image: url('<?php echo $profil->resto_image_path ? $profil->resto_image_path : base_url('bakul/img/promo.jpg') ?>');">
+							<!-- <img class="img-responsive" src="<?php echo $profil->resto_image_path ? $profil->resto_image_path : base_url('bakul/img/promo.jpg') ?>" alt="Gambar Resto" /> -->
 						</div>
 						<div class="clear"></div>
 					</div>
@@ -235,7 +251,7 @@
 	</div>
 	<div class="bg-tst">
 		<div class="bg-color-tst"></div>
-		<div class="bg-img-tst parallax-stellar testimonial-parallax" data-stellar-background-ratio="0.5"></div>
+		<div class="bg-img-tst parallax-stellar testimonial-parallax" data-stellar-background-ratio="0.5" style="background-image: url(<?php echo $home_settings->backgroundTestimoni ? $home_settings->backgroundTestimoni : base_url('bakul/img/testm.jpg'); ?>);"></div>
 	</div>
 </section>
 <!-- END TESTIMONIAL -->
@@ -247,24 +263,24 @@
 				<div class="well-block">
 					<div class="well-title">
 						<div class="heading-section">
-							<div class="heading-title">Menurutmu <?php echo $profil->name ?> itu Seperti Apa sih?</div>
+							<div class="heading-title">Menurutmu <?php echo $profil->name; ?> itu Seperti Apa sih?</div>
 							<div class="heading-text">Tulis Ulasanmu disini</div>
 						</div>
 					</div>
 					<div class="form-testimonial">
-						<form action="<?php echo base_url(); ?>crud/add_testimonial" method="POST">
+						<form id="form-testimoni" method="POST">
 							<!-- Form start -->
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
 										<label class="control-label" for="name">Nama</label>
-										<input id="name" name="name" type="text" placeholder="Nama" class="form-control input-md">
+										<input id="name" name="name" type="text" placeholder="Nama" class="form-control input-md" required>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
 										<label class="control-label" for="testimonial">Ulasanmu</label>
-										<textarea class="form-control" id="testimonial" name="testimonial"></textarea>
+										<textarea class="form-control" id="testimonial" name="testimonial" required></textarea>
 									</div>
 								</div>
 								<div class="col-md-12">
@@ -275,24 +291,18 @@
 												<option value="2">2</option>
 												<option value="3">3</option>
 												<option value="4">4</option>
-												<option value="5">5</option>
+												<option value="5" selected>5</option>
 											</select>
 										</div>
-										<!-- <input type='hidden'  id='rating'>
-									<div class="rating text-center">
-										<span id="star-0" class="fa fa-star" onmouseover="highlightStar(0)" onmouseout="removeHighlight(0)" onClick="selectStar(0)"></span>
-										<span id="star-1" class="fa fa-star" onmouseover="highlightStar(1)" onmouseout="removeHighlight(1)" onClick="selectStar(1)"></span>
-										<span id="star-2" class="fa fa-star" onmouseover="highlightStar(2)" onmouseout="removeHighlight(2)" onClick="selectStar(2)"></span>
-										<span id="star-3" class="fa fa-star" onmouseover="highlightStar(3)" onmouseout="removeHighlight(3)" onClick="selectStar(3)"></span>
-										<span id="star-4" class="fa fa-star" onmouseover="highlightStar(4)" onmouseout="removeHighlight(4)" onClick="selectStar(4)"></span>
-									</div> -->
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group btn-booknow">
-										<button id="kirim-testimoni" type="button" class="rounded-button fadetransition">Kirim!</button>
+										<button id="kirim-testimoni" type="submit" class="rounded-button fadetransition">
+											Kirim!
+										</button>
 									</div>
 								</div>
 							</div>

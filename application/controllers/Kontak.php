@@ -5,9 +5,13 @@ class Kontak extends CI_Controller {
 
 	public function index() {
 		$data['profil'] = $this->db->get('profil')->result()[0];
+		$data['open_hours'] = $this->db->get('open_hours')->result();
+		$data['socmed'] = $this->db->get('socmed')->result();
 		$data['body_id'] = array('single-page');
-		$data['js_to_load'] = array('');
-		$data['map_js'] = array('https://maps.googleapis.com/maps/api/js?key=AIzaSyADTzcHTc1GK8Aiy1nkfhToPKJ5IK9HrFc&callback=initMap');
+		$gmap_key = $this->siteconfig->getSettings()->gmap;
+		if ($gmap_key) {
+			$data['gmap_key'] = $gmap_key;
+		}
 
 		$this->load->view('template/style', $data);
 		$this->load->view('template/header', $data);

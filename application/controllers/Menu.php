@@ -5,11 +5,10 @@ class Menu extends CI_Controller {
 
 	public function index() {
 		$query = $this->db->get('profil');
-
-		$data['profil'] = $query->result()[0];
+		$data['profil'] = $this->db->get('profil')->result()[0];
+		$data['open_hours'] = $this->db->get('open_hours')->result();
+		$data['socmed'] = $this->db->get('socmed')->result();
 		$data['body_id'] = array('single-page');
-		$data['js_to_load'] = array('');
-		$data['map_js'] = array('');
 
 		$this->db->select('mc.*');
 		$this->db->from('menu_category mc');

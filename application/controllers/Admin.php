@@ -5,7 +5,7 @@ class Admin extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->helper('form', 'security');
+		$this->load->helper(array('form', 'security', 'json_helper'));
 		$this->load->library('user_agent');
 	}
 
@@ -17,7 +17,19 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	private function check_online() {
+		if ($this->session->userdata('status') !== "online") {
+			$this->session->sess_destroy();
+			// show_error('Silahkan login kembali', 403, '403');
+			show_404();
+			exit(EXIT_SUCCESS);
+		}
+
+		return true;
+	}
+
 	public function login() {
+		$this->session->sess_destroy();
 		$this->load->view('admin/v_login');
 	}
 
@@ -68,6 +80,8 @@ class Admin extends CI_Controller {
 	}
 
 	public function dashboard() {
+		$this->check_online();
+
 		$data['js_to_load'] = array('admin/js/dashboard-page.js', 'admin/js/analytics.js');
 		$data['css_to_load'] = '';
 		$data['jumlah'] = array(
@@ -81,21 +95,11 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/v_dashboard', $data);
 		$this->load->view('admin/template/v_admin_footer', $data);
-
-		if ($this->session->userdata('status') != "online") {
-			$query = $this->db->get('profil');
-			$data['profil'] = $query->result();
-			$data['body_id'] = array('single-page');
-			$data['js_to_load'] = array('');
-			$this->load->view('template/style', $data);
-			$this->load->view('template/header', $data);
-			$this->load->view('errors/html/error_404');
-			$this->load->view('template/footer', $data);
-			$this->load->view('template/script', $data);
-		}
 	}
 
 	public function testimoni() {
+		$this->check_online();
+
 		$data['js_to_load'] = array('admin/js/testimoni-page.js');
 		$data['css_to_load'] = '';
 		$query = $this->db->get('profil');
@@ -104,21 +108,11 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_testimoni');
 		$this->load->view('admin/template/v_admin_footer', $data);
-
-		if ($this->session->userdata('status') != "online") {
-			$query = $this->db->get('profil');
-			$data['profil'] = $query->result();
-			$data['body_id'] = array('single-page');
-			$data['js_to_load'] = array('');
-			$this->load->view('template/style', $data);
-			$this->load->view('template/header', $data);
-			$this->load->view('errors/html/error_404');
-			$this->load->view('template/footer', $data);
-			$this->load->view('template/script', $data);
-		}
 	}
 
 	public function menu() {
+		$this->check_online();
+
 		$data['js_to_load'] = array('admin/js/menu-page.js');
 		$data['css_to_load'] = '';
 		$profil = $this->db->get('profil');
@@ -136,21 +130,11 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_menu');
 		$this->load->view('admin/template/v_admin_footer', $data);
-
-		if ($this->session->userdata('status') != "online") {
-			$query = $this->db->get('profil');
-			$data['profil'] = $query->result();
-			$data['body_id'] = array('single-page');
-			$data['js_to_load'] = array('');
-			$this->load->view('template/style', $data);
-			$this->load->view('template/header', $data);
-			$this->load->view('errors/html/error_404');
-			$this->load->view('template/footer', $data);
-			$this->load->view('template/script', $data);
-		}
 	}
 
 	public function kategori() {
+		$this->check_online();
+
 		$data['js_to_load'] = array('admin/js/kategori-page.js');
 		$data['css_to_load'] = '';
 		$query = $this->db->get('profil');
@@ -161,21 +145,11 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_kategori', $main);
 		$this->load->view('admin/template/v_admin_footer', $data);
-
-		if ($this->session->userdata('status') != "online") {
-			$query = $this->db->get('profil');
-			$data['profil'] = $query->result();
-			$data['body_id'] = array('single-page');
-			$data['js_to_load'] = array('');
-			$this->load->view('template/style', $data);
-			$this->load->view('template/header', $data);
-			$this->load->view('errors/html/error_404');
-			$this->load->view('template/footer', $data);
-			$this->load->view('template/script', $data);
-		}
 	}
 
 	public function profil() {
+		$this->check_online();
+
 		$query = $this->db->get('profil');
 		$data['profil_count'] = $query->num_rows();
 		if ($query->num_rows() > 0) {
@@ -190,29 +164,25 @@ class Admin extends CI_Controller {
 				'tentang' => '',
 				'Lat' => '',
 				'Lng' => '',
+				'resto_image_path' => ''
 			];
 		}
 		$data['js_to_load'] = array('admin/js/profil-page.js', 'admin/js/map-profile.js');
 		$data['css_to_load'] = array('admin/css/map.css');
+		$gmap_key = $this->siteconfig->getSettings()->gmap;
+		if ($gmap_key) {
+			$data['gmap_key'] = $gmap_key;
+			// $data['map_js'] = 'https://maps.googleapis.com/maps/api/js?key=' . $gmap_key . '&callback=initMap';
+		}
 
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_profil', $data);
 		$this->load->view('admin/template/v_admin_footer', $data);
-
-		if ($this->session->userdata('status') != "online") {
-			$query = $this->db->get('profil');
-			$data['profil'] = $query->result();
-			$data['body_id'] = array('single-page');
-			$data['js_to_load'] = array('');
-			$this->load->view('template/style', $data);
-			$this->load->view('template/header', $data);
-			$this->load->view('errors/html/error_404');
-			$this->load->view('template/footer', $data);
-			$this->load->view('template/script', $data);
-		}
 	}
 
 	public function medsos() {
+		$this->check_online();
+
 		$data['js_to_load'] = array('admin/js/medsos-page.js');
 		$data['css_to_load'] = '';
 		$query = $this->db->get('profil');
@@ -221,21 +191,11 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_medsos');
 		$this->load->view('admin/template/v_admin_footer', $data);
-
-		if ($this->session->userdata('status') != "online") {
-			$query = $this->db->get('profil');
-			$data['profil'] = $query->result();
-			$data['body_id'] = array('single-page');
-			$data['js_to_load'] = array('');
-			$this->load->view('template/style', $data);
-			$this->load->view('template/header', $data);
-			$this->load->view('errors/html/error_404');
-			$this->load->view('template/footer', $data);
-			$this->load->view('template/script', $data);
-		}
 	}
 
 	public function tambah_gambar() {
+		$this->check_online();
+
 		$data['js_to_load'] = array(
 			'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js',
 			'admin/js/tambah-gambar-page.js'
@@ -250,21 +210,47 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_tambah_gambar');
 		$this->load->view('admin/template/v_admin_footer', $data);
+	}
 
-		if ($this->session->userdata('status') != "online") {
-			$query = $this->db->get('profil');
-			$data['profil'] = $query->result();
-			$data['body_id'] = array('single-page');
-			$data['js_to_load'] = array('');
-			$this->load->view('template/style', $data);
-			$this->load->view('template/header', $data);
-			$this->load->view('errors/html/error_404');
-			$this->load->view('template/footer', $data);
-			$this->load->view('template/script', $data);
-		}
+	public function setting() {
+		$this->check_online();
+
+		$data['js_to_load'] = array(
+			'admin/js/settings-page.js'
+		);
+		$query = $this->db->get('profil');
+		$data['profil'] = $query->result()[0];
+		$main['settings'] = (object) [
+			"gtag" => "",
+			"gmap" => "",
+			"pages" => (object) [
+				"home" => (object) [
+					"slides" => [],
+					"backgroundTestimoni" => ''
+				],
+				"menu" => (object) [
+					"headerImage" => ""
+				],
+				"gallery" => (object) [
+					"headerImage" => ""
+				],
+				"contact" => (object) [
+					"headerImage" => ""
+				]
+			]
+		];
+
+		$settings =  $this->siteconfig->getSettings();
+		$main['settings'] = $settings ? $settings : $main['settings'];
+
+		$this->load->view('admin/template/v_admin_header', $data);
+		$this->load->view('admin/pages/v_setting', $main);
+		$this->load->view('admin/template/v_admin_footer', $data);
 	}
 
 	public function jam_buka() {
+		$this->check_online();
+
 		$data['js_to_load'] = array('admin/js/jambuka-page.js');
 		$data['css_to_load'] = '';
 		$query = $this->db->get('profil');
@@ -273,44 +259,24 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_jambuka');
 		$this->load->view('admin/template/v_admin_footer', $data);
-
-		if ($this->session->userdata('status') != "online") {
-			$query = $this->db->get('profil');
-			$data['profil'] = $query->result();
-			$data['body_id'] = array('single-page');
-			$data['js_to_load'] = array('');
-			$this->load->view('template/style', $data);
-			$this->load->view('template/header', $data);
-			$this->load->view('errors/html/error_404');
-			$this->load->view('template/footer', $data);
-			$this->load->view('template/script', $data);
-		}
 	}
 
 	public function promo() {
+		$this->check_online();
+
 		$data['js_to_load'] = array('admin/js/promo-page.js');
 		$data['css_to_load'] = '';
-		$query = $this->db->get('profil');
-		$data['profil'] = $query->result()[0];
+		$data['profil'] = $this->db->get('profil')->result()[0];
+		$data['promo'] = $this->db->get('promo')->result();
 
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_promo');
 		$this->load->view('admin/template/v_admin_footer', $data);
-
-		if ($this->session->userdata('status') != "online") {
-			$query = $this->db->get('profil');
-			$data['profil'] = $query->result();
-			$data['body_id'] = array('single-page');
-			$data['js_to_load'] = array('');
-			$this->load->view('template/style', $data);
-			$this->load->view('template/header', $data);
-			$this->load->view('errors/html/error_404');
-			$this->load->view('template/footer', $data);
-			$this->load->view('template/script', $data);
-		}
 	}
 
 	public function tambahpromo() {
+		$this->check_online();
+
 		$data['js_to_load'] = array('admin/js/promo-page.js');
 		$data['css_to_load'] = '';
 		$query = $this->db->get('profil');
@@ -319,21 +285,11 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_tambah_promo');
 		$this->load->view('admin/template/v_admin_footer', $data);
-
-		if ($this->session->userdata('status') != "online") {
-			$query = $this->db->get('profil');
-			$data['profil'] = $query->result();
-			$data['body_id'] = array('single-page');
-			$data['js_to_load'] = array('');
-			$this->load->view('template/style', $data);
-			$this->load->view('template/header', $data);
-			$this->load->view('errors/html/error_404');
-			$this->load->view('template/footer', $data);
-			$this->load->view('template/script', $data);
-		}
 	}
 
 	public function akun() {
+		$this->check_online();
+
 		$data['js_to_load'] = array('admin/js/akun-page.js');
 		$data['css_to_load'] = '';
 
@@ -362,6 +318,8 @@ class Admin extends CI_Controller {
 	}
 
 	public function tambahakun() {
+		$this->check_online();
+
 		if ($this->session->level == 1) {
 			$data['js_to_load'] = array('admin/js/akun-page.js');
 			$data['css_to_load'] = '';
@@ -389,6 +347,8 @@ class Admin extends CI_Controller {
 	}
 
 	public function editakun() {
+		$this->check_online();
+
 		$data['js_to_load'] = array('admin/js/akun-page.js');
 		$data['css_to_load'] = '';
 		$query = $this->db->get('profil');
@@ -397,17 +357,5 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_edit_akun');
 		$this->load->view('admin/template/v_admin_footer', $data);
-
-		if ($this->session->userdata('status') != "online") {
-			$query = $this->db->get('profil');
-			$data['profil'] = $query->result();
-			$data['body_id'] = array('single-page');
-			$data['js_to_load'] = array('');
-			$this->load->view('template/style', $data);
-			$this->load->view('template/header', $data);
-			$this->load->view('errors/html/error_404');
-			$this->load->view('template/footer', $data);
-			$this->load->view('template/script', $data);
-		}
 	}
 }

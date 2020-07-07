@@ -1,13 +1,25 @@
-$('#kirim-testimoni').on('click',function(){
-	$.ajax({
-		url: 'crud/add_testimonial',
-		data: 'n='+$('#name').val()+'&t='+$('#testimonial').val()+'&r='+$('#rating').val(),
-		success: function () { 
-			$('#success-testimonial').css('display','block');
-		},
-		error: function () {
-			
-			$('#failed-testimonial').css('display','block');
-		}
+$(function () {
+	console.log("test");
+	$("#form-testimoni").submit(function (ev) {
+		ev.preventDefault();
+		console.log("help");
+		let btn = $("#kirim-testimoni");
+		btn.prop("disabled", true);
+		btn.text("Loading...");
+
+		$.ajax({
+			url: baseURL("crud/add_testimonial/ajax"),
+			data: $(this).serialize(),
+			success: function () {
+				$("#success-testimonial").css("display", "block");
+				btn.prop("disabled", false);
+				btn.text("Kirim");
+			},
+			error: function () {
+				$("#failed-testimonial").css("display", "block");
+				btn.prop("disabled", false);
+				btn.text("Kirim");
+			},
+		});
 	});
 });

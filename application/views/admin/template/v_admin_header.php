@@ -106,7 +106,7 @@
 					<li id="nav-menu" class="treeview">
 						<a href="<?php echo base_url() ?>admin/menu">
 							<i class="fa fa-archive"></i>
-							<span>Produk/Item</span>
+							<span>Produk/Menu</span>
 							<span class="pull-right-container">
 								<i class="fa fa-angle-left pull-right"></i>
 							</span>
@@ -144,14 +144,14 @@
 					</li>
 					<li id="nav-promo" class="treeview">
 						<a href="#">
-							<i class="fa fa-industry"></i>
+							<i class="fa fa-usd"></i>
 							<span>Promo</span>
 							<span class="pull-right-container">
 								<i class="fa fa-angle-left pull-right"></i>
 							</span>
 						</a>
 						<ul class="treeview-menu">
-							<li><a href="<?php echo base_url(); ?>admin/promo"><i class="fa fa-users"></i>Daftar Promo</a></li>
+							<li><a href="<?php echo base_url(); ?>admin/promo"><i class="fa fa-list-alt"></i>Daftar Promo</a></li>
 							<li><a href="<?php echo base_url(); ?>admin/tambahpromo"><i class="fa fa-plus"></i> Tambah Promo</a></li>
 						</ul>
 					</li>
@@ -175,6 +175,12 @@
 							?>
 							<li><a href="<?php echo base_url(); ?>admin/editakun"><i class="fa fa-clock-o"></i> Edit Akun</a></li>
 						</ul>
+					</li>
+					<li id="nav-site">
+						<a href="<?php echo base_url() ?>admin/setting">
+							<i class="fa fa-cog"></i>
+							<span>Pengaturan Situs</span>
+						</a>
 					</li>
 				</ul>
 				<!-- /.sidebar-menu -->

@@ -10,6 +10,7 @@
 <!-- Timepicker js -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-timepicker@0.5.2/js/bootstrap-timepicker.min.js"> </script>
 <!-- Custom js -->
+<script src="<?php echo base_url(); ?>bakul/js/helper.js"> </script>
 <script src="<?php echo base_url(); ?>bakul/js/main.js"> </script>
 
 <script src="<?php echo base_url(); ?>bakul/js/custom.js"></script>
@@ -18,16 +19,16 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery-bar-rating@1.2.2/examples/js/examples.js"> </script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-bar-rating@1.2.2/jquery.barrating.min.js"> </script>
 <?php
-if (isset($map_js) && is_array($map_js)) {
+if (isset($map_js) && $map_js) {
 ?>
-	<script type="text/javascript" src="<?php echo $map_js[0]; ?>"></script>
+	<script async defer type="text/javascript" src="<?php echo $map_js; ?>"></script>
 	<?php
 }
 
 if (isset($js_to_load) && is_array($js_to_load)) {
 	foreach ($js_to_load as $js_file) {
 		if (!preg_match('/https?:\/\//', $js_file)) { ?>
-			<script type="text/javascript" src="<?php echo base_url() ?>bakul/<?php echo $js_file; ?>"></script>
+			<script type="text/javascript" src="<?php echo base_url() ?>bakul/js/<?php echo $js_file; ?>"></script>
 		<?php
 		} else { ?>
 			<script type="text/javascript" src="<?php echo $js_file; ?>"></script>

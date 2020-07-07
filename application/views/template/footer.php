@@ -9,7 +9,9 @@
 							<div class="row footer-row-a">
 								<div class="col-md-3">
 									<div class="logo-footer">
-										<img src="<?php echo $profil->logo_path; ?>" alt="logo">
+										<img src="<?php echo $profil->logo_path ?
+														$profil->logo_path :
+														'https://via.placeholder.com/400x250?text=YourLogo'; ?>" alt="logo">
 									</div>
 								</div>
 								<div class="col-md-9">
@@ -57,12 +59,9 @@
 							<div class="open-hours-wrap">
 								<div class="oh-title">JAM BUKA</div>
 								<?php
-								$query = $this->db->get('open_hours');
 
-								$value = $query->result();
-
-								if ($query->num_rows() > 0) {
-									foreach ($value as $row) {
+								if (count($open_hours) > 0) {
+									foreach ($open_hours as $row) {
 								?>
 										<div class="oh-day">
 											<div class="ohd-day"><?php echo $row->day; ?></div>
@@ -99,10 +98,8 @@
 				<div class="footer-b-left ">
 					<div class="footer-sosmed-icon ">
 						<?php
-						$query = $this->db->get('socmed');
-
-						if ($query->num_rows() > 0) {
-							foreach ($query->result() as $row) {
+						if (count($socmed) > 0) {
+							foreach ($socmed as $row) {
 
 						?>
 								<div class="wrap-circle-sosmed ">
@@ -119,7 +116,7 @@
 					</div>
 				</div>
 				<div class="footer-b-right ">
-					<?php echo date('Y ') . $profil->name ?> All rights reserved. Designed by HidraTheme
+					<?php echo date('Y ') . $profil->name ?> All rights reserved. Made by <a href="<?php echo base_url('team') ?>">Kelompok 13</a>
 				</div>
 				<div class="clear"></div>
 			</div>

@@ -132,7 +132,69 @@ section.food-menu-page .menu-item-wrap .miw-right p {
 	color: whitesmoke;
 }
 
+section.home-slider .slide-caption.slider-caption-bottom {
+	top: 25em;
+	bottom: 0;
+}
+
+.team p {
+	margin: 0;
+}
+
+.team-container .team {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.team-container {
+	padding: 2em;
+	max-width: 60%;
+	border: 1px solid #21cb71;
+	border-radius: 5px;
+}
+
+section.testimonial .bg-tst .bg-img-tst {
+	background-size: cover;
+}
+
+body.theme-green .rounded-button[disabled] {
+	background: slategray;
+	cursor: default;
+}
+
+body.theme-green .rounded-button[disabled]:hover {
+	background: slategray;
+}
+
+.star-ratings .stars-example-fontawesome,
+.star-ratings .stars-example-css,
+.star-ratings .stars-example-bootstrap {
+	float: none !important;
+}
+
+.star-ratings .stars {
+	display: flex;
+	justify-content: center;
+}
+
+body.theme-green .footer-b-right a:hover,
+a:focus,
+a:active {
+	color: slateblue;
+}
+@media screen and (max-width: 1115px) {
+	section.home-slider .slide-caption.slider-caption-bottom {
+		top: 20em;
+		bottom: 0;
+	}
+}
+
 @media screen and (max-width: 767px) {
+	section.home-slider .slide-caption.slider-caption-bottom {
+		top: 10em;
+		bottom: 0;
+	}
+
 	section.promo .wrap-promo .wp-left {
 		padding: 0;
 	}

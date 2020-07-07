@@ -30,11 +30,15 @@
 
 <!-- iCheck -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.1/icheck.min.js"></script>
-
+<script src="<?php echo base_url(); ?>bakul/js/helper.js"> </script>
 <script src="<?php echo base_url() ?>bakul/js/custom.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADTzcHTc1GK8Aiy1nkfhToPKJ5IK9HrFc&callback=initMap">
-</script>
 <?php
+if (isset($map_js) && $map_js) {
+?>
+	<script async defer type="text/javascript" src="<?php echo $map_js; ?>"></script>
+	<?php
+}
+
 if (isset($js_to_load) && is_array($js_to_load)) {
 	foreach ($js_to_load as $js_file) {
 		if (!preg_match('/https?:\/\//', $js_file)) { ?>

@@ -6,7 +6,7 @@ class Crud extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('Core_Model');
-		$this->load->helper('file');
+		$this->load->helper(['file', 'json_helper']);
 		$this->load->library('user_agent');
 	}
 
@@ -77,29 +77,44 @@ class Crud extends CI_Controller {
 	}
 
 	public function edit_profil() {
+		$this->db->select('id');
 		$query = $this->db->get('profil');
+		$data = array(
+			'name' => html_escape($this->input->post('name')),
+			'email' => html_escape($this->input->post('email')),
+			'phone' => html_escape($this->input->post('phone')),
+			'alamat' => html_escape($this->input->post('alamat')),
+			'tentang' => html_escape($this->input->post('tentang')),
+		);
 
-		if ($query->num_rows() == 0) {
+		if ($_FILES['resto_image']['error'] !== UPLOAD_ERR_NO_FILE) {
+			$config['upload_path']          = './uploads/';
+			$config['file_name']			= 'resto_image';
+			$config['allowed_types']        = '|gif|jpeg|jpg|png';
+			$config['max_size']             = 8192;
+			$config['max_width']            = 4096;
+			$config['max_height']           = 4096;
 
-			$data = array(
-				'name' => html_escape($this->input->post('name')),
-				'email' => html_escape($this->input->post('email')),
-				'phone' => html_escape($this->input->post('phone')),
-				'alamat' => html_escape($this->input->post('alamat')),
-				'tentang' => html_escape($this->input->post('tentang'))
-			);
+			if ($this->Core_Model->upload_gambar('resto_image', $config, false)) {
+				$data['resto_image_path'] = base_url('uploads/') . $this->upload->data('file_name');
+			} else {
+				$error = '';
+				$data['error'] = array($this->upload->display_errors());
+				foreach ($data['error'] as $error_msg) {
+					$error .= $error_msg . '<br/>';
+				}
+				$this->session->set_flashdata('alert', '<div class="alert alert-warning alert-dismissable" role="alert">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+				<strong>Failed!</strong>' . $error . '
+				</div>');
+				return 0;
+			}
+		}
 
-			$data = $this->Core_Model->insert('profil', $data);
+		if ($query->num_rows() === 0) {
+			$this->Core_Model->insert('profil', $data);
 			$this->agent->redirect_back();
 		} else {
-			$data = array(
-				'name' => html_escape($this->input->post('name')),
-				'email' => html_escape($this->input->post('email')),
-				'phone' => html_escape($this->input->post('phone')),
-				'alamat' => html_escape($this->input->post('alamat')),
-				'tentang' => html_escape($this->input->post('tentang'))
-			);
-
 			$this->Core_Model->update('profil', $data, array('id' => 1));
 			$this->agent->redirect_back();
 		}
@@ -216,17 +231,15 @@ class Crud extends CI_Controller {
 		$config['max_height']           = 2048;
 
 		if (!$this->Core_Model->upload_gambar('edit-logo', $config, false)) {
-
+			$error = '';
 			$data['error'] = array($this->upload->display_errors());
-
+			foreach ($data['error'] as $error_msg) {
+				$error .= $error_msg . '<br/>';
+			}
 			$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
-			<strong>Gagal!</strong> Upload gagal.
+			<strong>Gagal!</strong> ' . $error . '.
 			</div>');
-
-			foreach ($data['error'] as $error_msg) {
-				echo $error_msg;
-			}
 
 			$this->agent->redirect_back();
 		} else {
@@ -256,11 +269,11 @@ class Crud extends CI_Controller {
 		}
 	}
 
-	public function add_testimonial() {
+	public function add_testimonial($type = 'standard') {
 		$data = array(
-			'name' => html_escape($this->input->get('n')),
-			'testimonial' => html_escape($this->input->get('t')),
-			'rating' => html_escape($this->input->get('r')),
+			'name' => html_escape($this->input->get('name')),
+			'testimonial' => html_escape($this->input->get('testimonial')),
+			'rating' => html_escape($this->input->get('rating')),
 			'ip_address' => html_escape($_SERVER['REMOTE_ADDR']),
 			'submited_date' => html_escape(date("Y-m-d")),
 			'submited_time' => html_escape(date("H:i:s")),
@@ -268,8 +281,12 @@ class Crud extends CI_Controller {
 		);
 
 		$this->Core_Model->insert('testimonials', $data);
-
-		$this->agent->redirect_back();
+		if ($type === 'standard') {
+			$this->agent->redirect_back();
+		} else {
+			http_response_code(200);
+			echo 'Success';
+		}
 	}
 
 	public function update_status_testimoni() {
@@ -296,7 +313,16 @@ class Crud extends CI_Controller {
 			'flag' => html_escape($this->input->post('flag')),
 		);
 
-		$data = $this->Core_Model->update('open_hours', $data, array('day' => $this->input->post('day')));
+		$this->db->select('id');
+		$this->db->where('day', $this->input->post('day'));
+		$cek = $this->db->get('open_hours')->num_rows();
+
+		if ($cek > 0) {
+			$data = $this->Core_Model->update('open_hours', $data, array('day' => $this->input->post('day')));
+		} else {
+			$data['day'] = $this->input->post('day');
+			$this->Core_Model->insert('open_hours', $data);
+		}
 
 		$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
@@ -324,6 +350,7 @@ class Crud extends CI_Controller {
 
 		echo json_encode($data->result_array());
 	}
+
 	public function upload_galeri() {
 
 		$config['upload_path']   = FCPATH . '/uploads/gallery';
@@ -335,6 +362,163 @@ class Crud extends CI_Controller {
 			);
 			$this->Core_Model->insert('gallery', $data);
 		}
+	}
+
+	public function upload_slide() {
+		$success = false;
+		$errors = NULL;
+		$config['upload_path']   = FCPATH . '/uploads';
+		$config['allowed_types'] = 'gif|jpg|png|ico';
+
+		if ($_FILES['slidefile1']['error'] !== UPLOAD_ERR_NO_FILE) {
+			$config['file_name'] = 'slide1';
+			if ($this->Core_Model->upload_gambar('slidefile1', $config, false)) {
+				$width = $this->upload->data('image_width');
+				$height = $this->upload->data('image_height');
+
+				$config['image_library'] 	= 'gd2';
+				$config['source_image'] 	= html_escape($this->upload->data('full_path'));
+				$config['x_axis']         	= $width - ($width % 9);
+				$config['y_axis']       	= $height - ($height % 16);
+
+				$this->load->library('image_lib', $config);
+				$this->image_lib->crop();
+
+				$this->siteconfig->changeSlideImage(
+					base_url('uploads/') . $this->upload->data('file_name')
+				);
+				$success = true;
+			} else {
+				$errors = $this->upload->display_errors();
+			}
+		}
+
+		if ($_FILES['slidefile2']['error'] !== UPLOAD_ERR_NO_FILE) {
+			$config['file_name'] = 'slide2';
+			if ($this->Core_Model->upload_gambar('slidefile2', $config, false)) {
+				$width = $this->upload->data('image_width');
+				$height = $this->upload->data('image_height');
+
+				$config['image_library'] 	= 'gd2';
+				$config['source_image'] 	= html_escape($this->upload->data('full_path'));
+				$config['x_axis']         	= $width - ($width % 9);
+				$config['y_axis']       	= $height - ($height % 16);
+
+				$this->load->library('image_lib', $config);
+				$this->image_lib->crop();
+
+				$this->siteconfig->changeSlideImage(
+					base_url('uploads/') . $this->upload->data('file_name'),
+					1
+				);
+				$success = true;
+			} else {
+				$errors = $this->upload->display_errors();
+			}
+		}
+
+		if ($success) {
+			$this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                <strong>Success!</strong> Berhasil ubah slide
+                </div>');
+		} else {
+			$error = '';
+			$data['error'] = array($errors);
+			foreach ($data['error'] as $error_msg) {
+				$error .= $error_msg . '<br/>';
+			}
+
+			$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+            <strong>Gagal!</strong> ' . $error . '
+            </div>');
+		}
+
+		$this->agent->redirect_back();
+	}
+
+	public function upload_background_testimoni() {
+		$success = false;
+		$errors = NULL;
+		$config['upload_path']   = FCPATH . '/uploads';
+		$config['allowed_types'] = 'gif|jpg|png|ico';
+
+		if ($_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
+			$config['file_name'] = 'slide1';
+			if ($this->Core_Model->upload_gambar('image', $config, false)) {
+				$width = $this->upload->data('image_width');
+				$height = $this->upload->data('image_height');
+
+				$config['image_library'] 	= 'gd2';
+				$config['source_image'] 	= html_escape($this->upload->data('full_path'));
+				$config['x_axis']         	= $width - ($width % 9);
+				$config['y_axis']       	= $height - ($height % 16);
+
+				$this->load->library('image_lib', $config);
+				$this->image_lib->crop();
+
+				$this->siteconfig->setBackgroundTestimoni(base_url('uploads/' . $this->upload->data('file_name')));
+				$success = true;
+			} else {
+				$errors = $this->upload->display_errors();
+			}
+		}
+
+		if ($success) {
+			$this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+                <strong>Success!</strong> Berhasil ubah setting
+                </div>');
+		} else {
+			$error = '';
+			$data['error'] = array($errors);
+			foreach ($data['error'] as $error_msg) {
+				$error .= $error_msg . '<br/>';
+			}
+
+			$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
+            <strong>Gagal!</strong> ' . $error . '
+            </div>');
+		}
+
+		$this->agent->redirect_back();
+	}
+
+	public function set_advanced_settings() {
+		$data = array(
+			'gtag' => html_escape($this->input->post('gtag')),
+			'gmap' => html_escape($this->input->post('gmap')),
+		);
+
+		$resData = (object) [
+			'message' => 'Failed'
+		];
+
+		if ($this->siteconfig->updateSettings($data)) {
+			$resData->message = 'Settings updated';
+			http_response_code(200);
+		} else {
+			http_response_code(400);
+		}
+
+		echo json_encode($resData);
+	}
+
+	public function get_site_settings() {
+		$resData = (object) [
+			'message' => 'Failed'
+		];
+
+		if ($resData->data = $this->siteconfig->getSettings()) {
+			$resData->message = 'Success';
+			http_response_code(200);
+		} else {
+			http_response_code(500);
+		}
+
+		echo json_encode($resData);
 	}
 
 	public function insert_promo() {
@@ -365,20 +549,22 @@ class Crud extends CI_Controller {
 				$data = array(
 					'code' => html_escape($this->input->post('code')),
 					'name' => html_escape($this->input->post('name')),
+					'description' => html_escape($this->input->post('description')),
 					'image_path' => html_escape(base_url('uploads/promo/' . $this->upload->data("file_name"))),
 				);
 
 				$data = $this->Core_Model->insert('promo', $data);
+				$width = $this->upload->data('image_width');
+				$height = $this->upload->data('image_height');
 
-				$config['image_library'] = 'gd2';
-				$config['source_image'] = html_escape($this->upload->data('full_path'));
-				$config['maintain_ratio'] = TRUE;
-				$config['width']         = 600;
-				$config['height']       = 600;
+				$config['image_library'] 	= 'gd2';
+				$config['source_image'] 	= html_escape($this->upload->data('full_path'));
+				$config['x_axis']         	= $width - ($width % 9);
+				$config['y_axis']       	= $height - ($height % 16);
 
 				$this->load->library('image_lib', $config);
 
-				$this->image_lib->resize();
+				$this->image_lib->crop();
 
 				$this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
@@ -394,6 +580,7 @@ class Crud extends CI_Controller {
 			$data = array(
 				'code' => html_escape($this->input->post('code')),
 				'name' => html_escape($this->input->post('name')),
+				'description' => html_escape($this->input->post('description')),
 			);
 
 			$data = $this->Core_Model->update('promo', $data, array('id' => $id));
@@ -424,10 +611,22 @@ class Crud extends CI_Controller {
 				$data = array(
 					'code' => html_escape($this->input->post('code')),
 					'name' => html_escape($this->input->post('name')),
+					'description' => html_escape($this->input->post('description')),
 					'image_path' => html_escape(base_url('uploads/promo/' . $this->upload->data("file_name"))),
 				);
 
 				$data = $this->Core_Model->update('promo', $data, array('id' => $id));
+				$width = $this->upload->data('image_width');
+				$height = $this->upload->data('image_height');
+
+				$config['image_library'] 	= 'gd2';
+				$config['source_image'] 	= html_escape($this->upload->data('full_path'));
+				$config['x_axis']         	= $width - ($width % 9);
+				$config['y_axis']       	= $height - ($height % 16);
+
+				$this->load->library('image_lib', $config);
+
+				$this->image_lib->crop();
 
 				$this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
@@ -560,31 +759,52 @@ class Crud extends CI_Controller {
 		$this->agent->redirect_back();
 	}
 
-	public function get_location() {
-		$data = $this->db->query('SELECT Lat, Lng FROM profil WHERE id = 1');
+	public function get_location($type = 'latlng') {
+		if (strtolower($type) === 'placeid') {
+			$this->db->select('maps_place_id');
+			$this->db->where('id', 1);
+			$data = $this->db->get('profil')->result()[0];
+		} else {
+			$data = $this->db->query('SELECT Lat, Lng FROM profil WHERE id = 1')->result_array();
+		}
 
-		echo json_encode($data->result_array());
+		http_response_code(200);
+		echo json_encode($data);
 	}
 
-	public function update_location() {
-		$data = array(
-			'Lat' => html_escape($this->input->post('lat')),
-			'Lng' => html_escape($this->input->post('lng')),
-		);
+	public function update_location($type = 'latlng') {
+		if (strtolower($type) === 'placeid') {
+			$data = [
+				'maps_place_id' => html_escape($this->input->post('maps_place_id'))
+			];
+		} else {
+			$data = array(
+				'Lat' => html_escape($this->input->post('lat')),
+				'Lng' => html_escape($this->input->post('lng')),
+			);
+		}
 
 		if ($this->Core_Model->update('profil', $data, array('id' => 1))) {
 			$data = array(
 				'status' => 'Berhasil!',
 				'status_msg' => 'Lokasi telah diubah'
 			);
+			http_response_code(200);
 		} else {
 			$data = array(
 				'status' => 'Gagal!',
-				'status_msg' => 'Terjad masalah'
+				'status_msg' => 'Terjadi masalah'
 			);
+			http_response_code(400);
 		}
 
-		$data['location'] = $this->db->query('SELECT Lat, Lng FROM profil WHERE id = 1')->result_array();
+		if (strtolower($type) === 'placeid') {
+			$this->db->select('maps_place_id');
+			$this->db->where('id', 1);
+			$data['location'] = $this->db->get('profil')->result()[0];
+		} else {
+			$data['location'] = $this->db->query('SELECT Lat, Lng FROM profil WHERE id = 1')->result_array();
+		}
 
 		echo json_encode($data);
 	}

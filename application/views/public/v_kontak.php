@@ -64,6 +64,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
+					<?php if (isset($gmap_key) && !empty($gmap_key)) { ?>
+						<iframe width="100%" height="500px" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?key=<?php echo $gmap_key; ?>&q=<?php echo $profil->maps_place_id ?>" allowfullscreen>
+						</iframe>
+					<?php } ?>
 					<div id="map_canvas"></div>
 				</div>
 			</div>

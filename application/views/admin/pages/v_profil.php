@@ -62,106 +62,121 @@
 	 									</dd>
 	 									<dt>Telepon</dt>
 	 									<dd><?php echo $profil->phone ?></dd>
+	 									<dt>Gambar Resto</dt>
+	 									<dd><img class="img-responsive img-rounded" src="<?php echo $profil->resto_image_path ? $profil->resto_image_path : base_url('bakul/img/promo.jpg') ?>" alt="gambar resto" /></dd>
 	 								</dl>
 	 							<?php
 									} else {
-										echo 'Sepertinya ada masalah.';
+										echo 'Silahkan isi data restoran di tab sebelah.';
 									}
 									?>
 	 						</div>
 	 						<!-- /.tab-pane -->
 	 						<div class="tab-pane" id="settings">
-	 							<form class="form-horizontal" action="<?php echo base_url() ?>crud/edit_profil" method="POST">
-	 								<?php
+	 							<?php echo form_open_multipart('crud/edit_profil', array('class' => 'needs-validation form-horizontal', 'novalidate' => '')); ?>
+	 							<?php
+									if ($profil_count > 0) {
+									?>
+	 								<div class="form-group">
+	 									<label for="name" class="col-sm-2 control-label">Nama Usaha</label>
 
-										if ($profil_count > 0) {
-										?>
-	 									<div class="form-group">
-	 										<label for="name" class="col-sm-2 control-label">Nama Usaha</label>
+	 									<div class="col-sm-10">
+	 										<input name="name" type="text" class="form-control" id="name" placeholder="Nama Usaha" value="<?php echo $profil->name ?>">
+	 									</div>
+	 								</div>
+	 								<div class="form-group">
+	 									<label for="email" class="col-sm-2 control-label">Email</label>
 
-	 										<div class="col-sm-10">
-	 											<input name="name" type="text" class="form-control" id="name" placeholder="Nama Usaha" value="<?php echo $profil->name ?>">
-	 										</div>
+	 									<div class="col-sm-10">
+	 										<input name="email" type="email" class="form-control" id="email" placeholder="Email" value="<?php echo $profil->email ?>">
 	 									</div>
-	 									<div class="form-group">
-	 										<label for="email" class="col-sm-2 control-label">Email</label>
+	 								</div>
+	 								<div class="form-group">
+	 									<label for="alamat" class="col-sm-2 control-label">Alamat</label>
 
-	 										<div class="col-sm-10">
-	 											<input name="email" type="email" class="form-control" id="email" placeholder="Email" value="<?php echo $profil->email ?>">
-	 										</div>
+	 									<div class="col-sm-10">
+	 										<textarea name="alamat" type="text" class="form-control" id="alamat" placeholder="Alamat"><?php echo $profil->alamat ?></textarea>
 	 									</div>
-	 									<div class="form-group">
-	 										<label for="alamat" class="col-sm-2 control-label">Alamat</label>
+	 								</div>
+	 								<div class="form-group">
+	 									<label for="tentang" class="col-sm-2 control-label">Tentang/Sejarah Usaha</label>
 
-	 										<div class="col-sm-10">
-	 											<textarea name="alamat" type="text" class="form-control" id="alamat" placeholder="Alamat"><?php echo $profil->alamat ?></textarea>
-	 										</div>
+	 									<div class="col-sm-10">
+	 										<textarea name="tentang" class="form-control" id="tentang" placeholder="Tentang/Sejarah Usaha"><?php echo $profil->tentang ?></textarea>
 	 									</div>
-	 									<div class="form-group">
-	 										<label for="tentang" class="col-sm-2 control-label">Tentang/Sejarah Usaha</label>
+	 								</div>
+	 								<div class="form-group">
+	 									<label for="phone" class="col-sm-2 control-label">Telepon</label>
 
-	 										<div class="col-sm-10">
-	 											<textarea name="tentang" class="form-control" id="tentang" placeholder="Tentang/Sejarah Usaha"><?php echo $profil->tentang ?></textarea>
-	 										</div>
+	 									<div class="col-sm-10">
+	 										<input name="phone" type="text" class="form-control" id="phone" placeholder="Telepon" value="<?php echo $profil->phone ?>">
 	 									</div>
-	 									<div class="form-group">
-	 										<label for="phone" class="col-sm-2 control-label">Telepon</label>
+	 								</div>
+	 								<div class="form-group">
+	 									<label class="col-sm-2 control-label" for="resto-image">Gambar Resto</label>
+	 									<div class="col-sm-10">
+	 										<input id="resto-image" name="resto_image" type="file">
+	 										<p class="help-block">Upload gambar/foto restoran.</p>
+	 									</div>
+	 								</div>
+	 								<div class="form-group">
+	 									<div class="col-sm-offset-2 col-sm-10">
+	 										<button type="submit" class="btn btn-danger">Submit</button>
+	 									</div>
+	 								</div>
+	 							<?php
+									} else {
+									?>
+	 								<div class="form-group">
+	 									<label for="name" class="col-sm-2 control-label">Nama Usaha</label>
 
-	 										<div class="col-sm-10">
-	 											<input name="phone" type="text" class="form-control" id="phone" placeholder="Telepon" value="<?php echo $profil->phone ?>">
-	 										</div>
+	 									<div class="col-sm-10">
+	 										<input name="name" type="text" class="form-control" id="name" placeholder="Nama Usaha">
 	 									</div>
-	 									<div class="form-group">
-	 										<div class="col-sm-offset-2 col-sm-10">
-	 											<button type="submit" class="btn btn-danger">Submit</button>
-	 										</div>
-	 									</div>
-	 								<?php
-										} else {
-										?>
-	 									<div class="form-group">
-	 										<label for="name" class="col-sm-2 control-label">Nama Usaha</label>
+	 								</div>
+	 								<div class="form-group">
+	 									<label for="email" class="col-sm-2 control-label">Email</label>
 
-	 										<div class="col-sm-10">
-	 											<input name="name" type="text" class="form-control" id="name" placeholder="Nama Usaha">
-	 										</div>
+	 									<div class="col-sm-10">
+	 										<input name="email" type="email" class="form-control" id="email" placeholder="Email">
 	 									</div>
-	 									<div class="form-group">
-	 										<label for="email" class="col-sm-2 control-label">Email</label>
+	 								</div>
+	 								<div class="form-group">
+	 									<label for="alamat" class="col-sm-2 control-label">Alamat</label>
 
-	 										<div class="col-sm-10">
-	 											<input name="email" type="email" class="form-control" id="email" placeholder="Email">
-	 										</div>
+	 									<div class="col-sm-10">
+	 										<textarea name="alamat" type="text" class="form-control" id="alamat" placeholder="Alamat"></textarea>
 	 									</div>
-	 									<div class="form-group">
-	 										<label for="alamat" class="col-sm-2 control-label">Alamat</label>
+	 								</div>
+	 								<div class="form-group">
+	 									<label for="tentang" class="col-sm-2 control-label">Tentang/Sejarah Usaha</label>
 
-	 										<div class="col-sm-10">
-	 											<textarea name="alamat" type="text" class="form-control" id="alamat" placeholder="Alamat"></textarea>
-	 										</div>
+	 									<div class="col-sm-10">
+	 										<textarea name="tentang" class="form-control" id="tentang" placeholder="Tentang/Sejarah Usaha"></textarea>
 	 									</div>
-	 									<div class="form-group">
-	 										<label for="tentang" class="col-sm-2 control-label">Tentang/Sejarah Usaha</label>
+	 								</div>
+	 								<div class="form-group">
+	 									<label for="phone" class="col-sm-2 control-label">Telepon</label>
 
-	 										<div class="col-sm-10">
-	 											<textarea name="tentang" class="form-control" id="tentang" placeholder="Tentang/Sejarah Usaha"></textarea>
-	 										</div>
+	 									<div class="col-sm-10">
+	 										<input name="phone" type="text" class="form-control" id="phone" placeholder="Telepon">
 	 									</div>
-	 									<div class="form-group">
-	 										<label for="phone" class="col-sm-2 control-label">Telepon</label>
-
-	 										<div class="col-sm-10">
-	 											<input name="phone" type="text" class="form-control" id="phone" placeholder="Telepon">
-	 										</div>
+	 								</div>
+	 								<div class="form-group">
+	 									<label class="col-sm-2 control-label" for="resto-image">Gambar Resto</label>
+	 									<div class="col-sm-10">
+	 										<input id="resto-image" name="resto_image" type="file">
+	 										<p class="help-block">Upload gambar/foto restoran.</p>
 	 									</div>
-	 									<div class="form-group">
-	 										<div class="col-sm-offset-2 col-sm-10">
-	 											<button type="submit" class="btn btn-danger">Submit</button>
-	 										</div>
+	 								</div>
+	 								<div class="form-group">
+	 									<div class="col-sm-offset-2 col-sm-10">
+	 										<button type="submit" class="btn btn-danger">Submit</button>
 	 									</div>
-	 								<?php
-										}
-										?>
+	 								</div>
+	 							<?php
+									}
+									?>
 	 							</form>
 	 						</div>
 	 						<!-- /.tab-pane -->
@@ -171,7 +186,7 @@
 	 				<!-- /.nav-tabs-custom -->
 	 				<div class="box box-primary">
 	 					<div class="box-header with-border">
-	 						<h3 class="box-title">Edit Menu</h3>
+	 						<h3 class="box-title">Edit Map</h3>
 
 	 						<div class="box-tools pull-right">
 	 							<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -181,24 +196,43 @@
 	 					</div>
 	 					<!-- /.box-header -->
 	 					<div class="box-body">
-	 						<!-- BEGIN SECTION MAP -->
-	 						<section class="contact-map">
-	 							<div class="homepage-map">
-	 								<div id="map-container" class="container-fluid">
-	 									<div class="row">
-	 										<div class="col-md-12">
-	 											<div id="map_canvas"></div>
+	 						<form id="place-id-form" method="post">
+	 							<div class="form-group">
+	 								<label for="phone" class="col-sm-2 control-label">Google Maps Plus Code</label>
+	 								<div class="col-sm-10">
+	 									<input name="maps_place_id" type="text" class="form-control" id="phone" placeholder="Place id restoran Anda" required>
+	 								</div>
+	 							</div>
+	 							<div class="form-group">
+	 								<div class="col-sm-offset-2 col-sm-10">
+	 									<button type="submit" class="btn btn-danger">Save</button>
+	 								</div>
+	 							</div>
+	 						</form>
+	 						<?php
+								if (isset($map_js) && !empty($map_js)) {
+								?>
+	 							<!-- BEGIN SECTION MAP -->
+	 							<section class="contact-map">
+	 								<div class="homepage-map">
+	 									<div id="map-container" class="container-fluid">
+	 										<div class="row">
+	 											<div class="col-md-12">
+	 												<div id="map_canvas"></div>
+	 											</div>
 	 										</div>
-	 									</div>
-	 									<div class="row">
-	 										<div class="col-md-12" style="padding: 15px;">
-	 											<button id="save-map" class="btn btn-block btn-primary" disabled>Save</button>
+	 										<div class="row">
+	 											<div class="col-md-12" style="padding: 15px;">
+	 												<button id="save-map" class="btn btn-block btn-primary" disabled>Save</button>
+	 											</div>
 	 										</div>
 	 									</div>
 	 								</div>
-	 							</div>
-	 						</section>
-	 						<!-- END SECTION MAP -->
+	 							</section>
+	 							<!-- END SECTION MAP -->
+	 						<?php
+								}
+								?>
 	 					</div>
 	 					<!-- /.box-body -->
 	 				</div>

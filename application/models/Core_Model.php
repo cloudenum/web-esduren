@@ -46,7 +46,7 @@ class Core_Model extends CI_Model {
 
 	public function upload_gambar($name_attr, $config, $random_name = true) {
 
-		if ($random_name == true) {
+		if ($random_name === true) {
 			$this->load->helper('string');
 			$config['file_name'] = random_string('alnum', 8);
 		}

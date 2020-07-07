@@ -21,8 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `restodb`
 --
-CREATE DATABASE IF NOT EXISTS `restodb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `restodb`;
+-- CREATE DATABASE IF NOT EXISTS `restodb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+-- USE `restodb`;
 
 -- --------------------------------------------------------
 
