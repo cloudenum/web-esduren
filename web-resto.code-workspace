@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"bmewburn.vscode-intelephense-client",
+			"felixfbecker.php-debug",
+			"small.php-ci",
+			"anish-m.ci-snippets2"
+		]
+	}
+}
