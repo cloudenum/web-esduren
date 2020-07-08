@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class SiteConfig {
+class Siteconfig {
 	protected $_CI;
 	private static $_instance = null;
 	protected $_configStore;
