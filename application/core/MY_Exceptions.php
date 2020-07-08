@@ -40,7 +40,7 @@ class MY_Exceptions extends CI_Exceptions {
 		$profil = $this->db_query('SELECT * FROM profil');
 
 		if (!$profil) {
-			$this->show_exception('WEIRD!!!');
+			$this->show_exception(new Exception('WEIRD!!!'));
 			return;
 		}
 
