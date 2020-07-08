@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Jul 2020 pada 12.51
+-- Waktu pembuatan: 08 Jul 2020 pada 11.40
 -- Versi server: 10.3.16-MariaDB
--- Versi PHP: 7.3.7
+-- Versi PHP: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `restodb`
 --
--- CREATE DATABASE IF NOT EXISTS `restodb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
--- USE `restodb`;
 
 -- --------------------------------------------------------
 
@@ -103,8 +101,10 @@ CREATE TABLE `profil` (
   `alamat` text NOT NULL,
   `tentang` text NOT NULL,
   `logo_path` text DEFAULT NULL,
+  `resto_image_path` text DEFAULT NULL,
   `Lat` bigint(20) DEFAULT NULL,
   `Lng` bigint(20) DEFAULT NULL,
+  `maps_place_id` text DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
@@ -120,6 +120,7 @@ CREATE TABLE `promo` (
   `id` char(36) NOT NULL,
   `code` varchar(20) NOT NULL,
   `name` text NOT NULL,
+  `description` text DEFAULT NULL,
   `image_path` text DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
