@@ -30,7 +30,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition login-page" style="background-image: url('<?php echo base_url() ?>bakul/admin/img/beach1.jpg'); ">
+<body class="hold-transition login-page" style="background-image: url('<?php echo base_url() ?>bakul/admin/img/photo4.jpg'); ">
 	<div class="bg-cover">
 		<div class="col-xs-12 col-pusher"></div>
 		<div class="login-box">
