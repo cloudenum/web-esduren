@@ -37,7 +37,14 @@ class MY_Exceptions extends CI_Exceptions {
 			ob_end_flush();
 		}
 
-		$profil = $this->db_query('SELECT * FROM profil')[0];
+		$profil = $this->db_query('SELECT * FROM profil');
+
+		if (!$profil) {
+			$this->show_exception('WEIRD!!!');
+			return;
+		}
+
+		$profil = $profil[0];
 		$open_hours = $this->db_query('SELECT * FROM open_hours');
 		$socmed = $this->db_query('SELECT * FROM socmed');
 		$body_id = array('single-page');
