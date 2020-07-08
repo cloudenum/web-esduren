@@ -18,9 +18,7 @@ if (!function_exists('send_to_owner_email')) {
 
 				$sendgrid = new \SendGrid($settings->sendgrid_api);
 				$response = $sendgrid->send($email);
-				log_message('debug', $response->statusCode());
-				log_message('debug', $response->headers());
-				log_message('debug', $response->body());
+				log_message('debug', 'Sendgrid response code: ' . $response->statusCode());
 
 				return $response;
 			} catch (Exception $e) {
