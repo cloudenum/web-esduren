@@ -2,6 +2,10 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Kontak extends CI_Controller {
+	public function __construct() {
+		parent::__construct();
+		$this->load->helper('email_helper');
+	}
 
 	public function index() {
 		$data['profil'] = $this->db->get('profil')->result()[0];
@@ -23,10 +27,47 @@ class Kontak extends CI_Controller {
 
 	public function send() {
 		$data = (object) [
-			'message' => 'Not Allowed'
+			'message' => 'Not Allowed',
+			'data' => (object) []
 		];
 
-		http_response_code(200);
-		echo json_encode($data);
+		try {
+
+			$senderName = html_escape($this->input->post('name'));
+			$from = html_escape($this->input->post('email'));
+			$message = html_escape($this->input->post('message'));
+			$subject = html_escape($this->input->post('subject'));
+			$res = send_to_owner_email($from, $senderName, $subject, $message);
+			$data->data->senderName = $senderName;
+
+			if (!$res) {
+				throw new Exception("Failed to send email", 1);
+			}
+
+			$data->message = 'Success';
+			$data->data->sendgrid = $res->statusCode();
+			$this->output->set_status_header(200);
+
+			$this->output
+				->set_content_type('application/json')
+				->set_output(json_encode($data));
+		} catch (\Exception $e) {
+			log_message('debug', $e->getMessage());
+
+			$this->output->set_status_header(403);
+
+			$this->output
+				->set_content_type('application/json')
+				->set_output(json_encode($data))
+				->_display();
+		} catch (\Throwable $th) {
+			log_message('error', $th->getMessage());
+
+			$this->output
+				->set_status_header(403)
+				->set_content_type('application/json')
+				->set_output(json_encode($data))
+				->_display();
+		}
 	}
 }

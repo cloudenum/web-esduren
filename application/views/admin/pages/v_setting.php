@@ -103,11 +103,15 @@
 				<?php echo form_open('', array('id' => 'advanced-form', 'class' => 'needs-validation', 'novalidate' => '')); ?>
 				<div class="form-group ">
 					<label>GTAG ID</label>
-					<input class="form-control " name="gtag" placeholder="Kode menu" type="text">
+					<input class="form-control " name="gtag" placeholder="ID Google Analytics" type="text">
 				</div>
 				<div class="form-group ">
 					<label>Google Maps API Key</label>
-					<input class="form-control " name="gmap" placeholder="Kode menu" type="text">
+					<input class="form-control " name="gmap" placeholder="Google Maps API Key" type="text">
+				</div>
+				<div class="form-group ">
+					<label>Sendgrid API Key</label>
+					<input class="form-control" name="sendgrid" placeholder="Sendgrid API Key" type="text">
 				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
 				</form>

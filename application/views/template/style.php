@@ -30,7 +30,7 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>bakul/css/main.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>bakul/css/mediaquery.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>bakul/css/custom.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>bakul/css/css-theme/theme-green.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>bakul/css/theme-green.css">
 	<!-- Font icon -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-line-icons@2.4.0/css/simple-line-icons.css">

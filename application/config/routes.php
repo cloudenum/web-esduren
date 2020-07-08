@@ -49,7 +49,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+$error_404 = 'errors/error404';
 $route['default_controller'] = 'Home';
-$route['404_override'] = 'errors/error404';
+$route['404_override'] = $error_404;
 $route['translate_uri_dashes'] = FALSE;
 $route['kontak']['POST'] = 'kontak/send';
+
+$route['bakul/admin/js/(:any)'] = 'resources/js/$1/admin';
+$route['bakul/admin/css/(:any)'] = 'resources/css/$1/admin';
+$route['bakul/admin/img/(:any)'] = 'resources/img/$1/admin';
+$route['bakul/js/helper.js'] = 'resources/helper_js';
+$route['bakul/js/(:any)'] = 'resources/js/$1';
+$route['bakul/css/(:any)'] = 'resources/css/$1';
+$route['bakul/img/(:any)'] = 'resources/img/$1';
+
+$route['resources/(:any)'] = $error_404;
+$route['resources/js/(:any)'] = $error_404;
+$route['resources/css/(:any)'] = $error_404;
+$route['resources/img/(:any)'] = $error_404;
+$route['resources/helper_js/(:any)'] = $error_404;

@@ -6,7 +6,7 @@ class Admin extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper(array('form', 'security', 'json_helper'));
-		$this->load->library('user_agent');
+		$this->load->library(array('user_agent', 'passwordhash'));
 	}
 
 	public function index() {
@@ -43,39 +43,44 @@ class Admin extends CI_Controller {
 
 	public function aksiLogin() {
 		$username = html_escape($this->input->post('username'));
-		$password = md5(html_escape($this->input->post('password')));
-		$where = array(
-			'username' => $username,
-			'password' => $password,
-		);
-		$cek = $this->db->query('SELECT u.id, u.nama, u.level FROM user u WHERE (u.username = \'' . $username . '\' AND u.password = \'' . $password . '\' ) OR ( email = \'' . $username . '\' AND u.password = \'' . $password . '\' )');
-		if (!$cek) {
-			redirect(base_url('admin/index/error'));
-		} else {
+		$password = html_escape($this->input->post('password'));
+
+		$this->db->select('u.id, u.nama, u.level, u.password');
+		$this->db->from('user u');
+		$this->db->where('u.username', $username);
+		$this->db->or_where('u.email', $username);
+		$this->db->limit(1);
+		$cek = $this->db->get();
+
+		if ($cek) {
 			if ($cek->num_rows() > 0) {
+				if ($this->passwordhash->verify($password, $cek->row()->password)) {
+					$fullname = $cek->row()->nama;
+					$data_session = array(
+						'id' => $cek->row()->id,
+						'nama' => $fullname,
+						'status' => "online",
+						'level' => $cek->row()->level
+					);
 
+					$this->session->set_userdata($data_session);
 
-				$fullname = $cek->row()->nama;
-				$data_session = array(
-					'id' => $cek->row()->id,
-					'nama' => $fullname,
-					'status' => "online",
-					'level' => $cek->row()->level
-				);
-
-				$this->session->set_userdata($data_session);
-
-				redirect(base_url("admin/dashboard"));
-			} else {
-
-				$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+					return redirect(base_url("admin/dashboard"));
+				} else {
+					$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times"></i></a>
 				<strong>gagal!</strong> Username atau password salah
 				</div>');
-
-				$this->agent->redirect_back();
+				}
+			} else {
+				$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times"></i></a>
+		<strong>gagal!</strong> Username atau password salah
+		</div>');
 			}
 		}
+
+		$this->agent->redirect_back();
 	}
 
 	public function logout() {
@@ -154,10 +159,11 @@ class Admin extends CI_Controller {
 	public function profil() {
 		$this->check_online();
 
+		$this->db->limit(1);
 		$query = $this->db->get('profil');
 		$data['profil_count'] = $query->num_rows();
 		if ($query->num_rows() > 0) {
-			$data['profil'] = $query->result()[0];
+			$data['profil'] = $query->row();
 		} else {
 			$data['profil'] = (object) [
 				'logo_path' => '',
@@ -190,7 +196,7 @@ class Admin extends CI_Controller {
 		$data['js_to_load'] = array('admin/js/medsos-page.js');
 		$data['css_to_load'] = '';
 		$query = $this->db->get('profil');
-		$data['profil'] = $query->result()[0];
+		$data['profil'] = $query->row();
 
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_medsos');

@@ -2,6 +2,13 @@ $(function () {
 	const advancedForm = $("#advanced-form");
 	const gtag = advancedForm.find('[name="gtag"]');
 	const gmap = advancedForm.find('[name="gmap"]');
+	const sendgrid = advancedForm.find('[name="sendgrid"]');
+	const alertSuccess = $("#advanced-success-alert").clone(true);
+	const alertFailed = $("#advanced-failed-alert").clone(true);
+	alertSuccess.removeClass("hidden");
+	alertFailed.removeClass("hidden");
+	$("#advanced-success-alert").remove();
+	$("#advanced-failed-alert").remove();
 
 	fetch(baseURL("crud/get_site_settings"), {
 		mode: "same-origin",
@@ -13,12 +20,11 @@ $(function () {
 		.then((json) => {
 			gtag.val(json.data.gtag);
 			gmap.val(json.data.gmap);
+			sendgrid.val(json.data.sendgrid_api);
 		})
 		.catch((er) => {
-			let alert = $("#advanced-failed-alert");
-			alert.removeClass("hidden");
-			alert.addClass("show");
-			alert.children("p").text(er.message);
+			alertFailed.children("p").text(er.message);
+			alertFailed.prependTo(advancedForm.parent());
 		});
 
 	advancedForm.submit((ev) => {
@@ -44,17 +50,13 @@ $(function () {
 			})
 			.then((json) => {
 				console.log(json);
-				let alert = $("#advanced-success-alert");
-				alert.removeClass("hidden");
-				alert.addClass("show");
+				alertSuccess.prependTo(advancedForm.parent());
 				btn.prop("disabled", false);
 				btn.text("Submit");
 			})
 			.catch((er) => {
-				let alert = $("#advanced-failed-alert");
-				alert.removeClass("hidden");
-				alert.addClass("show");
-				alert.children("p").text(er.message);
+				alertFailed.children("p").text(er.message);
+				alertFailed.prependTo(advancedForm.parent());
 				btn.prop("disabled", false);
 				btn.text("Submit");
 			});

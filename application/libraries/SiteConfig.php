@@ -33,6 +33,7 @@ class SiteConfig {
 		$data = (object) [
 			"gtag" => "",
 			"gmap" => "",
+			"sendgrid_api" => "",
 			"pages" => (object) [
 				"home" => (object) [
 					"slides" => [],

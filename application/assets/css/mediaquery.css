@@ -272,7 +272,6 @@ NOTE: This is stylesheet of mediaquery.
 	header .nav > li {
 		display: inline-block;
 		float: none;
-		float: unset;
 	}
 
 	header .nav-header .navbar {

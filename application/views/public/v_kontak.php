@@ -39,7 +39,7 @@
 					<div class="contact-wrapper-right">
 						<form class="contact-form">
 							<div class="form-group">
-								<input class="form-control" required id="name" placeholder="Name" type="text"></div>
+								<input class="form-control" required id="name" name="name" placeholder="Name" type="text"></div>
 							<div class="form-group">
 								<input class="form-control" id="email" placeholder="Email" name="email" required type="email"></div>
 							<div class="form-group">

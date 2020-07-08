@@ -6,8 +6,8 @@ class Crud extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('Core_Model');
-		$this->load->helper(['file', 'json_helper']);
-		$this->load->library('user_agent');
+		$this->load->helper(['file', 'json_helper', 'email_helper']);
+		$this->load->library(array('user_agent', 'passwordhash'));
 	}
 
 	public function insert_menu() {
@@ -490,6 +490,7 @@ class Crud extends CI_Controller {
 		$data = array(
 			'gtag' => html_escape($this->input->post('gtag')),
 			'gmap' => html_escape($this->input->post('gmap')),
+			'sendgrid_api' => html_escape($this->input->post('sendgrid')),
 		);
 
 		$resData = (object) [
@@ -642,13 +643,19 @@ class Crud extends CI_Controller {
 		$numRows = $this->Core_Model->countAllRows('user');
 		$data = array(
 			'username' => html_escape($this->input->post('username')),
-			'password' => md5(html_escape($this->input->post('password'))),
+			'password' => $this->passwordhash->hash(html_escape($this->input->post('password'))),
 			'nama' => html_escape($this->input->post('nama')),
 			'email' => html_escape($this->input->post('email')),
 			'level' => $numRows === 0 ? 1 : 0
 		);
 
-		$cek = $this->db->query('SELECT id FROM user WHERE username =\'' . $data['username'] . '\' OR email = \'' . $data['email'] . '\'');
+		$this->db->select('id');
+		$this->db->from('user');
+		$this->db->where('username', $data['username']);
+		$this->db->or_where('email', $data['email']);
+		$this->db->limit(1);
+		$cek = $this->db->get();
+
 		if ($cek->num_rows() > 0) {
 			$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
             <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
@@ -676,7 +683,13 @@ class Crud extends CI_Controller {
 			'nama' => html_escape($this->input->post('nama')),
 			'email' => html_escape($this->input->post('email')),
 		);
-		$cek = $this->db->query('SELECT id FROM user WHERE email = \'' . $data['email'] . '\'');
+
+		$this->db->select('id');
+		$this->db->from('user');
+		$this->db->where('email', $data['email']);
+		$this->db->limit(1);
+		$cek = $this->db->get();
+
 		if ($cek->num_rows() > 0) {
 			$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
             <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
@@ -702,26 +715,39 @@ class Crud extends CI_Controller {
 	public function edit_username() {
 		$level = $this->session->level;
 		if ($level != NULL) {
-			$cek = $this->db->query('SELECT id FROM user WHERE username = \'' . html_escape($this->input->post('username')) . '\'');
-			if ($cek->num_rows() == 0) {
-				$old_username = $this->db->query('SELECT username FROM user WHERE id=' . html_escape($this->session->id))->row()->username;
-				$new_username = html_escape($this->input->post('username'));
-				if ($new_username != $old_username) {
-					if ($this->Core_Model->update('user', array('username' => $new_username), array('id' => html_escape($this->session->id)))) {
-						$this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
+			$new_username = html_escape($this->input->post('username'));
+
+			$this->db->select('id');
+			$this->db->from('user');
+			$this->db->where('username', $new_username);
+			$this->db->limit(1);
+			$cek = $this->db->get();
+
+			if ($cek->num_rows() === 0) {
+				$this->db->select('username');
+				$this->db->from('user');
+				$this->db->where('id', html_escape($this->session->id));
+				$this->db->limit(1);
+				$old_username = $this->db->get();
+				if ($old_username) {
+					$old_username = $old_username->row()->username;
+					if ($new_username !== $old_username) {
+						if ($this->Core_Model->update('user', array('username' => $new_username), array('id' => html_escape($this->session->id)))) {
+							$this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
                         <strong>Success!</strong> Username telah diganti dari ' . $old_username . ' ke ' . $new_username . '</div>');
-					} else {
-						$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+						} else {
+							$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
                         <strong>Gagal!</strong> Terjadi masalah
                         </div>');
-					}
-				} else {
-					$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+						}
+					} else {
+						$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
                     <strong>Gagal!</strong> Username sama dengan sebelumnya.
                     </div>');
+					}
 				}
 			} else {
 				$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
@@ -730,32 +756,48 @@ class Crud extends CI_Controller {
                 </div>');
 			}
 		}
+
 		$this->agent->redirect_back();
 	}
 
 	public function edit_password() {
 		$level = $this->session->level;
 		if ($level != NULL) {
-			$cek = $this->db->query('SELECT password FROM user WHERE id = \'' . html_escape($this->session->id) . '\'');
-			if ($cek->row()->password == md5(html_escape($this->input->post('old_password')))) {
-				$new_password = md5(html_escape($this->input->post('new_password')));
-				if ($this->Core_Model->update('user', array('password' => $new_password), array('id' => html_escape($this->session->id)))) {
-					$this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
+			$this->db->select('password');
+			$this->db->from('user');
+			$this->db->where('id', html_escape($this->session->id));
+			$this->db->limit(1);
+			$cek = $this->db->get();
+
+			if ($cek) {
+				if ($cek->num_rows() > 0) {
+					$old_password = html_escape($this->input->post('old_password'));
+					$new_password = html_escape($this->input->post('new_password'));
+					if ($this->passwordhash->verify($old_password, $cek->row()->password)) {
+						$new_password = $this->passwordhash->hash($new_password);
+
+						if ($this->Core_Model->update('user', array('password' => $new_password), array('id' => html_escape($this->session->id)))) {
+							$this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
                     <strong>Success!</strong> Password telah diganti </div>');
-				} else {
-					$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+						} else {
+							$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
                     <strong>Gagal!</strong> Terjadi masalah
                     </div>');
-				}
-			} else {
-				$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
+						}
+					} else {
+						$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times" ></i></a>
                 <strong>Gagal!</strong> Password lama salah
                 </div>');
+					}
+				}
+			} else {
+				log_message('debug', 'somehow the driver failed to get the user data');
 			}
 		}
+
 		$this->agent->redirect_back();
 	}
 
