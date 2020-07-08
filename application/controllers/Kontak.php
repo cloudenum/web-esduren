@@ -19,7 +19,7 @@ class Kontak extends CI_Controller {
 		$data['socmed'] = $this->db->get('socmed')->result();
 		$data['body_id'] = array('single-page');
 		$data['js_to_load'] = array('https://unpkg.com/sweetalert/dist/sweetalert.min.js', 'contact.js');
-		$gmap_key = $this->siteconfig->getSettings()->gmap;
+		$gmap_key = $this->site_config->getSettings()->gmap;
 		if ($gmap_key) {
 			$data['gmap_key'] = $gmap_key;
 		}
