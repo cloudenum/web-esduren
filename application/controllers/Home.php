@@ -10,12 +10,13 @@ class Home extends CI_Controller {
 	public function index() {
 		$profile = $this->db->get('profil');
 		if ($this->Core_Model->countAllRows('user') < 1 || $profile->num_rows() < 1) {
-			return redirect(base_url('admin/register'), 'location');
+			return redirect(base_url('admin'), 'location');
 		}
 
+
+		$data['profil'] = $profile->result()[0];
 		$data['open_hours'] = $this->db->get('open_hours')->result();
 		$data['socmed'] = $this->db->get('socmed')->result();
-		$data['profil'] = $profile->result()[0];
 		$data['body_id'] = array('home-page');
 		$data['js_to_load'] = array('rating.js', 'home.js');
 		$data['promo'] = $this->db->get('promo')->result();

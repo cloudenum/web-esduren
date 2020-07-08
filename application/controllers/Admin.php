@@ -6,7 +6,7 @@ class Admin extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper(array('form', 'security', 'json_helper'));
-		$this->load->library(array('user_agent', 'passwordhash'));
+		$this->load->library(array('user_agent', 'password_hash'));
 	}
 
 	public function index() {
@@ -34,8 +34,13 @@ class Admin extends CI_Controller {
 		$data['profil'] = $query->result();
 		if (!$data['profil']) {
 			$data['profil'] = (object) [
-				'name' => 'WEB-RESTO'
+				'name' => 'WEB-RESTO',
+				'email' => '',
+				'tentang' => '',
+				'phone' => '',
 			];
+		} else {
+			$data['profil'] = $data['profil'][0];
 		}
 
 		$this->load->view('admin/v_login', $data);
@@ -46,8 +51,13 @@ class Admin extends CI_Controller {
 		$data['profil'] = $query->result();
 		if (!$data['profil']) {
 			$data['profil'] = (object) [
-				'name' => 'WEB-RESTO'
+				'name' => 'WEB-RESTO',
+				'email' => '',
+				'tentang' => '',
+				'phone' => '',
 			];
+		} else {
+			$data['profil'] = $data['profil'][0];
 		}
 
 		$this->load->view('admin/v_register', $data);
@@ -66,7 +76,7 @@ class Admin extends CI_Controller {
 
 		if ($cek) {
 			if ($cek->num_rows() > 0) {
-				if ($this->passwordhash->verify($password, $cek->row()->password)) {
+				if ($this->password_hash->verify($password, $cek->row()->password)) {
 					$fullname = $cek->row()->nama;
 					$data_session = array(
 						'id' => $cek->row()->id,
@@ -76,8 +86,12 @@ class Admin extends CI_Controller {
 					);
 
 					$this->session->set_userdata($data_session);
-
-					return redirect(base_url("admin/dashboard"));
+					$profile = $this->db->get('profil');
+					if ($profile->num_rows() > 0) {
+						return redirect("admin/dashboard");
+					} else {
+						return redirect('admin/profil');
+					}
 				} else {
 					$this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissable" role="alert">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times"></i></a>
@@ -111,7 +125,16 @@ class Admin extends CI_Controller {
 			'gallery' => $this->db->get('gallery')->num_rows(),
 		);
 		$query = $this->db->get('profil');
-		$data['profil'] = $query->result()[0];
+		if ($query->num_rows() > 0) {
+			$data['profil'] = $query->result()[0];
+		} else {
+			$data['profil'] = (object) [
+				'name' => 'WEB-RESTO',
+				'email' => '',
+				'tentang' => '',
+				'phone' => '',
+			];
+		}
 
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/v_dashboard', $data);
@@ -124,7 +147,16 @@ class Admin extends CI_Controller {
 		$data['js_to_load'] = array('admin/js/testimoni-page.js');
 		$data['css_to_load'] = '';
 		$query = $this->db->get('profil');
-		$data['profil'] = $query->result()[0];
+		if ($query->num_rows() > 0) {
+			$data['profil'] = $query->result()[0];
+		} else {
+			$data['profil'] = (object) [
+				'name' => 'WEB-RESTO',
+				'email' => '',
+				'tentang' => '',
+				'phone' => '',
+			];
+		}
 
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_testimoni');
@@ -136,8 +168,17 @@ class Admin extends CI_Controller {
 
 		$data['js_to_load'] = array('admin/js/menu-page.js');
 		$data['css_to_load'] = '';
-		$profil = $this->db->get('profil');
-		$data['profil'] = $profil->result()[0];
+		$query = $this->db->get('profil');
+		if ($query->num_rows() > 0) {
+			$data['profil'] = $query->result()[0];
+		} else {
+			$data['profil'] = (object) [
+				'name' => 'WEB-RESTO',
+				'email' => '',
+				'tentang' => '',
+				'phone' => '',
+			];
+		}
 
 		$this->db->select('m.*, mc.category');
 		$this->db->from('menu m');
@@ -159,7 +200,16 @@ class Admin extends CI_Controller {
 		$data['js_to_load'] = array('admin/js/kategori-page.js');
 		$data['css_to_load'] = '';
 		$query = $this->db->get('profil');
-		$data['profil'] = $query->result()[0];
+		if ($query->num_rows() > 0) {
+			$data['profil'] = $query->result()[0];
+		} else {
+			$data['profil'] = (object) [
+				'name' => 'WEB-RESTO',
+				'email' => '',
+				'tentang' => '',
+				'phone' => '',
+			];
+		}
 
 		$main['category'] = $this->db->get('menu_category')->result();
 
@@ -179,7 +229,7 @@ class Admin extends CI_Controller {
 		} else {
 			$data['profil'] = (object) [
 				'logo_path' => '',
-				'name' => '',
+				'name' => 'WEB-RESTO',
 				'email' => '',
 				'phone' => '',
 				'alamat' => '',
@@ -191,7 +241,7 @@ class Admin extends CI_Controller {
 		}
 		$data['js_to_load'] = array('admin/js/profil-page.js', 'admin/js/map-profile.js');
 		$data['css_to_load'] = array('admin/css/map.css');
-		$gmap_key = $this->siteconfig->getSettings()->gmap;
+		$gmap_key = $this->site_config->getSettings()->gmap;
 		if ($gmap_key) {
 			$data['gmap_key'] = $gmap_key;
 			$data['map_js'] = 'https://maps.googleapis.com/maps/api/js?key=' . $gmap_key . '&callback=initMap&libraries=places&v=weekly';
@@ -208,7 +258,16 @@ class Admin extends CI_Controller {
 		$data['js_to_load'] = array('admin/js/medsos-page.js');
 		$data['css_to_load'] = '';
 		$query = $this->db->get('profil');
-		$data['profil'] = $query->row();
+		if ($query->num_rows() > 0) {
+			$data['profil'] = $query->result()[0];
+		} else {
+			$data['profil'] = (object) [
+				'name' => 'WEB-RESTO',
+				'email' => '',
+				'tentang' => '',
+				'phone' => '',
+			];
+		}
 
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_medsos');
@@ -227,7 +286,16 @@ class Admin extends CI_Controller {
 			'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/basic.min.css'
 		);
 		$query = $this->db->get('profil');
-		$data['profil'] = $query->result()[0];
+		if ($query->num_rows() > 0) {
+			$data['profil'] = $query->result()[0];
+		} else {
+			$data['profil'] = (object) [
+				'name' => 'WEB-RESTO',
+				'email' => '',
+				'tentang' => '',
+				'phone' => '',
+			];
+		}
 
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_tambah_gambar');
@@ -241,7 +309,16 @@ class Admin extends CI_Controller {
 			'admin/js/settings-page.js'
 		);
 		$query = $this->db->get('profil');
-		$data['profil'] = $query->result()[0];
+		if ($query->num_rows() > 0) {
+			$data['profil'] = $query->result()[0];
+		} else {
+			$data['profil'] = (object) [
+				'name' => 'WEB-RESTO',
+				'email' => '',
+				'tentang' => '',
+				'phone' => '',
+			];
+		}
 		$main['settings'] = (object) [
 			"gtag" => "",
 			"gmap" => "",
@@ -262,7 +339,7 @@ class Admin extends CI_Controller {
 			]
 		];
 
-		$settings =  $this->siteconfig->getSettings();
+		$settings =  $this->site_config->getSettings();
 		$main['settings'] = $settings ? $settings : $main['settings'];
 
 		$this->load->view('admin/template/v_admin_header', $data);
@@ -276,7 +353,16 @@ class Admin extends CI_Controller {
 		$data['js_to_load'] = array('admin/js/jambuka-page.js');
 		$data['css_to_load'] = '';
 		$query = $this->db->get('profil');
-		$data['profil'] = $query->result()[0];
+		if ($query->num_rows() > 0) {
+			$data['profil'] = $query->result()[0];
+		} else {
+			$data['profil'] = (object) [
+				'name' => 'WEB-RESTO',
+				'email' => '',
+				'tentang' => '',
+				'phone' => '',
+			];
+		}
 
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_jambuka');
@@ -288,7 +374,17 @@ class Admin extends CI_Controller {
 
 		$data['js_to_load'] = array('admin/js/promo-page.js');
 		$data['css_to_load'] = '';
-		$data['profil'] = $this->db->get('profil')->result()[0];
+		$query = $this->db->get('profil');
+		if ($query->num_rows() > 0) {
+			$data['profil'] = $query->result()[0];
+		} else {
+			$data['profil'] = (object) [
+				'name' => 'WEB-RESTO',
+				'email' => '',
+				'tentang' => '',
+				'phone' => '',
+			];
+		}
 		$data['promo'] = $this->db->get('promo')->result();
 
 		$this->load->view('admin/template/v_admin_header', $data);
@@ -302,7 +398,16 @@ class Admin extends CI_Controller {
 		$data['js_to_load'] = array('admin/js/promo-page.js');
 		$data['css_to_load'] = '';
 		$query = $this->db->get('profil');
-		$data['profil'] = $query->result()[0];
+		if ($query->num_rows() > 0) {
+			$data['profil'] = $query->result()[0];
+		} else {
+			$data['profil'] = (object) [
+				'name' => 'WEB-RESTO',
+				'email' => '',
+				'tentang' => '',
+				'phone' => '',
+			];
+		}
 
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_tambah_promo');
@@ -317,22 +422,23 @@ class Admin extends CI_Controller {
 
 		if ($this->session->level == 1) {
 			$query = $this->db->get('profil');
-			$data['profil'] = $query->result()[0];
+			if ($query->num_rows() > 0) {
+				$data['profil'] = $query->result()[0];
+			} else {
+				$data['profil'] = (object) [
+					'name' => 'WEB-RESTO',
+					'email' => '',
+					'tentang' => '',
+					'phone' => '',
+				];
+			}
 
 			$this->load->view('admin/template/v_admin_header', $data);
 			$this->load->view('admin/pages/v_akun');
 			$this->load->view('admin/template/v_admin_footer', $data);
 
 			if ($this->session->userdata('status') != "online") {
-				$query = $this->db->get('profil');
-				$data['profil'] = $query->result();
-				$data['body_id'] = array('single-page');
-				$data['js_to_load'] = array('');
-				$this->load->view('template/style', $data);
-				$this->load->view('template/header', $data);
-				$this->load->view('errors/html/error_404');
-				$this->load->view('template/footer', $data);
-				$this->load->view('template/script', $data);
+				show_404();
 			}
 		} else {
 			echo 'Maaf anda tidak memilik hak akses';
@@ -346,22 +452,23 @@ class Admin extends CI_Controller {
 			$data['js_to_load'] = array('admin/js/akun-page.js');
 			$data['css_to_load'] = '';
 			$query = $this->db->get('profil');
-			$data['profil'] = $query->result()[0];
+			if ($query->num_rows() > 0) {
+				$data['profil'] = $query->result()[0];
+			} else {
+				$data['profil'] = (object) [
+					'name' => 'WEB-RESTO',
+					'email' => '',
+					'tentang' => '',
+					'phone' => '',
+				];
+			}
 
 			$this->load->view('admin/template/v_admin_header', $data);
 			$this->load->view('admin/pages/v_tambah_akun');
 			$this->load->view('admin/template/v_admin_footer', $data);
 
-			if ($this->session->userdata('status') != "online") {
-				$query = $this->db->get('profil');
-				$data['profil'] = $query->result();
-				$data['body_id'] = array('single-page');
-				$data['js_to_load'] = array('');
-				$this->load->view('template/style', $data);
-				$this->load->view('template/header', $data);
-				$this->load->view('errors/html/error_404');
-				$this->load->view('template/footer', $data);
-				$this->load->view('template/script', $data);
+			if ($this->session->userdata('status') !== "online") {
+				show_404();
 			}
 		} else {
 			echo 'Maaf anda tidak memilik hak akses';
@@ -374,7 +481,16 @@ class Admin extends CI_Controller {
 		$data['js_to_load'] = array('admin/js/akun-page.js');
 		$data['css_to_load'] = '';
 		$query = $this->db->get('profil');
-		$data['profil'] = $query->result()[0];
+		if ($query->num_rows() > 0) {
+			$data['profil'] = $query->result()[0];
+		} else {
+			$data['profil'] = (object) [
+				'name' => 'WEB-RESTO',
+				'email' => '',
+				'tentang' => '',
+				'phone' => '',
+			];
+		}
 
 		$this->load->view('admin/template/v_admin_header', $data);
 		$this->load->view('admin/pages/v_edit_akun');

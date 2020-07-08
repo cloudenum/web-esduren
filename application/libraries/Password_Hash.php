@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Passwordhash {
+class Password_Hash {
 	private CI_Controller $_CI;
 	private CI_Encryption $_encryption;
 

@@ -7,7 +7,7 @@ class Crud extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Core_Model');
 		$this->load->helper(['file', 'json_helper', 'email_helper']);
-		$this->load->library(array('user_agent', 'passwordhash'));
+		$this->load->library(array('user_agent', 'password_hash'));
 	}
 
 	public function insert_menu() {
@@ -384,7 +384,7 @@ class Crud extends CI_Controller {
 				$this->load->library('image_lib', $config);
 				$this->image_lib->crop();
 
-				$this->siteconfig->changeSlideImage(
+				$this->site_config->changeSlideImage(
 					base_url('uploads/') . $this->upload->data('file_name')
 				);
 				$success = true;
@@ -407,7 +407,7 @@ class Crud extends CI_Controller {
 				$this->load->library('image_lib', $config);
 				$this->image_lib->crop();
 
-				$this->siteconfig->changeSlideImage(
+				$this->site_config->changeSlideImage(
 					base_url('uploads/') . $this->upload->data('file_name'),
 					1
 				);
@@ -458,7 +458,7 @@ class Crud extends CI_Controller {
 				$this->load->library('image_lib', $config);
 				$this->image_lib->crop();
 
-				$this->siteconfig->setBackgroundTestimoni(base_url('uploads/' . $this->upload->data('file_name')));
+				$this->site_config->setBackgroundTestimoni(base_url('uploads/' . $this->upload->data('file_name')));
 				$success = true;
 			} else {
 				$errors = $this->upload->display_errors();
@@ -497,7 +497,7 @@ class Crud extends CI_Controller {
 			'message' => 'Failed'
 		];
 
-		if ($this->siteconfig->updateSettings($data)) {
+		if ($this->site_config->updateSettings($data)) {
 			$resData->message = 'Settings updated';
 			http_response_code(200);
 		} else {
@@ -512,7 +512,7 @@ class Crud extends CI_Controller {
 			'message' => 'Failed'
 		];
 
-		if ($resData->data = $this->siteconfig->getSettings()) {
+		if ($resData->data = $this->site_config->getSettings()) {
 			$resData->message = 'Success';
 			http_response_code(200);
 		} else {
@@ -643,7 +643,7 @@ class Crud extends CI_Controller {
 		$numRows = $this->Core_Model->countAllRows('user');
 		$data = array(
 			'username' => html_escape($this->input->post('username')),
-			'password' => $this->passwordhash->hash(html_escape($this->input->post('password'))),
+			'password' => $this->password_hash->hash(html_escape($this->input->post('password'))),
 			'nama' => html_escape($this->input->post('nama')),
 			'email' => html_escape($this->input->post('email')),
 			'level' => $numRows === 0 ? 1 : 0
@@ -773,8 +773,8 @@ class Crud extends CI_Controller {
 				if ($cek->num_rows() > 0) {
 					$old_password = html_escape($this->input->post('old_password'));
 					$new_password = html_escape($this->input->post('new_password'));
-					if ($this->passwordhash->verify($old_password, $cek->row()->password)) {
-						$new_password = $this->passwordhash->hash($new_password);
+					if ($this->password_hash->verify($old_password, $cek->row()->password)) {
+						$new_password = $this->password_hash->hash($new_password);
 
 						if ($this->Core_Model->update('user', array('password' => $new_password), array('id' => html_escape($this->session->id)))) {
 							$this->session->set_flashdata('alert', '<div class="alert alert-success alert-dismissable" role="alert">
@@ -802,15 +802,29 @@ class Crud extends CI_Controller {
 	}
 
 	public function get_location($type = 'latlng') {
+		$data = [];
 		if (strtolower($type) === 'placeid') {
 			$this->db->select('maps_place_id');
 			$this->db->where('id', 1);
-			$data = $this->db->get('profil')->result()[0];
+			$data = $this->db->get('profil');
+			if ($data->num_rows() > 0) {
+				$data = $data->result()[0];
+			} else {
+				http_response_code(403);
+			}
 		} else {
-			$data = $this->db->query('SELECT Lat, Lng FROM profil WHERE id = 1')->result_array();
+			$this->db->select('Lat, Lng');
+			$this->db->from('profil');
+			$this->db->where('id', 1);
+			$data = $this->db->get();
+			if ($data->num_rows() > 0) {
+				$data = $data->result_array();
+				http_response_code(200);
+			} else {
+				http_response_code(403);
+			}
 		}
 
-		http_response_code(200);
 		echo json_encode($data);
 	}
 

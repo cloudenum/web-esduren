@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Siteconfig {
+class Site_Config {
 	protected $_CI;
 	private static $_instance = null;
 	protected $_configStore;
@@ -56,7 +56,7 @@ class Siteconfig {
 
 	public static function getInstance() {
 		if (self::$_instance === null) {
-			self::$_instance = new SiteConfig();
+			self::$_instance = new Site_Config();
 		}
 
 		return self::$_instance;
