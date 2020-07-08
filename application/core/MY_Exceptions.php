@@ -39,9 +39,18 @@ class MY_Exceptions extends CI_Exceptions {
 
 		$profil = $this->db_query('SELECT * FROM profil');
 
-		if (!$profil) {
-			$this->show_exception(new Exception('WEIRD!!!'));
-			return;
+		if (count($profil) === 0) {
+			$profil = array((object) [
+				'logo_path' => '',
+				'name' => 'WEB-RESTO',
+				'email' => '',
+				'phone' => '',
+				'alamat' => '',
+				'tentang' => '',
+				'Lat' => '',
+				'Lng' => '',
+				'resto_image_path' => ''
+			]);
 		}
 
 		$profil = $profil[0];
