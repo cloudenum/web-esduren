@@ -25,7 +25,7 @@ class Home extends CI_Controller {
 		$this->db->from('menu m');
 		$this->db->join('menu_category mc', 'm.menu_category_id = mc.id');
 		$data['menu'] = $this->db->get()->result();
-		$data['home_settings'] = $this->siteconfig->getSettings()->pages->home;
+		$data['home_settings'] = $this->site_config->getSettings()->pages->home;
 
 		$this->load->view('template/style', $data);
 		$this->load->view('template/header', $data);
