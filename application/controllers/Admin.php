@@ -31,7 +31,13 @@ class Admin extends CI_Controller {
 	public function login() {
 		$this->session->sess_destroy();
 		$query = $this->db->get('profil');
-		$data['profil'] = $query->result()[0];
+		$data['profil'] = $query->result();
+		if (!$data['profil']) {
+			$data['profil'] = (object) [
+				'name' => 'WEB-RESTO'
+			];
+		}
+
 		$this->load->view('admin/v_login', $data);
 	}
 
