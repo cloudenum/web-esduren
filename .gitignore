@@ -26,6 +26,7 @@ site-settings.json
 /nbproject/
 .idea/*
 /.vscode/*
+*.code-workspace
 
 ## Sublime Text cache files
 *.tmlanguage.cache
