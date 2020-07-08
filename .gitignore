@@ -33,4 +33,3 @@ site-settings.json
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
-.code-workspace
