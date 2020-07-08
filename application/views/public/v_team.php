@@ -38,7 +38,7 @@
 		<div class="row">
 			<div class="col-md-12 team">
 				<p><strong>Stendy Ricksen</strong></p>
-				<p>18.11.6969</p>
+				<p>18.11.1918</p>
 			</div>
 		</div>
 	</div>

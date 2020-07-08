@@ -19,6 +19,8 @@ bakul/vendor/*
 
 uploads/*
 
+site-settings.json
+
 # IDE Files
 #-------------------------
 /nbproject/
@@ -31,4 +33,4 @@ uploads/*
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
-*.code-workspace
+.code-workspace

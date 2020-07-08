@@ -1,1 +1,26 @@
-{"gtag":"","gmap":"AIzaSyAvpvma_uDMg4BkL58oOXGSUiyOpLTdev8","pages":{"home":{"slides":[{"image_path":"http:\/\/localhost\/web-resto\/uploads\/slide16.jpg"},{"image_path":"http:\/\/localhost\/web-resto\/uploads\/slide14.jpg"}],"backgroundTestimoni":"http:\/\/localhost\/web-resto\/uploads\/slide15.jpg"},"menu":{"headerImage":""},"gallery":{"headerImage":""},"contact":{"headerImage":""}}}
+{
+    "gtag": "",
+    "gmap": "AIzaSyATFkQFUyuHwfGZ1Zl6S0NUiaXpIn2cDyk",
+    "pages": {
+        "home": {
+            "slides": [
+                {
+                    "image_path": ""
+                },
+                {
+                    "image_path": ""
+                }
+            ],
+            "backgroundTestimoni": ""
+        },
+        "menu": {
+            "headerImage": ""
+        },
+        "gallery": {
+            "headerImage": ""
+        },
+        "contact": {
+            "headerImage": ""
+        }
+    }
+}

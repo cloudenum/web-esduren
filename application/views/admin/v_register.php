@@ -34,11 +34,11 @@
 <body class="hold-transition register-page">
 	<div class="register-box">
 		<div class="register-logo">
-			<a href="<?php echo base_url() ?>">Es Duren</a>
+			<a href="<?php echo base_url() ?>"><?php echo $profil->name ?></a>
 		</div>
 
 		<div class="register-box-body">
-			<p class="login-box-msg">Register a new account</p>
+			<p class="login-box-msg">Daftar</p>
 
 			<form action="<?php echo base_url() ?>crud/add_account" method="post">
 				<div class="form-group has-feedback">
@@ -66,7 +66,7 @@
 				</div>
 			</form>
 
-			<a href="<?php echo base_url() ?>admin/login" class="text-center">I already have a membership</a>
+			<a href="<?php echo base_url() ?>admin/login" class="text-center">Sudah punya akun?</a>
 		</div>
 		<!-- /.form-box -->
 	</div>

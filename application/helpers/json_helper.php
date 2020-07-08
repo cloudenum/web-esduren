@@ -11,9 +11,9 @@ if (!function_exists('create_json_file')) {
 	 * @param mixed $data
 	 * @return bool
 	 */
-	function create_json_file(string $path, $data) {
+	function create_json_file(string $path, $data, $options = 0, $depth = 512) {
 		if (!file_exists($path)) {
-			if (file_put_contents($path, json_encode($data))) return true;
+			if (file_put_contents($path, json_encode($data, $options, $depth))) return true;
 		}
 
 		return false;
@@ -31,11 +31,11 @@ if (!function_exists('read_json_file')) {
 	 * @param string $path
 	 * @return object|bool
 	 */
-	function read_json_file(string $path) {
+	function read_json_file(string $path, $assoc = false, $depth = 512, $options = 0) {
 		if (file_exists($path)) {
 			$raw =  file_get_contents($path);
 			if ($raw) {
-				return json_decode($raw);
+				return json_decode($raw, $assoc, $depth, $options);
 			}
 		}
 
@@ -44,9 +44,9 @@ if (!function_exists('read_json_file')) {
 }
 
 if (!function_exists('write_json_file')) {
-	function write_json_file(string $file_path, $data) {
+	function write_json_file(string $file_path, $data, $options = 0, $depth = 512) {
 		if (file_exists($file_path)) {
-			if (file_put_contents($file_path, json_encode($data))) return true;
+			if (file_put_contents($file_path, json_encode($data, $options, $depth))) return true;
 		}
 
 		return false;

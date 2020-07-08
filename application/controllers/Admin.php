@@ -30,11 +30,15 @@ class Admin extends CI_Controller {
 
 	public function login() {
 		$this->session->sess_destroy();
-		$this->load->view('admin/v_login');
+		$query = $this->db->get('profil');
+		$data['profil'] = $query->result()[0];
+		$this->load->view('admin/v_login', $data);
 	}
 
 	public function register() {
-		$this->load->view('admin/v_register');
+		$query = $this->db->get('profil');
+		$data['profil'] = $query->result()[0];
+		$this->load->view('admin/v_register', $data);
 	}
 
 	public function aksiLogin() {
@@ -172,7 +176,7 @@ class Admin extends CI_Controller {
 		$gmap_key = $this->siteconfig->getSettings()->gmap;
 		if ($gmap_key) {
 			$data['gmap_key'] = $gmap_key;
-			// $data['map_js'] = 'https://maps.googleapis.com/maps/api/js?key=' . $gmap_key . '&callback=initMap';
+			$data['map_js'] = 'https://maps.googleapis.com/maps/api/js?key=' . $gmap_key . '&callback=initMap&libraries=places&v=weekly';
 		}
 
 		$this->load->view('admin/template/v_admin_header', $data);

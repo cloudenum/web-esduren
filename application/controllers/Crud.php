@@ -775,7 +775,7 @@ class Crud extends CI_Controller {
 	public function update_location($type = 'latlng') {
 		if (strtolower($type) === 'placeid') {
 			$data = [
-				'maps_place_id' => html_escape($this->input->post('maps_place_id'))
+				'maps_place_id' => 'place_id:' . html_escape($this->input->post('maps_place_id'))
 			];
 		} else {
 			$data = array(

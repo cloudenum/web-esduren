@@ -371,4 +371,14 @@ $(function () {
 	setup();
 
 	$('[data-toggle="tooltip"]').tooltip();
+
+	$('input[type="checkbox"].flat, input[type="radio"].flat').iCheck({
+		checkboxClass: "icheckbox_flat-grey social-checkbox",
+		radioClass: "iradio_flat-blue",
+	});
+
+	$('input[type="checkbox"].line, input[type="radio"].line').iCheck({
+		checkboxClass: "icheckbox_line social-checkbox",
+		radioClass: "iradio_line",
+	});
 });

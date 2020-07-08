@@ -198,9 +198,9 @@
 	 					<div class="box-body">
 	 						<form id="place-id-form" method="post">
 	 							<div class="form-group">
-	 								<label for="phone" class="col-sm-2 control-label">Google Maps Plus Code</label>
+	 								<label for="phone" class="col-sm-2 control-label">Google Maps Place ID</label>
 	 								<div class="col-sm-10">
-	 									<input name="maps_place_id" type="text" class="form-control" id="phone" placeholder="Place id restoran Anda" required>
+	 									<input name="maps_place_id" type="text" class="form-control" id="place-id" placeholder="Gunakan tools dibawah jika sudah setting GMAP API KEY" required>
 	 								</div>
 	 							</div>
 	 							<div class="form-group">
@@ -209,32 +209,39 @@
 	 								</div>
 	 							</div>
 	 						</form>
-	 						<?php
-								if (isset($map_js) && !empty($map_js)) {
-								?>
-	 							<!-- BEGIN SECTION MAP -->
-	 							<section class="contact-map">
-	 								<div class="homepage-map">
-	 									<div id="map-container" class="container-fluid">
-	 										<div class="row">
-	 											<div class="col-md-12">
-	 												<div id="map_canvas"></div>
-	 											</div>
-	 										</div>
-	 										<div class="row">
-	 											<div class="col-md-12" style="padding: 15px;">
-	 												<button id="save-map" class="btn btn-block btn-primary" disabled>Save</button>
-	 											</div>
-	 										</div>
-	 									</div>
-	 								</div>
-	 							</section>
-	 							<!-- END SECTION MAP -->
-	 						<?php
-								}
-								?>
 	 					</div>
 	 					<!-- /.box-body -->
+	 					<?php
+							if (isset($map_js) && !empty($map_js)) {
+							?>
+	 						<!-- BEGIN SECTION MAP -->
+	 						<section class="google-maps">
+	 							<div id="map-container" class="container-fluid">
+	 								<iframe width="100%" height="500" src="//jsfiddle.net/hammam_afiq/eohcv5ks/embedded/result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+	 								<!-- <div style="display: none">
+	 									<input id="pac-input" class="controls" type="text" placeholder="Enter a location" />
+	 								</div>
+	 								<div id="map"></div>
+	 								<div id="infowindow-content">
+	 									<span id="place-name" class="title"></span><br />
+	 									<strong>Place ID:</strong> <span id="place-id"></span><br />
+	 									<span id="place-address"></span>
+	 								</div> -->
+	 							</div>
+	 						</section>
+	 						<!-- END SECTION MAP -->
+	 					<?php
+							} else {
+							?>
+	 						<div class="box-body">
+	 							<p class="text-danger">Belum setting gmap key. <a href="<?php echo base_url('admin/setting') ?>">Silahkan setting disini.</a></p>
+	 						</div>
+	 					<?php
+							}
+							?>
+	 					<div class="box-body">
+	 						<p>Atau gunakan <a target="_blank" href="https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder">tools ini.</a></p>
+	 					</div>
 	 				</div>
 	 			</div>
 	 			<!-- /.col -->

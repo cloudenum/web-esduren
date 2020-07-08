@@ -39,16 +39,16 @@
 					<div class="contact-wrapper-right">
 						<form class="contact-form">
 							<div class="form-group">
-								<input class="form-control" required="" id="name" placeholder="Name" type="text"></div>
+								<input class="form-control" required id="name" placeholder="Name" type="text"></div>
 							<div class="form-group">
-								<input class="form-control" id="email" placeholder="Email" name="email" required="" type="email"></div>
+								<input class="form-control" id="email" placeholder="Email" name="email" required type="email"></div>
 							<div class="form-group">
-								<input class="form-control" required="" id="subject" placeholder="Subject" type="text"></div>
+								<input class="form-control" required id="subject" name="subject" placeholder="Subject" type="text"></div>
 							<div class="form-group" style="position: relative;">
-								<textarea class="form-control" required="" id="message" placeholder="Text" rows="3" spellcheck="true" style="background: rgb(238, 241, 245) none repeat scroll 0% 0%; z-index: auto; position: relative; line-height: 22.85px; font-size: 16px; transition: none 0s ease 0s ;"></textarea>
+								<textarea class="form-control" name="message" required id="message" placeholder="Text" rows="3" spellcheck="true" style="background: rgb(238, 241, 245) none repeat scroll 0% 0%; z-index: auto; position: relative; line-height: 22.85px; font-size: 16px; transition: none 0s ease 0s ;"></textarea>
 							</div>
 							<div class="form-group text-center">
-								<input class="rounded-button fadetransition" value="SEND" type="submit">
+								<button class="rounded-button fadetransition" type="submit">KIRIM</button>
 							</div>
 						</form>
 					</div>
@@ -65,10 +65,9 @@
 			<div class="row">
 				<div class="col-md-12">
 					<?php if (isset($gmap_key) && !empty($gmap_key)) { ?>
-						<iframe width="100%" height="500px" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?key=<?php echo $gmap_key; ?>&q=<?php echo $profil->maps_place_id ?>" allowfullscreen>
+						<iframe width="100%" height="500px" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=<?php echo $gmap_key; ?>&q=<?php echo $profil->maps_place_id ?>" allowfullscreen>
 						</iframe>
 					<?php } ?>
-					<div id="map_canvas"></div>
 				</div>
 			</div>
 		</div>

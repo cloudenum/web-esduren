@@ -9,11 +9,12 @@
 		}
 	],
 	"require": {
-		"php": "7.3.13"
+		"php": "7.4.8",
+		"sendgrid/sendgrid": "~7"
 	},
 	"config": {
 		"platform": {
-			"php": "7.3.13"
+			"php": "7.4.8"
 		}
 	}
 }

@@ -84,7 +84,7 @@ class SiteConfig {
 
 		if ($jsonData && is_array($changedData)) {
 			$jsonData = (object) array_merge((array) $jsonData, $changedData);
-			return write_json_file($this->_filePath, $jsonData);
+			return write_json_file($this->_filePath, $jsonData, JSON_PRETTY_PRINT);
 		}
 
 		return false;

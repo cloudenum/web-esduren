@@ -35,7 +35,7 @@
 		<div class="col-xs-12 col-pusher"></div>
 		<div class="login-box">
 			<div class="login-logo">
-				<a href="<?php echo base_url() ?>admin"><b>ES DUREN KOMBINASI</b></a>
+				<a href="<?php echo base_url() ?>admin"><b><?php echo $profil->name ?></b></a>
 			</div>
 			<!-- /.login-logo -->
 			<div class="login-box-body">
