@@ -10,7 +10,8 @@
 	],
 	"require": {
 		"php": "7.4.8",
-		"sendgrid/sendgrid": "~7"
+		"sendgrid/sendgrid": "~7",
+		"php-ffmpeg/php-ffmpeg": "^0.16.0"
 	},
 	"config": {
 		"platform": {

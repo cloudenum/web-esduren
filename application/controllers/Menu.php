@@ -10,7 +10,7 @@ class Menu extends CI_Controller {
 		} else {
 			redirect('admin');
 		}
-
+		$this->db->order_by('id', "ASC");
 		$data['open_hours'] = $this->db->get('open_hours')->result();
 		$data['socmed'] = $this->db->get('socmed')->result();
 		$data['body_id'] = array('single-page');

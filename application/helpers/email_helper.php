@@ -4,8 +4,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 if (!function_exists('send_to_owner_email')) {
 	function send_to_owner_email(string $from, string $senderName, string $subject, string $message) {
 		$CI = &get_instance();
-		$CI->load->library('siteconfig');
-		$settings = $CI->siteconfig->getSettings();
+		$CI->load->library('site_config');
+		$settings = $CI->site_config->getSettings();
 
 		if (isset($settings->sendgrid_api) && $settings->sendgrid_api) {
 			try {

@@ -24,7 +24,7 @@
 				<img class="img-responsive" src="<?php
 													echo (count($home_settings->slides) > 0) && $home_settings->slides[0]->image_path ?
 														$home_settings->slides[0]->image_path :
-														base_url('bakul/img/esduren1.jpg'); ?>" alt="slide">
+														base_url('bakul/img/p1.jpg'); ?>" alt="slide">
 			</div>
 		</div>
 		<!-- end slide item -->
@@ -80,7 +80,7 @@
 				<img class="img-responsive" src="<?php
 													echo (count($home_settings->slides) > 1) && $home_settings->slides[1]->image_path ?
 														$home_settings->slides[1]->image_path :
-														base_url('bakul/img/esduren2.jpg'); ?>" alt="slide">
+														base_url('bakul/img/p2.jpg'); ?>" alt="slide">
 			</div>
 		</div>
 		<!-- end slide item -->

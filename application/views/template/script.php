@@ -26,12 +26,6 @@
 <!-- Bar-Rating -->
 <script defer src="https://cdn.jsdelivr.net/npm/jquery-bar-rating@1.2.2/jquery.barrating.min.js"> </script>
 <script defer src="https://cdn.jsdelivr.net/npm/jquery-bar-rating@1.2.2/examples/js/examples.js"> </script>
-<!-- Custom js -->
-<script defer src="<?php echo base_url(); ?>bakul/js/helper.js"> </script>
-<script defer src="<?php echo base_url(); ?>bakul/js/main.js"> </script>
-<script defer src="<?php echo base_url(); ?>bakul/js/custom.js"></script>
-<script defer src="<?php echo base_url(); ?>bakul/js/map.js"></script>
-
 <?php
 if (isset($map_js) && $map_js) {
 ?>
@@ -42,11 +36,24 @@ if (isset($map_js) && $map_js) {
 
 if (isset($js_to_load) && is_array($js_to_load)) {
 	foreach ($js_to_load as $js_file) {
+		if (preg_match('/https?:\/\//', $js_file)) { ?>
+			<script defer type="text/javascript" src="<?php echo $js_file; ?>"></script>
+<?php
+		}
+	}
+} ?>
+
+<!-- Custom js -->
+<script defer src="<?php echo base_url(); ?>bakul/js/helper.js"> </script>
+<script defer src="<?php echo base_url(); ?>bakul/js/main.js"> </script>
+<script defer src="<?php echo base_url(); ?>bakul/js/custom.js"></script>
+<script defer src="<?php echo base_url(); ?>bakul/js/map.js"></script>
+
+<?php
+if (isset($js_to_load) && is_array($js_to_load)) {
+	foreach ($js_to_load as $js_file) {
 		if (!preg_match('/https?:\/\//', $js_file)) { ?>
 			<script defer type="text/javascript" src="<?php echo base_url() ?>bakul/js/<?php echo $js_file; ?>"></script>
-		<?php
-		} else { ?>
-			<script defer type="text/javascript" src="<?php echo $js_file; ?>"></script>
 <?php
 		}
 	}

@@ -7,8 +7,15 @@ $(document).ready(function () {
 		data: "d=" + $("#day").val(),
 		//for example "id=5&parent=6"
 		dataType: "json", //data format
-		success: function (data) {
-			getData(data);
+		success: function (res) {
+			if (res.success) {
+				getData(res.data);
+			} else {
+				resetForm();
+			}
+		},
+		error: function (e) {
+			console.log(e.responseJSON.message);
 		},
 	});
 
@@ -18,8 +25,15 @@ $(document).ready(function () {
 			data: "d=" + $("#day").val(),
 			//for example "id=5&parent=6"
 			dataType: "json", //data format
-			success: function (data) {
-				getData(data);
+			success: function (res) {
+				if (res.success) {
+					getData(res.data);
+				} else {
+					resetForm();
+				}
+			},
+			error: function (e) {
+				console.log(e.responseJSON.message);
 			},
 		});
 	});
@@ -28,6 +42,10 @@ $(document).ready(function () {
 	$(".timepicker").timepicker({
 		showInputs: false,
 		showMeridian: false,
+		icons: {
+			up: "fa fa-chevron-up",
+			down: "fa fa-chevron-down",
+		},
 	});
 
 	function getData(data) {
@@ -36,17 +54,18 @@ $(document).ready(function () {
 		$('input[name="close_hour"]').val(data[0].close_hour.slice(0, 5));
 
 		if (data[0].flag == "1") {
-			$("#tutup").parent().removeClass("checked");
-			$("#tutup").parent().attr("aria-checked", false);
-			$("#buka").parent().addClass("checked");
-			$("#buka").parent().attr("aria-checked", true);
+			$("#tutup").iCheck("uncheck");
+			$("#buka").iCheck("check");
 		}
 
 		if (data[0].flag == "0") {
-			$("#buka").parent().removeClass("checked");
-			$("#buka").parent().attr("aria-checked", false);
-			$("#tutup").parent().addClass("checked");
-			$("#tutup").parent().attr("aria-checked", true);
+			$("#buka").iCheck("uncheck");
+			$("#tutup").iCheck("check");
 		}
+	}
+
+	function resetForm() {
+		$("#buka").iCheck("uncheck");
+		$("#tutup").iCheck("uncheck");
 	}
 });

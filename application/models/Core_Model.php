@@ -44,15 +44,30 @@ class Core_Model extends CI_Model {
 		return $res;
 	}
 
-	public function upload_gambar($name_attr, $config, $random_name = true) {
+	public function upload_file($name_attr, $config, $random_name = true) {
+		if ($config['upload_path']) {
+			if (!file_exists($config['upload_path'])) {
+				log_message('debug', 'The upload_path directory doesn\'t exists :/');
+				log_message('debug', 'Let me make one for you :)');
+				if (!mkdir($config['upload_path'], 0777, true)) {
+					log_message('debug', 'I can\'t make the directory :(');
+					return false;
+				}
+			}
 
-		if ($random_name === true) {
-			$this->load->helper('string');
-			$config['file_name'] = random_string('alnum', 8);
+			if ($random_name === true) {
+				$this->load->helper('string');
+				$config['file_name'] = random_string('alnum', 16);
+			}
+
+			$this->load->library('upload', $config);
+
+			$upload = $this->upload->do_upload($name_attr);
+
+			return $upload;
+		} else {
+			log_message('debug', 'you don\'t specify the upload path >:(');
+			return false;
 		}
-
-		$this->load->library('upload', $config);
-
-		return $this->upload->do_upload($name_attr);
 	}
 }

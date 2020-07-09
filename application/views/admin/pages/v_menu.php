@@ -3,12 +3,12 @@
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
-				Daftar Produk
+				Daftar Menu
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="<?php echo base_url() ?>admin"><i class="fa fa-dashboard"></i> Admin</a></li>
-				<li><a href="<?php echo base_url() ?>admin/menu">Produk</a></li>
-				<li class="active"><a href="<?php echo base_url() ?>admin/menu">Daftar Produk</a></li>
+				<li><a href="<?php echo base_url() ?>admin/menu">Menu</a></li>
+				<li class="active"><a href="<?php echo base_url() ?>admin/menu">Daftar Menu</a></li>
 			</ol>
 		</section>
 
@@ -19,7 +19,7 @@
 			?>
 			<div class="box box-info">
 				<div class="box-header with-border">
-					<h3 class="box-title">Buat Produk/Item Baru</h3>
+					<h3 class="box-title">Buat menu baru</h3>
 				</div>
 				<div class="box-body">
 					<?php echo form_open_multipart('crud/insert_menu', array('class' => 'needs-validation', 'novalidate' => '')); ?>
@@ -47,7 +47,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="category">Kategori Produk</label>
+						<label for="category">Kategori</label>
 						<div class="input-group">
 							<select class="form-control" name="category" id="category">
 								<?php
@@ -82,7 +82,7 @@
 
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Daftar Produk</h3>
+					<h3 class="box-title">Daftar Menu</h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -144,7 +144,7 @@
 														}
 												?>
 												<td>
-													<a class="btn btn-warning btn-s" data-toggle="modal" data-target="#editModal" data-id="<?php echo $row->id; ?>" data-code="<?php echo $row->code; ?>" data-name="<?php echo $row->name; ?>" data-desc="<?php echo $row->description; ?>" data-price="<?php echo $row->price; ?>" data-img-path="<?php echo $row->image_path; ?>" data-category="<?php echo $row->food_category_id; ?>">
+													<a class="btn btn-warning btn-s" data-toggle="modal" data-target="#editModal" data-id="<?php echo $row->id; ?>" data-code="<?php echo $row->code; ?>" data-name="<?php echo $row->name; ?>" data-desc="<?php echo $row->description; ?>" data-price="<?php echo $row->price; ?>" data-img-path="<?php echo $row->image_path; ?>" data-category="<?php echo $row->menu_category_id; ?>">
 														<span class="fa fa-pencil" />
 														edit
 													</a>
@@ -189,7 +189,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Edit Menu</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -213,7 +213,7 @@
 						<input id="edit-price" class="form-control" name="price" placeholder="Harga" type="text">
 					</div>
 					<div class="form-group">
-						<label for="edit-category">Kategori Produk</label>
+						<label for="edit-category">Kategori</label>
 						<div class="input-group">
 							<select class="form-control" name="category" id="edit-category">
 								<?php

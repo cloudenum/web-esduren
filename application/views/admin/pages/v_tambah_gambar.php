@@ -20,7 +20,7 @@
 		<div class="dropzone">
 
 			<div class="dz-message">
-				<h3> Klik atau Drop gambar disini</h3>
+				<h3> Klik atau Drop gambar/video disini</h3>
 			</div>
 
 		</div>
@@ -40,7 +40,7 @@
 											No.
 										</th>
 										<th class="sorting" aria-controls="varian-table">
-											Gambar
+											Media
 										</th>
 										<th class="sorting" aria-controls="varian-table" style="width: 10%;">
 											Action
@@ -49,19 +49,19 @@
 								</thead>
 								<tbody>
 									<?php
-									$query = $this->db->get('gallery');
-
 									$nomor = 1;
 
-									if ($query->num_rows() > 0) {
-										foreach ($query->result_array() as $row) {
+									if (count($gallery) > 0) {
+										foreach ($gallery as $row) {
 
 									?>
 											<tr role="row">
-												<td><?php echo $nomor++ ?></td>
-												<td><img class="img-responsive" src="<?php echo base_url('uploads/gallery/') . $row['image_path']; ?>" /></td>
+												<td><?php echo $nomor++; ?></td>
 												<td>
-													<a class="btn btn-danger btn-s" href="<?php echo base_url('crud/hapus/') . $row['id'] . "/gallery"; ?>">
+													<img class="img-responsive" src="<?php echo base_url('uploads/gallery/') . $row->thumbnail_path; ?>" />
+												</td>
+												<td>
+													<a class="btn btn-danger btn-s" href="<?php echo base_url('crud/hapus/') . $row->id . "/gallery"; ?>">
 														<span class="fa fa-trash" />
 														Hapus
 													</a>

@@ -24,7 +24,7 @@
 						<p>Jumlah Produk/Item</p>
 					</div>
 					<div class="icon">
-						<i class="fa fa-archive"></i>
+						<i class="fa fa-cutlery"></i>
 					</div>
 					<a href="<?php echo base_url() ?>admin/menu" class="small-box-footer">
 						Selengkapnya <i class="fa fa-arrow-circle-right"></i>

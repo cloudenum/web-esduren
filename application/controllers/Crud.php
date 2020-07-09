@@ -33,7 +33,7 @@ class Crud extends CI_Controller {
 			$config['allowed_types']        = '|gif|jpeg|jpg|png';
 			$config['max_size']             = 8192;
 
-			if (!$this->Core_Model->upload_gambar('image', $config)) {
+			if (!$this->Core_Model->upload_file('image', $config)) {
 				$error = '';
 				$data['error'] = array($this->upload->display_errors());
 				foreach ($data['error'] as $error_msg) {
@@ -94,8 +94,9 @@ class Crud extends CI_Controller {
 			$config['max_size']             = 8192;
 			$config['max_width']            = 4096;
 			$config['max_height']           = 4096;
+			$config['overwrite']			= TRUE;
 
-			if ($this->Core_Model->upload_gambar('resto_image', $config, false)) {
+			if ($this->Core_Model->upload_file('resto_image', $config, false)) {
 				$data['resto_image_path'] = base_url('uploads/') . $this->upload->data('file_name');
 			} else {
 				$error = '';
@@ -158,7 +159,7 @@ class Crud extends CI_Controller {
 			$config['max_width']            = 2048;
 			$config['max_height']           = 2048;
 
-			if (!$this->Core_Model->upload_gambar('edit-image', $config, false)) {
+			if (!$this->Core_Model->upload_file('edit-image', $config, false)) {
 				$error = '';
 				$data['error'] = array($this->upload->display_errors());
 				foreach ($data['error'] as $error_msg) {
@@ -230,7 +231,7 @@ class Crud extends CI_Controller {
 		$config['max_width']            = 2048;
 		$config['max_height']           = 2048;
 
-		if (!$this->Core_Model->upload_gambar('edit-logo', $config, false)) {
+		if (!$this->Core_Model->upload_file('edit-logo', $config, false)) {
 			$error = '';
 			$data['error'] = array($this->upload->display_errors());
 			foreach ($data['error'] as $error_msg) {
@@ -301,9 +302,23 @@ class Crud extends CI_Controller {
 
 	public function select_time() {
 		$this->db->where('day', html_escape($this->input->get('d')));
+		$this->db->order_by('id', 'ASC');
 		$data = $this->db->get('open_hours');
+		if ($data->num_rows() > 0) {
+			http_response_code(200);
+			echo json_encode([
+				'success' => true,
+				'message' => 'Success',
+				'data' => $data->result_array()
+			]);
+			return;
+		}
 
-		echo json_encode($data->result_array());
+		http_response_code(203);
+		echo json_encode([
+			'success' => false,
+			'message' => 'No data'
+		]);
 	}
 
 	public function update_jambuka() {
@@ -321,7 +336,17 @@ class Crud extends CI_Controller {
 			$data = $this->Core_Model->update('open_hours', $data, array('day' => $this->input->post('day')));
 		} else {
 			$data['day'] = $this->input->post('day');
-			$this->Core_Model->insert('open_hours', $data);
+			$day = [
+				'Senin',
+				'Selasa',
+				'Rabu',
+				'Kamis',
+				'Jumat',
+				'Sabtu',
+				'Minggu'
+			];
+			$data['id'] = array_search($data['day'], $day, true) + 1;
+			$this->Core_Model->insert('open_hours', $data, false);
 		}
 
 		$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissable" role="alert">
@@ -352,16 +377,63 @@ class Crud extends CI_Controller {
 	}
 
 	public function upload_galeri() {
+		$json_data = (object) [
+			'message' => 'Failed'
+		];
 
-		$config['upload_path']   = FCPATH . '/uploads/gallery';
-		$config['allowed_types'] = 'gif|jpg|png|ico';
+		try {
+			$config['upload_path']   = FCPATH . '/uploads/gallery';
+			$config['allowed_types'] = 'gif|png|jpeg|jpg|tiff|mp4|webm|avi';
 
-		if ($this->Core_Model->upload_gambar('userfile', $config, false)) {
-			$data = array(
-				'image_path' => html_escape($this->upload->data('file_name')),
+			if (!$this->Core_Model->upload_file('userfile', $config)) {
+				throw new Exception('Can\'t upload an error occured');
+			}
+
+			$file_path = $this->upload->data('full_path');
+			$file_type = mime_content_type($file_path);
+			$thumbnail_path = $file_path;
+
+			if (preg_match('/video\/.+/', $file_type)) {
+				$this->load->helper('video_helper');
+				$thumbnail_path = create_video_thumbnail($file_path);
+			} else {
+				$config['image_library'] = 'gd2';
+				$config['source_image'] = $file_path;
+				$config['create_thumb'] = TRUE;
+				$config['maintain_ratio'] = TRUE;
+				$config['width']         = 300;
+				$config['height']       = 300;
+
+				$this->load->library('image_lib', $config);
+
+				$this->image_lib->resize();
+				$thumbnail_path = $this->upload->data('raw_name') . '_thumb' . $this->upload->data('file_ext');
+			}
+
+			$db_data = array(
+				'media_path' => html_escape($this->upload->data('file_name')),
+				'thumbnail_path' => $thumbnail_path,
+				'file_type' => $file_type
 			);
-			$this->Core_Model->insert('gallery', $data);
+
+			if (!$this->Core_Model->insert('gallery', $db_data)) {
+				throw new Exception('Can\'t insert data to db');
+			}
+
+			$this->output->set_status_header(200);
+			$json_data->message = 'Success';
+		} catch (\Exception $e) {
+			log_message('debug', $e->getMessage());
+			$this->output->set_status_header(400);
+			$json_data->message = $e->getMessage();
+		} catch (\Throwable $th) {
+			log_message('error', $th->getFile() . ':' . $th->getLine() . ' -> ' . $th->getMessage());
+			$this->output->set_status_header(500);
 		}
+
+		$this->output
+			->set_content_type('application/json')
+			->set_output(json_encode($json_data));
 	}
 
 	public function upload_slide() {
@@ -369,10 +441,11 @@ class Crud extends CI_Controller {
 		$errors = NULL;
 		$config['upload_path']   = FCPATH . '/uploads';
 		$config['allowed_types'] = 'gif|jpg|png|ico';
+		$config['overwrite'] = TRUE;
 
 		if ($_FILES['slidefile1']['error'] !== UPLOAD_ERR_NO_FILE) {
 			$config['file_name'] = 'slide1';
-			if ($this->Core_Model->upload_gambar('slidefile1', $config, false)) {
+			if ($this->Core_Model->upload_file('slidefile1', $config, false)) {
 				$width = $this->upload->data('image_width');
 				$height = $this->upload->data('image_height');
 
@@ -395,7 +468,7 @@ class Crud extends CI_Controller {
 
 		if ($_FILES['slidefile2']['error'] !== UPLOAD_ERR_NO_FILE) {
 			$config['file_name'] = 'slide2';
-			if ($this->Core_Model->upload_gambar('slidefile2', $config, false)) {
+			if ($this->Core_Model->upload_file('slidefile2', $config, false)) {
 				$width = $this->upload->data('image_width');
 				$height = $this->upload->data('image_height');
 
@@ -446,7 +519,7 @@ class Crud extends CI_Controller {
 
 		if ($_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
 			$config['file_name'] = 'slide1';
-			if ($this->Core_Model->upload_gambar('image', $config, false)) {
+			if ($this->Core_Model->upload_file('image', $config, false)) {
 				$width = $this->upload->data('image_width');
 				$height = $this->upload->data('image_height');
 
@@ -535,7 +608,7 @@ class Crud extends CI_Controller {
 			$config['allowed_types']        = '|gif|jpeg|jpg|png';
 			$config['max_size']             = 8192;
 
-			if (!$this->Core_Model->upload_gambar('image', $config, false)) {
+			if (!$this->Core_Model->upload_file('image', $config, false)) {
 				$error = '';
 				$data['error'] = array($this->upload->display_errors());
 				foreach ($data['error'] as $error_msg) {
@@ -597,7 +670,7 @@ class Crud extends CI_Controller {
 			$config['allowed_types']        = '|gif|jpeg|jpg|png';
 			$config['max_size']             = 8192;
 
-			if (!$this->Core_Model->upload_gambar('edit-image', $config, false)) {
+			if (!$this->Core_Model->upload_file('edit-image', $config, false)) {
 				$error = '';
 				$data['error'] = array($this->upload->display_errors());
 				foreach ($data['error'] as $error_msg) {

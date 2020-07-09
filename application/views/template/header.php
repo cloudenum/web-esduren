@@ -6,7 +6,7 @@
 	<!-- BEGIN PRELOADING -->
 	<div class="preloading">
 		<div class="wrap-preload">
-			<img class="cssload-loader" src="<?php echo base_url(); ?>bakul/img/durian-ico.png"></img>
+			<img class="cssload-loader" src="<?php echo base_url(); ?>bakul/img/dish.png"></img>
 			<div class="text-preloading">LOADING</div>
 		</div>
 	</div>

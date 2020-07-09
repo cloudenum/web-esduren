@@ -14,7 +14,7 @@
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 	<!-- Timepicker -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.2.3/css/bootstrap-timepicker.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css">
 	<!-- Ionicons -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.0/css/ionicons.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.1/skins/all.css">
@@ -105,28 +105,22 @@
 					</li>
 					<li id="nav-menu" class="treeview">
 						<a href="<?php echo base_url() ?>admin/menu">
-							<i class="fa fa-archive"></i>
-							<span>Produk/Menu</span>
+							<i class="fa fa-cutlery"></i>
+							<span>Menu</span>
 							<span class="pull-right-container">
 								<i class="fa fa-angle-left pull-right"></i>
 							</span>
 						</a>
 						<ul class="treeview-menu">
-							<li><a href="<?php echo base_url() ?>admin/menu"><span>Daftar Produk</span></a></li>
-							<li><a href="<?php echo base_url() ?>admin/kategori"><span>Ketegori Produk</span></a></li>
+							<li><a href="<?php echo base_url() ?>admin/menu"><span>Daftar Menu</span></a></li>
+							<li><a href="<?php echo base_url() ?>admin/kategori"><span>Ketegori Menu</span></a></li>
 						</ul>
 					</li>
-					<li id="nav-galeri" class="treeview">
-						<a href="#">
+					<li id="nav-galeri">
+						<a href="<?php echo base_url() ?>admin/tambah_gambar">
 							<i class="fa fa-file-image-o"></i>
 							<span>Galeri</span>
-							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
 						</a>
-						<ul class="treeview-menu">
-							<li><a href="<?php echo base_url() ?>admin/tambah_gambar"><i class="fa fa-plus"></i> Tambah Gambar</a></li>
-						</ul>
 					</li>
 					<li id="nav-profil" class="treeview">
 						<a href="#">

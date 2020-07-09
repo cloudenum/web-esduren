@@ -323,6 +323,19 @@ NOTE: This is the custom js file for the template
 	// });
 
 	/*=================== GALLERY FUNCTIONS ===================*/
+	let myPlayer;
+	let videoPlayerEl = `<video id="video-gallery" autoplay class="video-js" controls preload="auto" data-setup='{}'>
+	<p class="vjs-no-js">
+		To view this video please enable JavaScript, and consider upgrading to a
+		web browser that
+		<a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+	</p>
+</video>`;
+
+	$("#image-gallery").on("hidden.bs.modal", function (e) {
+		$("#image-gallery-image").hide();
+		myPlayer.dispose();
+	});
 
 	loadGallery(true, "a.viewthumb");
 
@@ -340,7 +353,47 @@ NOTE: This is the custom js file for the template
 			selector,
 			counter = 0;
 
+		function updateGallery(selector) {
+			var $sel = selector;
+			current_image = $sel.data("image-id");
+			// $('#image-gallery-caption').text($sel.data('caption'));
+			// $('#image-gallery-title').text($sel.data('title'));
+			const regx = /video\/.+/;
+			const fileType = $sel.data("file-type");
+			const fileSource = $sel.data("media");
+			if (myPlayer) {
+				if (!myPlayer.isDisposed()) {
+					myPlayer.dispose();
+				}
+			}
+			$("#image-gallery-image").hide();
+
+			if (regx.test(fileType)) {
+				$("#media-container").append(videoPlayerEl);
+				myPlayer = videojs(document.querySelector("#video-gallery"), {
+					controls: true,
+					responsive: true,
+					sources: [
+						{
+							src: fileSource,
+							type: fileType,
+						},
+					],
+				});
+
+				myPlayer.ready(function () {
+					myPlayer.play();
+				});
+			} else {
+				$("#image-gallery-image").show();
+				$("#image-gallery-image").attr("src", fileSource);
+			}
+
+			disableButtons(counter, $sel.data("image-id"));
+		}
+
 		$("#show-next-image, #show-previous-image").on("click", function () {
+			$("#image-gallery-image").hide();
 			if ($(this).attr("id") == "show-previous-image") {
 				current_image--;
 			} else {
@@ -350,15 +403,6 @@ NOTE: This is the custom js file for the template
 			selector = $('[data-image-id="' + current_image + '"]');
 			updateGallery(selector);
 		});
-
-		function updateGallery(selector) {
-			var $sel = selector;
-			current_image = $sel.data("image-id");
-			// $('#image-gallery-caption').text($sel.data('caption'));
-			// $('#image-gallery-title').text($sel.data('title'));
-			$("#image-gallery-image").attr("src", $sel.data("image"));
-			disableButtons(counter, $sel.data("image-id"));
-		}
 
 		if (setIDs == true) {
 			$("[data-image-id]").each(function () {

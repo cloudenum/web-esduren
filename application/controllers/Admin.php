@@ -275,15 +275,23 @@ class Admin extends CI_Controller {
 	}
 
 	public function tambah_gambar() {
+		redirect('admin/tambah_gallery');
+	}
+
+	public function tambah_gallery() {
 		$this->check_online();
 
 		$data['js_to_load'] = array(
 			'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js',
-			'admin/js/tambah-gambar-page.js'
+			'https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js',
+			'https://vjs.zencdn.net/7.8.3/video.js',
+			'admin/js/tambah-gambar-page.js',
 		);
 		$data['css_to_load'] = array(
 			'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.css',
-			'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/basic.min.css'
+			'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/basic.min.css',
+			'https://unpkg.com/video.js@7/dist/video-js.min.css',
+			'https://unpkg.com/@videojs/themes@1/dist/forest/index.css"'
 		);
 		$query = $this->db->get('profil');
 		if ($query->num_rows() > 0) {
@@ -297,8 +305,12 @@ class Admin extends CI_Controller {
 			];
 		}
 
+		$this->db->order_by('created_at', 'ASC');
+		$gallery = $this->db->get('gallery');
+		$main['gallery'] = $gallery->result();
+
 		$this->load->view('admin/template/v_admin_header', $data);
-		$this->load->view('admin/pages/v_tambah_gambar');
+		$this->load->view('admin/pages/v_tambah_gambar', $main);
 		$this->load->view('admin/template/v_admin_footer', $data);
 	}
 

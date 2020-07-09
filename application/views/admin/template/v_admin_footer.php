@@ -24,7 +24,7 @@
 <!-- Fastclick -->
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 <!-- Timepicker -->
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.2.3/js/bootstrap-timepicker.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
 <!-- Pace.js -->
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
 <!-- iCheck -->
