@@ -66,7 +66,7 @@ class Core_Model extends CI_Model {
 
 			return $upload;
 		} else {
-			log_message('debug', 'you don\'t specify the upload path >:(');
+			log_message('debug', 'you didn\'t specify the upload path >:(');
 			return false;
 		}
 	}

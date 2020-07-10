@@ -63,8 +63,7 @@ $route['bakul/js/(:any)'] = 'resources/js/$1';
 $route['bakul/css/(:any)'] = 'resources/css/$1';
 $route['bakul/img/(:any)'] = 'resources/img/$1';
 
+$route['uploads/(:any)'] = 'resources/uploaded_file/$1';
+$route['uploads/(:any)/(:any)'] = 'resources/uploaded_file/$2/$1';
+
 $route['resources/(:any)'] = $error_404;
-$route['resources/js/(:any)'] = $error_404;
-$route['resources/css/(:any)'] = $error_404;
-$route['resources/img/(:any)'] = $error_404;
-$route['resources/helper_js/(:any)'] = $error_404;

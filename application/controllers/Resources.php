@@ -3,11 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Resources extends CI_Controller {
 	private $_assets_path;
+	private $_uploads_path;
 
 	public function __construct() {
 		parent::__construct();
 		$this->load->library('parser');
 		$this->_assets_path = APPPATH . 'assets' . DIRECTORY_SEPARATOR;
+		$this->_uploads_path = APPPATH . 'uploads' . DIRECTORY_SEPARATOR;
 	}
 
 	public function js($file_name, $parentFolder = '') {
@@ -61,15 +63,42 @@ class Resources extends CI_Controller {
 				throw new Exception('Invalid filename', 1);
 			}
 
-			$file_path = $this->_assets_path . DIRECTORY_SEPARATOR . $parentFolder . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . $file_name;
-			$img_file = file_get_contents($file_path);
+			if ($parentFolder) {
+				$file_path = $this->_assets_path . $parentFolder . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . $file_name;
+			} else {
+				$file_path = $this->_assets_path . 'img' . DIRECTORY_SEPARATOR . $file_name;
+			}
 
-			if (!$img_file) throw new Exception('Failed to get file img/' . $file_name, 1);
+			$this->load->library('file_streamer', ['file_path' => $file_path]);
+			$this->file_streamer->start();
+			// $mime_type = $this->get_mime_type($file_path);
+			// $img_file = file_get_contents($file_path);
 
-			$this->output->set_status_header(200);
-			$this->output
-				->set_content_type('image/*')
-				->set_output($img_file);
+			// if (!$img_file) throw new Exception('Failed to get file img/' . $file_name, 1);
+
+		} catch (\Exception $e) {
+			log_message('debug', $e->getMessage());
+			show_404();
+		} catch (\Throwable $th) {
+			log_message('error', $th->getMessage());
+			show_404();
+		}
+	}
+
+	public function uploaded_file($file_name, $parentFolder = '') {
+		try {
+			if (!$file_name) {
+				throw new Exception('Invalid filename', 1);
+			}
+
+			if ($parentFolder) {
+				$file_path = $this->_uploads_path . $parentFolder . DIRECTORY_SEPARATOR . $file_name;
+			} else {
+				$file_path = $this->_uploads_path . $file_name;
+			}
+
+			$this->load->library('file_streamer', ['file_path' => $file_path]);
+			$this->file_streamer->start();
 		} catch (\Exception $e) {
 			log_message('debug', $e->getMessage());
 			show_404();

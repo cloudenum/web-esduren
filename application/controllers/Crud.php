@@ -29,7 +29,7 @@ class Crud extends CI_Controller {
 
 			$this->agent->redirect_back();
 		} else {
-			$config['upload_path']          = './uploads/';
+			$config['upload_path']          = APPPATH . 'uploads';
 			$config['allowed_types']        = '|gif|jpeg|jpg|png';
 			$config['max_size']             = 8192;
 
@@ -88,7 +88,7 @@ class Crud extends CI_Controller {
 		);
 
 		if ($_FILES['resto_image']['error'] !== UPLOAD_ERR_NO_FILE) {
-			$config['upload_path']          = './uploads/';
+			$config['upload_path']          = APPPATH . 'uploads';
 			$config['file_name']			= 'resto_image';
 			$config['allowed_types']        = '|gif|jpeg|jpg|png';
 			$config['max_size']             = 8192;
@@ -153,7 +153,7 @@ class Crud extends CI_Controller {
 
 			$this->agent->redirect_back();
 		} else {
-			$config['upload_path']          = './uploads/';
+			$config['upload_path']          = APPPATH . 'uploads';
 			$config['allowed_types']        = '|gif|jpeg|jpg|png';
 			$config['max_size']             = 8192;
 			$config['max_width']            = 2048;
@@ -222,8 +222,7 @@ class Crud extends CI_Controller {
 	}
 
 	public function upload_logo() {
-
-		$config['upload_path']          = './bakul/';
+		$config['upload_path']          = APPPATH . 'uploads';
 		$config['allowed_types']        = '|gif|jpeg|jpg|png';
 		$config['file_name']			= 'logo';
 		$config['overwrite']			= true;
@@ -245,7 +244,7 @@ class Crud extends CI_Controller {
 			$this->agent->redirect_back();
 		} else {
 			$data = array(
-				'logo_path' => html_escape(base_url('bakul/' . $this->upload->data("file_name")))
+				'logo_path' => html_escape(base_url('uploads/' . $this->upload->data("file_name")))
 			);
 
 			$this->Core_Model->update('profil', $data, array('id' => 1));
@@ -382,15 +381,30 @@ class Crud extends CI_Controller {
 		];
 
 		try {
-			$config['upload_path']   = FCPATH . '/uploads/gallery';
+			$config['upload_path']   = APPPATH . 'uploads/gallery';
 			$config['allowed_types'] = 'gif|png|jpeg|jpg|tiff|mp4|webm|avi';
 
 			if (!$this->Core_Model->upload_file('userfile', $config)) {
-				throw new Exception('Can\'t upload an error occured');
+				throw new Exception('Can\'t upload an error occured. See above error');
+			}
+
+
+			$finfo = finfo_open(FILEINFO_MIME_TYPE);
+
+			if (!$finfo) {
+				finfo_close($finfo);
+				throw new Exception('Failed to open finfo');
 			}
 
 			$file_path = $this->upload->data('full_path');
-			$file_type = mime_content_type($file_path);
+			$file_type = finfo_file($finfo, $file_path);
+
+			if (!$file_type) {
+				finfo_close($finfo);
+				throw new Exception('Failed to get file\'s mime type');
+			}
+
+			finfo_close($finfo);
 			$thumbnail_path = $file_path;
 
 			if (preg_match('/video\/.+/', $file_type)) {
@@ -439,7 +453,7 @@ class Crud extends CI_Controller {
 	public function upload_slide() {
 		$success = false;
 		$errors = NULL;
-		$config['upload_path']   = FCPATH . '/uploads';
+		$config['upload_path']   = APPPATH . 'uploads';
 		$config['allowed_types'] = 'gif|jpg|png|ico';
 		$config['overwrite'] = TRUE;
 
@@ -514,7 +528,7 @@ class Crud extends CI_Controller {
 	public function upload_background_testimoni() {
 		$success = false;
 		$errors = NULL;
-		$config['upload_path']   = FCPATH . '/uploads';
+		$config['upload_path']   = APPPATH . 'uploads';
 		$config['allowed_types'] = 'gif|jpg|png|ico';
 
 		if ($_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
@@ -604,7 +618,7 @@ class Crud extends CI_Controller {
 
 			$this->agent->redirect_back();
 		} else {
-			$config['upload_path']          = './uploads/promo';
+			$config['upload_path']          = APPPATH . 'uploads/promo';
 			$config['allowed_types']        = '|gif|jpeg|jpg|png';
 			$config['max_size']             = 8192;
 
@@ -666,7 +680,7 @@ class Crud extends CI_Controller {
 
 			$this->agent->redirect_back();
 		} else {
-			$config['upload_path']          = './uploads/promo';
+			$config['upload_path']          = APPPATH . 'uploads/promo';
 			$config['allowed_types']        = '|gif|jpeg|jpg|png';
 			$config['max_size']             = 8192;
 
