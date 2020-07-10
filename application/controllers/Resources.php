@@ -98,7 +98,23 @@ class Resources extends CI_Controller {
 			}
 
 			$this->load->library('file_streamer', ['file_path' => $file_path]);
-			$this->file_streamer->start();
+			$mime_type = $this->file_streamer->get_mime_type();
+			$file_size = filesize($file_path);
+
+			if (preg_match('/text\/.+/', $mime_type) && $file_size <= 100000) {
+				$text_file = file_get_contents($file_path);
+				if (!$text_file) throw new Exception("Can't get the file's content");
+
+				$this->output
+					->set_status_header(200)
+					->set_header('Content-Length: ' . $file_size)
+					->set_header('Expires: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT')
+					->set_header('Last-Modified: ' . gmdate('D, d M Y H:i:s', @filemtime($file_path)) . ' GMT')
+					->set_content_type($mime_type)
+					->set_output($text_file);
+			} else {
+				$this->file_streamer->start();
+			}
 		} catch (\Exception $e) {
 			log_message('debug', $e->getMessage());
 			show_404();

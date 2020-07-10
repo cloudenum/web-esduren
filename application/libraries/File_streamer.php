@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class File_streamer {
 	private $path 	= "";
 	private $stream = "";
-	private $buffer = 102400;
+	private $buffer = 100000;
 	private $start  = -1;
 	private $end    = -1;
 	private $size   = 0;
@@ -30,7 +30,7 @@ class File_streamer {
 	/**
 	 * Get the file mime type
 	 */
-	private function get_mime_type($file_path) {
+	public function get_mime_type() {
 		$finfo = finfo_open(FILEINFO_MIME_TYPE);
 
 		if (!$finfo) {
@@ -38,7 +38,7 @@ class File_streamer {
 			throw new Exception('Failed to open finfo');
 		}
 
-		$file_type = finfo_file($finfo, $file_path);
+		$file_type = finfo_file($finfo, $this->path);
 
 		if (!$file_type) {
 			if (!finfo_close($finfo)) throw new Exception("Failed to close finfo", 1);
@@ -55,11 +55,11 @@ class File_streamer {
 	 */
 	private function setHeader() {
 		ob_get_clean();
-		$mime_type = $this->get_mime_type($this->path);
+		$mime_type = $this->get_mime_type();
 		header("Content-Type: $mime_type");
 		header("Cache-Control: max-age=2592000, public");
-		header("Expires: " . gmdate('D, d M Y H:i:s', time() + 2592000) . ' UTC');
-		header("Last-Modified: " . gmdate('D, d M Y H:i:s', @filemtime($this->path)) . ' UTC');
+		header("Expires: " . gmdate('D, d M Y H:i:s', time() + 2592000) . ' GMT');
+		header("Last-Modified: " . gmdate('D, d M Y H:i:s', @filemtime($this->path)) . ' GMT');
 		$this->start = 0;
 		$this->size  = filesize($this->path);
 		$this->end   = $this->size - 1;
