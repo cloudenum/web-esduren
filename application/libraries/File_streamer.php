@@ -31,6 +31,10 @@ class File_streamer {
 	 * Get the file mime type
 	 */
 	public function get_mime_type() {
+		if (!is_file($this->path)) {
+			throw new Exception("File not found or not a regular file");
+		}
+
 		$finfo = finfo_open(FILEINFO_MIME_TYPE);
 
 		if (!$finfo) {
