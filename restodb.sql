@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 08 Jul 2020 pada 11.40
+-- Waktu pembuatan: 11 Jul 2020 pada 02.26
 -- Versi server: 10.3.16-MariaDB
 -- Versi PHP: 7.4.8
 
@@ -30,7 +30,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `gallery` (
   `id` char(36) NOT NULL,
-  `image_path` text NOT NULL,
+  `media_path` text NOT NULL,
+  `thumbnail_path` text NOT NULL,
+  `file_type` varchar(250) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
@@ -77,7 +79,7 @@ CREATE TABLE `menu_category` (
 --
 
 CREATE TABLE `open_hours` (
-  `id` char(36) NOT NULL,
+  `id` tinyint(1) NOT NULL,
   `day` varchar(20) NOT NULL,
   `open_hour` time NOT NULL,
   `close_hour` time NOT NULL,
